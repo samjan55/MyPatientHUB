@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPatientHUB - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<div class="dashboard">
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">M</div>
+            <span>MyPatientHUB</span>
+        </div>
+        <div class="menu">
+            <a href="#" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Appointments</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Find Doctor</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-hospital"></i>
+                <span>Find Clinic</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-message"></i>
+                <span>Chat</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-store"></i>
+                <span>Find MarketPlace</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-pills"></i>
+                <span>Find Pharmacy</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+                <span>My Dependents</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-user"></i>
+                <span>My Account</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+        </div>
+
+        <div class="help">
+            <i class="fa-solid fa-question"></i>
+        </div>
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main">
+        <!-- ================= TOP BAR ================= -->
+        <header class="topbar">
+            <div class="top-title">
+                <div class="breadcrumb">
+                    <i class="fa-solid fa-house"></i>
+                    <span>/</span>
+                    <span>Dashboard</span>
+                </div>
+                <button class="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h2>Dashboard</h2>
+
+            </div>
+            <div class="top-right">
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="text"
+                        placeholder="Type here...">
+                </div>
+                <span id="logout" class="logout">
+                    <i class="fa-solid fa-circle-user"></i>
+                    Log out
+                </span>
+                <i class="fa-solid fa-gear"></i>
+                <i class="fa-solid fa-bell"></i>
+            </div>
+        </header>
+        <!-- ================= CONTENT ================= -->
+        <section class="content">
+            <h1>Welcome To MyPatientHUB!</h1>
+            <div class="cards">
+                <!-- ================================================= -->
+                <!-- CLINICS CARD -->
+                <!-- ================================================= -->
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Promotion by Clinics</h3>
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div class="chart-content">
+                        <div class="donut clinic-chart"></div>
+                        <div class="chart-list">
+                            <p>
+                                <i class="fa-solid fa-heart-pulse clinic-icon pink"></i>
+                                <span>Klinik Lee Healthcare</span>
+                                <b>19%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-hospital clinic-icon blue"></i>
+                                <span>Klinik Bandar Baru Nilai</span>
+                                <b>4%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-kit-medical clinic-icon green"></i>
+                                <span>Klinik Mediviron Giant Nilai</span>
+                                <b>10%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-house-medical clinic-icon yellow"></i>
+                                <span>KLINIK NILAI IMPIAN</span>
+                                <b>21%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-stethoscope clinic-icon dark"></i>
+                                <span>Klinik Mediviron</span>
+                                <b>2%</b>
+                            </p>
+                        </div>
+
+                    </div>
+                    <button class="details">
+                        MORE DETAILS
+                    </button>
+                </div>
+                <!-- ================================================= -->
+                <!-- PHARMACY CARD -->
+                <!-- ================================================= -->
+
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Promotion by Pharmacies</h3>
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div class="chart-content">
+                        <div class="donut pharmacy-chart"></div>
+                        <div class="chart-list">
+                 <p>        
+                  <i class="fa-solid fa-pills pharmacy-icon blue"></i>
+                  <span>ALPRO PHARMACY NILAI</span>
+                    <b>15%</b>
+                   </p>
+                 <p>
+                <i class="fa-solid fa-capsules pharmacy-icon light"></i>
+                 <span>ALPRO PHARMACY PEKAN NILAI</span>
+                    <b>12%</b>
+                   </p>
+                            <p>
+                 <i class="fa-solid fa-prescription-bottle-medical pharmacy-icon pink"></i>
+                     <span>OK PHARMACY</span>
+                       <b>5%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-mortar-pestle pharmacy-icon green"></i>
+                                <span>PHARMART PHARMACY NILAI</span>
+                                <b>9%</b>
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-capsules pharmacy-icon dark"></i>
+                                <span>Health Lane Family Pharmacy</span>
+                                <b>14%</b>
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="details">
+                        MORE DETAILS
+                    </button>
+                </div>
+                <!-- ================================================= -->
+                <!-- MARKET CARD -->
+                <!-- ================================================= -->
+
+                <div class="card">
+                    <div class="card-title">
+                        <h3>Smart Market Usage by app</h3>
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    </div>
+                    <div class="chart-content">
+                        <div class="donut market-chart"></div>
+                        <div class="chart-list">
+                            <p>
+
+                                <i class="fa-solid fa-utensils market-icon pink"></i>
+                                <span>Food Panda</span>
+                                <b>25%</b>
+                            </p> 
+
+                            <p>
+
+                <i class="fa-solid fa-motorcycle market-icon blue"></i>
+                 <span>Grab Food</span>
+                                <b>3%</b>
+                            </p>
+
+
+                            <p>
+                  <i class="fa-solid fa-heart-pulse market-icon green"></i>
+                    <span>MySejahtera</span>
+                   <b>15%</b>
+
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- HEALTH CARD -->
+                <!-- ================================================= -->
+
+                <div class="card health-card">
+                    <div class="card-title">
+                        <h3>Health Index</h3>
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+
+
+                    <div class="health-number">
+                        70%
+                        <span>+3%</span>
+
+                    </div>
+
+                    <div class="health-chart">
+                        <svg class="health-line" viewBox="0 0 600 150">
+                            <path d="M0 135
+                            Q60 105 120 125
+                            Q180 145 240 85
+                            Q300 30 360 100
+                            Q420 145 480 75
+                            Q540 35 600 20"
+                            fill="none"
+                            stroke="#30345f"
+                            stroke-width="2">
+                            </path>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="dashboard-footer">
+            <p>
+                © 2026, made with ♥ by MyPatientHUB for a better web.
+            </p>
+
+            <div>
+                <a href="#">MyPatientHUB</a>
+                <a href="#">About Us</a>
+                <a href="#">Blog</a>
+            </div>
+        </footer>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

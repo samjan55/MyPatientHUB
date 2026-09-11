@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyPatientHUB - Sign In</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="login-page">
+     <div class="login-background">
+       <div class="welcome">
+          <h1>Welcome to MyPatientHUB!</h1>
+           <p>We provide smart healthcare services in your hands.</p>
+            </div>
+        </div>
+        <div class="login-box">
+            <h2>Sign in to MyPatientHUB</h2>
+            <div class="social">
+                <button>
+                    <i class="fa-brands fa-facebook-f"></i>
+                    Facebook
+                </button>
+                <button>
+                    <i class="fa-brands fa-google"></i>
+                    Google
+                </button>
+            </div>
+            <form id="loginForm" novalidate>
+                <input type="text"id="email" placeholder="Email or Phone number">
+                <p id="emailError"></p>
+                <input type="password"id="password" placeholder="Please enter your password">
+                <p id="passwordError"></p>
+                <button type="submit" class="sign-in">
+                    SIGN IN
+                </button>
+                <div class="options">
+                    <a href="#">Forgot password?</a>
+                    <label>
+                        <input type="checkbox">
+                        Remember me
+                    </label>
+                </div>
+            </form>
+            <div class="or">
+                <span>or</span>
+            </div>
+            <button class="sign-up">
+                SIGN UP
+            </button>
+        </div>
+        <footer class="login-footer">
+            <a href="#">Google Play Store APP</a>
+            <a href="#">App Store APP</a>
+            <a href="#">About MyPatientHUB</a>
+            <a href="#">About Us</a>
+            <a href="#">Our Blog</a>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
