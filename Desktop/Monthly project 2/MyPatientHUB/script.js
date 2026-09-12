@@ -46,3 +46,11 @@ if (logout) {
     });
 
 }
+const menuToggle = document.querySelector(".menu-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+if (menuToggle) {
+    menuToggle.addEventListener("click", function() {
+        sidebar.classList.toggle("hide");
+    });
+}

@@ -450,37 +450,6 @@ body {
     color: #1677d2;
 }
 
-/* ================= DOTS ================= */
-.pink-dot,
-.blue-dot,
-.green-dot,
-.yellow-dot,
-.dark-dot,
-.light-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    display: inline-block;
-}
-.pink-dot {
-    background: #e56ba8;
-}
-.blue-dot {
-    background: #1677d2;
-}
-.green-dot {
-    background: #35b97a;
-}
-.yellow-dot {
-    background: #f5c451;
-}
-.dark-dot {
-    background: #526f8c;
-}
-.light-dot {
-    background: #8ba4bd;
-}
-
 /* ================= DETAILS BUTTON ================= */
 .details {
     background: #155c9e;
@@ -547,22 +516,6 @@ body {
     margin-top: -8px;
     margin-bottom: 10px;
 }
-
-/* ================= MEDICAL IMAGE ================= */
-.medical-image {
-    position: absolute;
-    left: 30px;
-    top: 150px;
-    width: 300px;
-    height: 600px;
-    z-index: 1;
-}
-.medical-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 /* ================= MOBILE ================= */
 
 /* ================= TABLET ================= */
@@ -728,4 +681,12 @@ body {
     font-size: 20px;
     color: #344767;
     cursor: pointer;
+}
+.sidebar.hide {
+    transform: translateX(-100%);
+}
+
+.main.full {
+    width: 100%;
+    margin-left: 0;
 }
