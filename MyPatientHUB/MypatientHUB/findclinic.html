@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyPatientHUB - Find Clinic</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="clinic-page">
+
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="clinic-header">
+
+
+            <!-- Breadcrumb -->
+
+            <div class="clinic-breadcrumb">
+
+                <a href="dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Home</span>
+
+                </a>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span>Find Clinic</span>
+
+            </div>
+
+
+            <!-- Top Icons -->
+
+            <div class="clinic-top-icons">
+
+                <!-- Profile -->
+
+                <button
+                    type="button"
+                    class="clinic-top-icon">
+                     <a href="index.html">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+                </button>
+
+
+                <!-- Menu -->
+
+                <button
+                    type="button"
+                    class="clinic-menu-toggle" >
+                 <a href="dashboard.html">
+                    <i class="fa-solid fa-bars"></i>
+                 </a>
+                </button>
+
+
+                <!-- Settings -->
+
+                <button type="button"
+                    class="clinic-top-icon clinic-settings" >
+                   <a href="dashboard.html">
+                    <i class="fa-solid fa-gear"></i>
+                   </a>
+                </button>
+
+            </div>
+
+
+            <!-- Page Heading -->
+
+            <div class="clinic-heading">
+
+                <h1>Find Clinic</h1>
+
+            </div>
+
+
+            <!-- Search Title -->
+
+            <div class="clinic-search-title">
+
+                <h2>Find a Clinic</h2>
+
+                <p>
+                    Search Clinics and schedule an
+                    appointment with doctors through Clinic.
+                </p>
+
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="clinic-search">
+
+                <input
+                    type="text"
+                    placeholder="Search"
+                >
+
+            </div>
+
+
+            <!-- Location Search -->
+
+            <div class="clinic-location-search">
+
+                <input
+                    type="text"
+                    placeholder="Zip Code or Neighborhood"
+                >
+
+            </div>
+
+
+            <!-- Search Buttons -->
+
+            <div class="clinic-buttons">
+
+                <button type="button">
+                    CURRENT
+                </button>
+
+                <button type="button">
+                    SEARCH
+                </button>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- ================= MAP / LIST ================= -->
+
+        <section class="clinic-view-switch">
+
+
+            <button
+                type="button"
+                class="clinic-view-btn active"
+            >
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+                Map
+
+            </button>
+
+
+            <button
+                type="button"
+                class="clinic-view-btn"
+            >
+
+                <i class="fa-solid fa-list"></i>
+
+                List
+
+            </button>
+
+
+        </section>
+
+
+        <!-- ================= FILTER ================= -->
+
+        <section class="clinic-filter-card">
+
+
+            <!-- Location -->
+
+            <div class="clinic-location-fields">
+
+                <input
+                    type="text"
+                    placeholder="Primary Care"
+                >
+
+                <input
+                    type="text"
+                    placeholder="Zip code or Neighborhood"
+                >
+
+            </div>
+
+
+            <!-- Filter By -->
+
+            <div class="clinic-filter-block">
+
+                <h2>
+                    Filter By
+                </h2>
+
+
+                <button
+                    type="button"
+                    class="clinic-select"
+                >
+
+                    <span>
+                        Specialty
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clinic-select"
+                >
+
+                    <span>
+                        Gender
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clinic-select"
+                >
+
+                    <span>
+                        Condition
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clinic-select"
+                >
+
+                    <span>
+                        Languages
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- Providers Who Treat -->
+
+            <div class="clinic-filter-block">
+
+                <h2>
+                    Providers Who Treat
+                </h2>
+
+
+                <label class="clinic-check">
+
+                    <input
+                        type="checkbox"
+                        name="age"
+                        value="all"
+                    >
+
+                    <span>
+                        All Ages
+                    </span>
+
+                </label>
+
+
+                <label class="clinic-check">
+
+                    <input
+                        type="checkbox"
+                        name="age"
+                        value="children"
+                    >
+
+                    <span>
+                        Children
+                    </span>
+
+                </label>
+
+
+                <label class="clinic-check">
+
+                    <input
+                        type="checkbox"
+                        name="age"
+                        value="adults"
+                    >
+
+                    <span>
+                        Adults
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- View Only -->
+
+            <div class="clinic-filter-block">
+
+                <h2>
+                    View Only
+                </h2>
+
+
+                <label class="clinic-check">
+
+                    <input
+                        type="checkbox"
+                        name="view"
+                        value="online"
+                    >
+
+                    <span>
+                        Online Scheduling
+                    </span>
+
+                </label>
+
+
+                <label class="clinic-check">
+
+                    <input
+                        type="checkbox"
+                        name="view"
+                        value="primary"
+                    >
+
+                    <span>
+                        Primary Care
+                    </span>
+
+                </label>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= MAP ================= -->
+
+        <section class="clinic-map-section">
+
+
+            <!-- Map Buttons -->
+
+            <div class="clinic-map-buttons">
+
+
+                <button
+                    type="button"
+                    class="clinic-map-btn active"
+                >
+
+                    <i class="fa-solid fa-map"></i>
+
+                    Map
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clinic-map-btn"
+                >
+
+                    <i class="fa-solid fa-satellite"></i>
+
+                    Satellite
+
+                </button>
+
+
+            </div>
+
+
+            <!-- Map Container -->
+
+            <div
+                id="clinic-map"
+                class="clinic-map"
+            ></div>
+
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="clinic-footer">
+
+
+            <!-- Footer Logo -->
+
+            <div class="footer-logo">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+                MyPatientHUB
+
+            </div>
+
+
+            <!-- Footer Text -->
+
+            <p>
+
+                Making healthcare easier and more accessible.
+
+            </p>
+
+
+            <!-- Footer Links -->
+
+            <div class="footer-links">
+
+
+                <a href="dashboard.html">
+                    Home
+                </a>
+
+
+                <a href="#">
+                    About Us
+                </a>
+
+
+                <a href="#">
+                    Services
+                </a>
+
+
+                <a href="#">
+                    Contact
+                </a>
+
+
+            </div>
+
+
+            <!-- Copyright -->
+
+            <div class="copyright">
+
+                © 2026 MyPatientHUB.
+                All rights reserved.
+
+            </div>
+
+
+            <!-- Back To Top -->
+
+            <button
+                type="button"
+                class="clinic-back-top"
+            >
+
+                <i class="fa-solid fa-chevron-up"></i>
+
+            </button>
+
+
+        </footer>
+
+
+    </div>
+
+
+    <!-- ================= LEAFLET JS ================= -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+
+    <!-- ================= YOUR JS ================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MyPatientHUB - Find Doctor</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="doctor-page">
+
+        <!-- ================= HEADER ================= -->
+        <header class="doctor-header">
+
+            <div class="breadcrumb">
+
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span>Find Doctor</span>
+
+            </div>
+
+
+            <div class="header-content">
+
+                <div class="header-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+
+                <div>
+                    <h1>Find a Doctor</h1>
+
+                    <p>
+                        Find the right doctor and book your
+                        appointment with ease.
+                    </p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= SEARCH ================= -->
+        <section class="search-card">
+
+            <div class="search-title">
+
+                <h2>Search for a Doctor</h2>
+
+                <p>
+                    Search by doctor name, specialty or location.
+                </p>
+
+            </div>
+
+
+            <div class="search-form">
+
+                <!-- Doctor Search -->
+                <div class="search-input">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Doctor name or specialty">
+
+                </div>
+
+
+                <!-- Location Search -->
+                <div class="search-input">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input
+                        type="text"
+                        placeholder="City, area or ZIP code">
+
+                </div>
+
+
+                <!-- Search Button -->
+                <button type="button" class="search-button">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Search Doctors
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SPECIAL SERVICES ================= -->
+        <section class="special-services">
+
+            <h2>Special Services</h2>
+
+
+            <!-- Service 1 -->
+            <div class="service-card">
+
+                <div class="service-icon">
+                    ❤️
+                </div>
+
+                <div class="service-content">
+
+                    <h3>Primary Care and Internal MD</h3>
+
+                    <p>
+                        Our doctors partner with you to help you
+                        reach your wellness goals.
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right service-arrow"></i>
+
+            </div>
+
+
+            <!-- Service 2 -->
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🩺
+                </div>
+
+                <div class="service-content">
+
+                    <h3>Emergency Care</h3>
+
+                    <p>
+                        We provide emergency care for adults
+                        and children.
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right service-arrow"></i>
+
+            </div>
+
+
+            <!-- Service 3 -->
+            <div class="service-card">
+
+                <div class="service-icon">
+                    ❤️
+                </div>
+
+                <div class="service-content">
+
+                    <h3>Imaging Services</h3>
+
+                    <p>
+                        From X-ray to MR scan, we offer modern
+                        imaging services.
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right service-arrow"></i>
+
+            </div>
+
+
+            <!-- Service 4 -->
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🏥
+                </div>
+
+                <div class="service-content">
+
+                    <h3>Urgent Care</h3>
+
+                    <p>
+                        We offer urgent care for patients who
+                        need quick attention.
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-chevron-right service-arrow"></i>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SPECIALTIES ================= -->
+        <section class="specialty-section">
+
+
+            <!-- Section Heading -->
+            <div class="section-heading">
+
+                <span class="small-label">
+                    FIND YOUR SPECIALIST
+                </span>
+
+                <h2>Doctors by Specialty</h2>
+
+                <p>
+                    Select a specialty to find available doctors
+                    and schedule an appointment.
+                </p>
+
+            </div>
+
+
+            <!-- Specialty Cards -->
+            <div class="specialty-grid">
+
+
+                <!-- 1. Anesthesiology -->
+                <a
+                    href="specialty.html?specialty=Anesthesiology"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-syringe"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Anesthesiology</h3>
+
+                        <p>
+                            Specialist doctors
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+                <!-- 2. Dermatology -->
+                <a
+                    href="specialty.html?specialty=Dermatology"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-hand-dots"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Dermatology</h3>
+
+                        <p>
+                            Skin specialists
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+                <!-- 3. Emergency Medicine -->
+                <a
+                    href="specialty.html?specialty=Emergency%20Medicine"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Emergency Medicine</h3>
+
+                        <p>
+                            Emergency specialists
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+                <!-- 4. Neurology -->
+                <a
+                    href="specialty.html?specialty=Neurology"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Neurology</h3>
+
+                        <p>
+                            Brain specialists
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+                <!-- 5. Consultation -->
+                <a
+                    href="specialty.html?specialty=Consultation"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Consultation</h3>
+
+                        <p>
+                            Medical consultation
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+                <!-- 6. Ophthalmology -->
+                <a
+                    href="specialty.html?specialty=Ophthalmology"
+                    class="specialty-card">
+
+                    <div class="specialty-icon">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+
+                    <div class="specialty-content">
+
+                        <h3>Ophthalmology</h3>
+
+                        <p>
+                            Eye specialists
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right specialty-arrow"></i>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+<footer class="doctor-footer">
+
+    <div class="footer-logo">
+        <i class="fa-solid fa-heart-pulse"></i>
+        MyPatientHUB
+    </div>
+
+    <p>
+        Making healthcare easier and more accessible.
+    </p>
+
+    <div class="footer-links">
+
+        <a href="dashboard.html">
+            Home
+        </a>
+
+        <a href="#">
+            About Us
+        </a>
+
+        <a href="#">
+            Services
+        </a>
+
+        <a href="#">
+            Contact
+        </a>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 MyPatientHUB. All rights reserved.
+    </div>
+
+</footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
