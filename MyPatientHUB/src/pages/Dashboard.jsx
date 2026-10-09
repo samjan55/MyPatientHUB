@@ -8,8 +8,8 @@ const menu = [
   { icon: 'hospital', label: 'Find Clinic', to: '/findclinic' },
   { icon: 'message', label: 'Chat' },
   { icon: 'store', label: 'Find MarketPlace', to:'/marketplace'},
-  { icon: 'pills', label: 'Find Pharmacy' },
-  { icon: 'users', label: 'My Dependents' },
+  { icon: 'pills', label: 'Find Pharmacy', to: '/findpharmacy' },
+  { icon: 'users', label: 'My Dependents', to: '/mydependents' },
   { icon: 'user', label: 'My Account' },
   { icon: 'gear', label: 'Settings' },
 ]

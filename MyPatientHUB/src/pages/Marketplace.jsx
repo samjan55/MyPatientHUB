@@ -9,10 +9,10 @@ const menu = [
   { icon: 'hospital', label: 'Find Clinic', to: '/findclinic' },
   { icon: 'comments', label: 'Chat' },
   { icon: 'cart-shopping', label: 'Find MarketPlace', to: '/marketplace', active: true },
-  { icon: 'capsules', label: 'Find Pharmacy' },
-  { icon: 'users', label: 'My Dependents' },
-  { icon: 'user', label: 'My Account' },
-  { icon: 'gear', label: 'Settings' },
+  { icon: 'capsules', label: 'Find Pharmacy', to: '/findpharmacy' },
+  { icon: 'users', label: 'My Dependents', to: '/my-dependents' },
+  { icon: 'user', label: 'My Account', to: '/my-account' },
+  { icon: 'gear', label: 'Settings', to: '/settings' },
 ]
 
 const products = [
@@ -90,7 +90,7 @@ function Marketplace() {
               <i className="fa-solid fa-magnifying-glass"></i>
               <input type="text" placeholder="Type here..." />
             </div>
-            <span className="logout" onClick={() => navigate('/')}>
+            <span className="logout" onClick={() => navigate('/login')}>
               <i className="fa-solid fa-circle-user"></i>
               Log out
             </span>
