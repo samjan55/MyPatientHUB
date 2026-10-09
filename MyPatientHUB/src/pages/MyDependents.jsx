@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../style.css";
+import "./MyDependents.css";
 import sarah from "../assets/avatar 1.jpeg";
 import ahmad from "../assets/avatar2.jpeg";
 import maryam from "../assets/3.jpeg";
@@ -15,16 +15,18 @@ const menu = [
   { icon: "hospital", label: "Find Clinic", to: "/findclinic" },
   { icon: "message", label: "Chat" },
   { icon: "store", label: "Find MarketPlace", to: "/marketplace" },
-  { icon: "pills", label: "Find Pharmacy" },
+  { icon: "pills", label: "Find Pharmacy", to: "/findpharmacy" },
   { icon: "users", label: "My Dependents", to: "/mydependents", active: true },
-  { icon: "user", label: "My Account" },
-  { icon: "gear", label: "Settings" },
+  { icon: "user", label: "My Account", to: "/myaccount" },
+  { icon: "gear", label: "Settings", to: "/settings" },
 ];
 
 function MyDependents() {
   const navigate = useNavigate();
 
-  const [sidebarHidden, setSidebarHidden] = useState(false);
+  const [sidebarHidden, setSidebarHidden] = useState(
+    window.innerWidth <= 768
+  );
   const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState("");
 
