@@ -1561,4 +1561,620 @@
   .pp-buy-button {
     margin-top: 7px;
     padding: 7px 4px;
+  }/* ========================================
+   PHARMACY WELCOME CARD — DASHBOARD COLORS
+======================================== */
+
+.pp-welcome,
+.pp-welcome * {
+  box-sizing: border-box;
+}
+
+.pp-welcome {
+  position: relative;
+  isolation: isolate;
+
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 35px;
+
+  width: 100%;
+  min-height: 350px;
+  margin-bottom: 28px;
+  padding: 38px 42px;
+
+  overflow: hidden;
+  border-radius: 24px;
+
+  /* Dashboard blue gradient */
+  background: linear-gradient(
+    110deg,
+    #ffffff 0%,
+    #f0f8ff 48%,
+    #c0e2ff 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  box-shadow:
+    0 18px 45px rgba(22, 119, 210, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* DECORATIVE BACKGROUND */
+
+.pp-welcome::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  width: 350px;
+  height: 350px;
+
+  top: -150px;
+  right: -70px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(79, 166, 255, 0.25),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+.pp-welcome::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+
+  width: 400px;
+  height: 200px;
+
+  right: 25%;
+  bottom: -150px;
+
+  border-radius: 50%;
+  background: rgba(83, 169, 255, 0.15);
+
+  pointer-events: none;
+}
+
+/* CONTENT */
+
+.pp-welcome-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+/* BADGE */
+
+.pp-welcome-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 15px;
+  margin-bottom: 20px;
+
+  color: #0875d1;
+  background: #e6f3ff;
+
+  border: 1px solid #d5eaff;
+  border-radius: 30px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 3px 12px rgba(22, 119, 210, 0.08);
+}
+
+.pp-welcome-tag i {
+  color: #087be8;
+  font-size: 16px;
+}
+
+/* TITLE */
+
+.pp-welcome-content h1 {
+  margin: 0 0 18px;
+
+  color: #092e5c;
+  font-size: clamp(28px, 3vw, 43px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.pp-welcome-content h1 span {
+  color: #087be8;
+}
+
+/* DESCRIPTION */
+
+.pp-welcome-content > p {
+  max-width: 450px;
+  margin: 0 0 25px;
+
+  color: #637b96;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* EXPLORE BUTTON */
+
+.pp-welcome-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 13px 20px;
+  min-height: 46px;
+
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #269bff,
+    #006be8
+  );
+
+  border: 1px solid transparent;
+  border-radius: 30px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 18px rgba(22, 119, 210, 0.2);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.pp-welcome-btn:hover {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    #087be8,
+    #07528a
+  );
+
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 24px rgba(22, 119, 210, 0.28);
+}
+
+.pp-welcome-btn i:last-child {
+  transition: transform 0.3s ease;
+}
+
+.pp-welcome-btn:hover i:last-child {
+  transform: translateX(4px);
+}
+
+/* FEATURES */
+
+.pp-welcome-features {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin-top: 27px;
+}
+
+.pp-welcome-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #47769e;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pp-welcome-features i {
+  color: #1687e5;
+  font-size: 16px;
+}
+
+/* IMAGE */
+
+.pp-welcome-image {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 275px;
+  min-width: 0;
+
+  border-radius: 22px;
+}
+
+.pp-welcome-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  border-radius: 22px;
+
+  box-shadow: 0 15px 35px rgba(7, 82, 138, 0.2);
+
+  transition: transform 0.4s ease;
+}
+
+.pp-welcome-image:hover img {
+  transform: scale(1.025);
+}
+
+/* FLOATING WHITE CARD */
+
+.pp-welcome-floating {
+  position: absolute;
+  left: -18px;
+  bottom: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 16px;
+
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid #e5effa;
+  border-radius: 15px;
+
+  box-shadow: 0 10px 28px rgba(10, 66, 115, 0.16);
+}
+
+.pp-floating-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+
+  color: #1677d2;
+  background: #e6f3ff;
+
+  border-radius: 12px;
+  font-size: 21px;
+}
+
+.pp-welcome-floating strong {
+  display: block;
+  color: #07528a;
+  font-size: 12px;
+}
+
+.pp-welcome-floating p {
+  margin: 5px 0 0;
+  color: #637b96;
+  font-size: 11px;
+}
+
+/* DECORATIVE CIRCLE */
+
+.pp-welcome-decoration {
+  position: absolute;
+  z-index: -1;
+
+  top: -100px;
+  right: 35%;
+
+  width: 250px;
+  height: 250px;
+
+  border: 35px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .pp-welcome {
+    grid-template-columns: 1fr 0.85fr;
+    gap: 24px;
+    padding: 30px;
   }
+
+  .pp-welcome-image {
+    height: 245px;
+  }
+
+  .pp-welcome-floating {
+    left: -10px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .pp-welcome {
+    grid-template-columns: 1fr;
+    gap: 25px;
+
+    min-height: auto;
+    padding: 25px 20px;
+
+    border-radius: 20px;
+  }
+
+  .pp-welcome-content {
+    text-align: left;
+  }
+
+  .pp-welcome-content h1 {
+    font-size: 32px;
+  }
+
+  .pp-welcome-content > p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .pp-welcome-image {
+    height: 220px;
+    margin-bottom: 12px;
+  }
+
+  .pp-welcome-floating {
+    left: 10px;
+    bottom: -12px;
+  }
+
+  .pp-welcome-features {
+    gap: 15px;
+  }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 360px) {
+  .pp-welcome {
+    padding: 20px 15px;
+  }
+
+  .pp-welcome-content h1 {
+    font-size: 28px;
+  }
+
+  .pp-welcome-image {
+    height: 185px;
+  }
+
+  .pp-welcome-floating {
+    gap: 8px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pp-welcome {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+  }
+
+  .pp-welcome-content {
+    order: 1;
+  }
+
+  .pp-welcome-image {
+    order: 2;
+    width: 100%;
+    height: 220px;
+    margin-bottom: 12px;
+  }
+
+  .pp-welcome-floating {
+    left: 10px;
+    bottom: 10px;
+  }
+}
+
+/* =========================================
+FIX: MEDICINE CARDS ALIGNMENT
+========================================= */
+
+.pp-medicine-grid {
+display: grid;
+grid-template-columns: repeat(4, minmax(0, 1fr));
+align-items: stretch;
+gap: 20px;
+width: 100%;
+}
+
+.pp-medicine-card {
+display: flex;
+flex-direction: column;
+align-self: stretch;
+height: 100%;
+min-width: 0;
+overflow: hidden;
+border: 1px solid #e1eaf2;
+border-radius: 16px;
+background: #fff;
+}
+
+.pp-product-image {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+width: 100%;
+height: 180px;
+padding: 12px;
+overflow: hidden;
+background: #fff;
+}
+
+.pp-medicine-image {
+display: block;
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+.pp-card-body {
+display: flex;
+flex: 1;
+flex-direction: column;
+min-width: 0;
+padding: 16px;
+}
+
+.pp-card-body h3 {
+min-height: 40px;
+margin: 0 0 8px;
+color: #23415f;
+font-size: 15px;
+line-height: 1.4;
+overflow-wrap: anywhere;
+}
+
+.pp-product-description {
+display: -webkit-box;
+flex: 1;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+min-height: 48px;
+margin: 0 0 12px;
+color: #7890a8;
+font-size: 12px;
+line-height: 1.5;
+}
+
+.pp-product-bottom {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: auto;
+padding-top: 12px;
+border-top: 1px solid #edf2f7;
+}
+
+.pp-price {
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.pp-details-button {
+flex-shrink: 0;
+}
+
+.pp-buy-button {
+flex-shrink: 0;
+margin-top: 12px;
+}
+
+/* TABLET */
+
+@media (max-width: 1200px) {
+.pp-medicine-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 16px;
+}
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+.pp-medicine-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 12px;
+}
+
+.pp-product-image {
+height: 140px;
+padding: 8px;
+}
+
+.pp-card-body {
+padding: 12px;
+}
+
+.pp-card-body h3 {
+min-height: 34px;
+font-size: 13px;
+}
+
+.pp-product-description {
+min-height: 45px;
+font-size: 11px;
+}
+
+.pp-product-bottom {
+align-items: flex-start;
+gap: 8px;
+}
+
+.pp-price strong {
+font-size: 15px;
+}
+
+.pp-details-button {
+padding: 8px;
+font-size: 10px;
+}
+
+.pp-buy-button {
+padding: 9px 5px;
+font-size: 11px;
+}
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 360px) {
+.pp-medicine-grid {
+gap: 8px;
+}
+
+.pp-product-image {
+height: 115px;
+}
+
+.pp-card-body {
+padding: 8px;
+}
+
+.pp-card-body h3 {
+font-size: 12px;
+}
+
+.pp-product-description {
+font-size: 10px;
+}
+
+.pp-price strong {
+font-size: 13px;
+}
+}

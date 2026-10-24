@@ -1,7 +1,11 @@
-import { useState } from 'react'
+ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import patientimage from '../assets/patient-avatar.jpeg'
+
 import './Settings.css'
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
 
 const menu = [
   { icon: 'house', label: 'Dashboard', to: '/dashboard' },
@@ -17,11 +21,11 @@ const menu = [
 ]
 
 const sections = [
-  { id: 'basic-info', icon: 'user', label: 'Basic Info' },
-  { id: 'password', icon: 'lock', label: 'Change Password' },
-  { id: 'security', icon: 'shield-halved', label: '2FA' },
-  { id: 'sessions', icon: 'laptop', label: 'Sessions' },
-  { id: 'delete-account', icon: 'trash', label: 'Delete Account' },
+  { id: 'basic-info', icon: 'user', label: 'basicInfo' },
+  { id: 'password', icon: 'lock', label: 'changePassword' },
+  { id: 'security', icon: 'shield-halved', label: 'twoFactor' },
+  { id: 'sessions', icon: 'laptop', label: 'sessions' },
+  { id: 'delete-account', icon: 'trash', label: 'deleteAccount' },
 ]
 
 const initialProfile = {
@@ -50,6 +54,8 @@ function loadProfile() {
 }
 
 function Settings() {
+  const { t } = useTranslation()
+
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -58,6 +64,7 @@ function Settings() {
   const [invisible, setInvisible] = useState(false)
   const [profile, setProfile] = useState(loadProfile)
   const [saved, setSaved] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const [passwords, setPasswords] = useState({
     current: '',
@@ -71,7 +78,7 @@ function Settings() {
   const userName =
     [profile.firstName, profile.lastName].filter(Boolean).join(' ') ||
     localStorage.getItem('userName') ||
-    'Patient'
+    t('patient')
 
   const updateProfile = (e) => {
     const { name, value } = e.target
@@ -109,87 +116,32 @@ function Settings() {
     e.preventDefault()
 
     if (passwords.newPassword !== passwords.confirm) {
-      alert('Passwords do not match.')
+      alert(t('passwordMismatch'))
       return
     }
 
-    alert('Password changes require backend authentication.')
+    alert(t('backendPassword'))
   }
 
   return (
-    <div className="settings-layout">
-
-      {/* SIDEBAR */}
-
-      <aside className={`settings-sidebar ${sidebarHidden ? 'hide' : ''}`}>
-
-        <div className="settings-logo">
-          <div className="settings-logo-icon">
-            <i className="fa-solid fa-heart-pulse"></i>
-          </div>
-          <span>MyPatientHUB</span>
-        </div>
-
-        <nav className="settings-menu">
-          {menu.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className={location.pathname === item.to ? 'active' : ''}
-            >
-              <i className={`fa-solid fa-${item.icon}`}></i>
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </nav>
-
-        <div className="settings-help">
-          <i className="fa-solid fa-question"></i>
-        </div>
-
-      </aside>
+    <div
+      className={`settings-layout ${
+        sidebarOpen ? 'sidebar-open' : 'sidebar-closed'
+      }`}
+    >
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       {/* MAIN */}
 
-      <main className={`settings-main ${sidebarHidden ? 'expanded' : ''}`}>
+      <main className="settings-main">
 
-        {/* TOPBAR */}
-
-        <header className="settings-topbar">
-
-          <div className="settings-top-title">
-            <div className="settings-breadcrumb">
-              <i className="fa-solid fa-house"></i>
-              <span>/</span>
-              <span>Account Settings</span>
-
-              <button
-                type="button"
-                className="settings-menu-toggle"
-                onClick={() => setSidebarHidden(!sidebarHidden)}
-              >
-                <i className="fa-solid fa-bars"></i>
-              </button>
-            </div>
-
-            <h2>Account Settings</h2>
-          </div>
-
-          <div className="settings-top-right">
-            <button
-              type="button"
-              className="settings-logout"
-              onClick={() => navigate('/login')}
-            >
-              <i className="fa-solid fa-right-from-bracket"></i>
-              Log out
-            </button>
-
-            <i className="fa-solid fa-gear"></i>
-            <i className="fa-solid fa-bell"></i>
-          </div>
-
-        </header>
+        <Header
+          title={t('settings')}
+          onMenuClick={() => setSidebarOpen((prev) => !prev)}
+        />
 
         <div className="settings-content">
 
@@ -199,32 +151,32 @@ function Settings() {
 
             <div className="settings-hero-left">
               <div className="settings-avatar">
-                <img src={patientimage} alt="Patient" />
+                <img src={patientimage} alt={t('patient')} />
                 <span className="settings-avatar-status"></span>
               </div>
 
               <div className="settings-hero-info">
                 <span className="settings-hero-label">
-                  MY PATIENT HUB ACCOUNT
+                  {t('myPatientHubAccount')}
                 </span>
 
                 <h1>{userName}</h1>
 
                 <div className="settings-patient-badge">
                   <i className="fa-solid fa-heart-pulse"></i>
-                  Patient
+                  {t('patient')}
                 </div>
               </div>
             </div>
 
             <div className="settings-hero-right">
-              <span>Switch to invisible</span>
+              <span>{t('switchInvisible')}</span>
 
               <button
                 type="button"
                 className={`settings-switch ${invisible ? 'on' : ''}`}
                 onClick={() => setInvisible(!invisible)}
-                aria-label="Switch invisible status"
+                aria-label={t('switchInvisible')}
               >
                 <span></span>
               </button>
@@ -245,7 +197,7 @@ function Settings() {
                 onClick={() => goToSection(section.id)}
               >
                 <i className={`fa-solid fa-${section.icon}`}></i>
-                {section.label}
+                {t(section.label)}
               </button>
             ))}
           </nav>
@@ -260,9 +212,9 @@ function Settings() {
               </div>
 
               <div>
-                <span>PERSONAL INFORMATION</span>
-                <h2>Basic Info</h2>
-                <p>Manage your personal and medical information.</p>
+                <span>{t('personalInformation')}</span>
+                <h2>{t('basicInfo')}</h2>
+                <p>{t('managePersonalInfo')}</p>
               </div>
             </div>
 
@@ -271,42 +223,44 @@ function Settings() {
               <div className="settings-form-grid">
 
                 <label>
-                  First Name
+                  {t('firstName')}
                   <input
                     name="firstName"
                     value={profile.firstName}
                     onChange={updateProfile}
-                    placeholder="First Name"
+                    placeholder={t('firstName')}
                   />
                 </label>
 
                 <label>
-                  Last Name
+                  {t('lastName')}
                   <input
                     name="lastName"
                     value={profile.lastName}
                     onChange={updateProfile}
-                    placeholder="Last Name"
+                    placeholder={t('lastName')}
                   />
                 </label>
 
                 <label>
-                  I'm
+                  {t('gender')}
                   <select
                     name="gender"
                     value={profile.gender}
                     onChange={updateProfile}
                   >
-                    <option value="">Select gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Other</option>
-                    <option>Prefer not to say</option>
+                    <option value="">{t('selectGender')}</option>
+                    <option value="Male">{t('male')}</option>
+                    <option value="Female">{t('female')}</option>
+                    <option value="Other">{t('other')}</option>
+                    <option value="Prefer not to say">
+                      {t('preferNotToSay')}
+                    </option>
                   </select>
                 </label>
 
                 <label>
-                  Birth Date
+                  {t('birthDate')}
                   <input
                     type="date"
                     name="birthDate"
@@ -316,7 +270,7 @@ function Settings() {
                 </label>
 
                 <label>
-                  Email
+                  {t('email')}
                   <input
                     type="email"
                     name="email"
@@ -327,13 +281,13 @@ function Settings() {
                 </label>
 
                 <label>
-                  Blood Group
+                  {t('bloodGroup')}
                   <select
                     name="bloodGroup"
                     value={profile.bloodGroup}
                     onChange={updateProfile}
                   >
-                    <option value="">Select blood group</option>
+                    <option value="">{t('selectBloodGroup')}</option>
                     {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(
                       (group) => (
                         <option key={group}>{group}</option>
@@ -343,17 +297,17 @@ function Settings() {
                 </label>
 
                 <label>
-                  Your Location
+                  {t('location')}
                   <input
                     name="location"
                     value={profile.location}
                     onChange={updateProfile}
-                    placeholder="City, Country"
+                    placeholder={t('cityCountry')}
                   />
                 </label>
 
                 <label>
-                  Phone Number
+                  {t('phone')}
                   <input
                     type="tel"
                     name="phone"
@@ -364,24 +318,24 @@ function Settings() {
                 </label>
 
                 <label>
-                  Height (cm)
+                  {t('height')}
                   <input
                     type="number"
                     name="height"
                     value={profile.height}
                     onChange={updateProfile}
-                    placeholder="Height"
+                    placeholder={t('height')}
                   />
                 </label>
 
                 <label>
-                  Weight (kg)
+                  {t('weight')}
                   <input
                     type="number"
                     name="weight"
                     value={profile.weight}
                     onChange={updateProfile}
-                    placeholder="Weight"
+                    placeholder={t('weight')}
                   />
                 </label>
 
@@ -391,13 +345,13 @@ function Settings() {
                 {saved && (
                   <span className="settings-saved">
                     <i className="fa-solid fa-circle-check"></i>
-                    Changes saved
+                    {t('changesSaved')}
                   </span>
                 )}
 
                 <button type="submit" className="settings-primary-btn">
                   <i className="fa-solid fa-floppy-disk"></i>
-                  Save Changes
+                  {t('saveChanges')}
                 </button>
               </div>
 
@@ -414,9 +368,9 @@ function Settings() {
               </div>
 
               <div>
-                <span>ACCOUNT SECURITY</span>
-                <h2>Change Password</h2>
-                <p>Keep your account safe with a strong password.</p>
+                <span>{t('accountSecurity')}</span>
+                <h2>{t('changePassword')}</h2>
+                <p>{t('strongPassword')}</p>
               </div>
             </div>
 
@@ -425,10 +379,10 @@ function Settings() {
               <form onSubmit={handlePassword}>
 
                 <label>
-                  Current Password
+                  {t('currentPassword')}
                   <input
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Current Password"
+                    placeholder={t('currentPassword')}
                     value={passwords.current}
                     onChange={(e) =>
                       setPasswords({
@@ -440,10 +394,10 @@ function Settings() {
                 </label>
 
                 <label>
-                  New Password
+                  {t('newPassword')}
                   <input
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="New Password"
+                    placeholder={t('newPassword')}
                     value={passwords.newPassword}
                     onChange={(e) =>
                       setPasswords({
@@ -455,10 +409,10 @@ function Settings() {
                 </label>
 
                 <label>
-                  Confirm New Password
+                  {t('confirmPassword')}
                   <input
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Confirm New Password"
+                    placeholder={t('confirmPassword')}
                     value={passwords.confirm}
                     onChange={(e) =>
                       setPasswords({
@@ -475,12 +429,12 @@ function Settings() {
                     checked={showPassword}
                     onChange={(e) => setShowPassword(e.target.checked)}
                   />
-                  Show passwords
+                  {t('showPasswords')}
                 </label>
 
                 <button type="submit" className="settings-primary-btn">
                   <i className="fa-solid fa-key"></i>
-                  Change Password
+                  {t('changePassword')}
                 </button>
 
               </form>
@@ -490,15 +444,15 @@ function Settings() {
                   <i className="fa-solid fa-shield-heart"></i>
                 </div>
 
-                <h3>Password Requirements</h3>
+                <h3>{t('passwordRequirements')}</h3>
 
-                <p>Follow this guide for a strong password.</p>
+                <p>{t('passwordGuide')}</p>
 
                 <ul>
-                  <li>At least 8 characters</li>
-                  <li>One special character</li>
-                  <li>One number</li>
-                  <li>Use a unique password</li>
+                  <li>{t('eightCharacters')}</li>
+                  <li>{t('specialCharacter')}</li>
+                  <li>{t('oneNumber')}</li>
+                  <li>{t('uniquePassword')}</li>
                 </ul>
               </div>
 
@@ -516,12 +470,14 @@ function Settings() {
               </div>
 
               <div>
-                <span>EXTRA PROTECTION</span>
-                <h2>Two-Factor Authentication</h2>
-                <p>Add another layer of security to your account.</p>
+                <span>{t('extraProtection')}</span>
+                <h2>{t('twoFactorAuthentication')}</h2>
+                <p>{t('securityDescription')}</p>
               </div>
 
-              <span className="settings-demo-badge">Not configured</span>
+              <span className="settings-demo-badge">
+                {t('notConfigured')}
+              </span>
             </div>
 
             <div className="settings-security-grid">
@@ -531,9 +487,9 @@ function Settings() {
                   <i className="fa-solid fa-key"></i>
                 </div>
 
-                <h3>Security Keys</h3>
-                <p>No security keys</p>
-                <span>Not Configured</span>
+                <h3>{t('securityKeys')}</h3>
+                <p>{t('noSecurityKeys')}</p>
+                <span>{t('notConfigured')}</span>
               </div>
 
               <div className="settings-security-item">
@@ -541,9 +497,9 @@ function Settings() {
                   <i className="fa-solid fa-mobile-screen"></i>
                 </div>
 
-                <h3>SMS Number</h3>
-                <p>No phone configured</p>
-                <span>Not Configured</span>
+                <h3>{t('smsNumber')}</h3>
+                <p>{t('noPhone')}</p>
+                <span>{t('notConfigured')}</span>
               </div>
 
               <div className="settings-security-item">
@@ -551,9 +507,9 @@ function Settings() {
                   <i className="fa-solid fa-shield"></i>
                 </div>
 
-                <h3>Authenticator App</h3>
-                <p>Not configured</p>
-                <span>Not Configured</span>
+                <h3>{t('authenticatorApp')}</h3>
+                <p>{t('notConfigured')}</p>
+                <span>{t('notConfigured')}</span>
               </div>
 
             </div>
@@ -570,11 +526,9 @@ function Settings() {
               </div>
 
               <div>
-                <span>DEVICE ACTIVITY</span>
-                <h2>Sessions</h2>
-                <p>
-                  Review devices that have logged into your account.
-                </p>
+                <span>{t('deviceActivity')}</span>
+                <h2>{t('sessions')}</h2>
+                <p>{t('reviewDevices')}</p>
               </div>
             </div>
 
@@ -585,19 +539,18 @@ function Settings() {
               </div>
 
               <div>
-                <h3>Current Browser</h3>
-                <p>This device · Browser session</p>
+                <h3>{t('currentBrowser')}</h3>
+                <p>{t('currentDevice')}</p>
               </div>
 
               <span className="settings-active-badge">
-                DEMO
+                {t('demo')}
               </span>
 
             </div>
 
             <p className="settings-session-note">
-              Real session tracking requires a connected authentication
-              service.
+              {t('sessionNote')}
             </p>
 
           </section>
@@ -615,12 +568,9 @@ function Settings() {
               </div>
 
               <div>
-                <span>DANGER ZONE</span>
-                <h2>Delete Account</h2>
-                <p>
-                  Once you delete your account, there is no going back.
-                  Please be certain.
-                </p>
+                <span>{t('dangerZone')}</span>
+                <h2>{t('deleteAccount')}</h2>
+                <p>{t('deleteDescription')}</p>
               </div>
             </div>
 
@@ -630,7 +580,7 @@ function Settings() {
                 checked={deleteConfirmed}
                 onChange={(e) => setDeleteConfirmed(e.target.checked)}
               />
-              I want to delete my account.
+              {t('confirmDelete')}
             </label>
 
             <button
@@ -638,11 +588,11 @@ function Settings() {
               className="settings-delete-btn"
               disabled={!deleteConfirmed}
               onClick={() =>
-                alert('Account deletion requires backend authentication.')
+                alert(t('backendDelete'))
               }
             >
               <i className="fa-solid fa-trash"></i>
-              Delete Account
+              {t('deleteAccount')}
             </button>
 
           </section>
@@ -652,11 +602,11 @@ function Settings() {
         {/* FOOTER */}
 
         <footer className="settings-footer">
-          <p>© 2026 MyPatientHUB. Your health, our priority.</p>
+          <p>{t('footerText')}</p>
 
           <div>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/finddoctor">Find Doctor</Link>
+            <Link to="/dashboard">{t('dashboard')}</Link>
+            <Link to="/finddoctor">{t('findDoctor')}</Link>
           </div>
         </footer>
 

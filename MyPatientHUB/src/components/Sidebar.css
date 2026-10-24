@@ -1,0 +1,389 @@
+/* =========================================
+   MYPATIENTHUB SIDEBAR
+========================================= */
+
+.app-sidebar,
+.app-sidebar * {
+  box-sizing: border-box;
+}
+
+.app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 255px;
+  height: 100vh;
+  height: 100dvh;
+
+  padding: 25px 18px;
+
+  background: #ffffff;
+  border-right: 1px solid #e5effa;
+  box-shadow: 6px 0 25px rgba(22, 119, 210, 0.07);
+
+  z-index: 1000;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+}
+
+/* HEADER */
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  min-height: 48px;
+  margin-bottom: 18px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+  text-decoration: none;
+}
+
+.sidebar-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+
+  border-radius: 11px;
+  background: linear-gradient(135deg, #35b8ff, #1677d2);
+  color: white;
+
+  font-size: 21px;
+}
+
+.sidebar-logo-text {
+  color: #1677d2;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.sidebar-logo-text span {
+  color: #38a9f5;
+}
+
+.sidebar-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 8px;
+  background: #e8f4ff;
+  color: #07528a;
+
+  cursor: pointer;
+}
+
+/* SECTION TITLE */
+
+.sidebar-section-title {
+  margin: 0 0 15px 10px;
+
+  color: #93a8bb;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* MENU */
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  width: 100%;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 46px;
+  padding: 7px 10px;
+
+  border-radius: 11px;
+
+  color: #092e5c;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sidebar-link:hover {
+  background: #f0f8ff;
+  color: #092e5c;
+}
+
+.sidebar-link.active {
+  background: #e8f4ff;
+  color: #092e5c;
+}
+
+.sidebar-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+
+  border-radius: 9px;
+  background: #f3f8fc;
+  color: #1677d2;
+
+  font-size: 15px;
+}
+
+.sidebar-link.active .sidebar-link-icon {
+  background: #1677d2;
+  color: white;
+}
+
+.sidebar-link:hover .sidebar-link-icon {
+  background: #1677d2;
+  color: white;
+}
+
+.sidebar-link-text {
+  white-space: nowrap;
+}
+
+/* BOTTOM AREA */
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 25px;
+}
+
+.sidebar-help {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 11px;
+  margin-bottom: 35px;
+
+  border-radius: 13px;
+  background: linear-gradient(135deg, #e8f4ff, #f4faff);
+}
+
+.sidebar-help-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: #1677d2;
+  color: white;
+}
+
+.sidebar-help-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-help-text strong {
+  color: #07528a;
+  font-size: 11px;
+}
+
+.sidebar-help-text span {
+  font-size: 9px;
+  color: rgb(9, 9, 243);
+
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 43px;
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+
+  color: rgb(9, 9, 243);
+  font-size: 12px;
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.sidebar-logout:hover {
+  background: #fff0f2;
+  color: #e64e78;
+}
+
+/* OVERLAY */
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* =========================================
+   RESPONSIVE SIDEBAR (همه دستگاه‌ها)
+========================================= */
+
+/* پیش‌فرض: بسته */
+.app-sidebar {
+  transform: translateX(-100%);
+}
+
+.app-sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-close {
+  display: inline-flex;
+}
+
+/* دسکتاپ و تبلت بزرگ: بدون overlay */
+@media (min-width: 901px) {
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-sidebar {
+    width: 210px;
+    padding: 20px 12px;
+  }
+}
+/* پرده تیره حذف شود تا صفحه کنار سایدبار دیده شود */
+.sidebar-overlay,
+.sidebar-overlay.show {
+  display: none !important;
+}
+
+/* دسکتاپ: سایدبار باز، محتوا کنار آن */
+.app-sidebar.open ~ main,
+.app-sidebar.open ~ [class*="-main"] {
+  margin-left: 255px !important;
+  width: calc(100% - 255px) !important;
+  min-width: 0 !important;
+}
+
+/* سایدبار بسته: محتوا تمام‌عرض */
+.app-sidebar:not(.open) ~ main,
+.app-sidebar:not(.open) ~ [class*="-main"] {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+/* موبایل و تبلت */
+@media (max-width: 900px) {
+  .app-sidebar {
+    width: 210px;
+    padding: 20px 12px;
+  }
+
+  .app-sidebar.open ~ main,
+  .app-sidebar.open ~ [class*="-main"] {
+    margin-left: 210px !important;
+    width: calc(100% - 210px) !important;
+    overflow-x: hidden;
+  }
+
+  .sidebar-link {
+    gap: 8px;
+    min-height: 44px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .sidebar-link-icon {
+    width: 29px;
+    height: 29px;
+    font-size: 13px;
+  }
+}main,
+.content,
+.app-sidebar {
+  animation: none !important;
+  transition: none !important;
+}
+/* =========================================
+   RTL (دری / پشتو): سایدبار سمت راست
+========================================= */
+
+[dir="rtl"] .app-sidebar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid #e5effa;
+  box-shadow: -6px 0 25px rgba(22, 119, 210, 0.07);
+  transform: translateX(100%);
+}
+
+[dir="rtl"] .app-sidebar.open {
+  transform: translateX(0);
+}
+
+/* عنوان "منوی اصلی" از راست فاصله بگیرد */
+[dir="rtl"] .sidebar-section-title {
+  margin: 0 10px 15px 0;
+  letter-spacing: 0;
+}
+
+/* سایدبار باز: محتوا از راست فاصله بگیرد */
+[dir="rtl"] .app-sidebar.open ~ main,
+[dir="rtl"] .app-sidebar.open ~ [class*="-main"] {
+  margin-left: 0 !important;
+  margin-right: 255px !important;
+  width: calc(100% - 255px) !important;
+}
+
+/* سایدبار بسته: محتوا تمام‌عرض */
+[dir="rtl"] .app-sidebar:not(.open) ~ main,
+[dir="rtl"] .app-sidebar:not(.open) ~ [class*="-main"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+/* موبایل و تبلت */
+@media (max-width: 900px) {
+  [dir="rtl"] .app-sidebar.open ~ main,
+  [dir="rtl"] .app-sidebar.open ~ [class*="-main"] {
+    margin-left: 0 !important;
+    margin-right: 210px !important;
+    width: calc(100% - 210px) !important;
+  }
+}

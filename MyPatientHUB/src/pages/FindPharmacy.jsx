@@ -1,6 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./FindPharmacy.css";
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
+import pharmacy from '../assets/pharmacywlc.jpeg'
 
 const menu = [
   { icon: "house", label: "Dashboard", to: "/dashboard" },
@@ -118,6 +122,7 @@ const CATEGORIES = [
 ];
 
 function MedicineImage({ medicine }) {
+  const { t } = useTranslation();
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -140,34 +145,38 @@ function MedicineImage({ medicine }) {
 }
 
 function MedicineCard({ medicine, category, onDetails, onBuy }) {
+  const { t } = useTranslation();
+
   return (
     <article className="pp-medicine-card">
       <div className="pp-product-image">
-        <span className="pp-product-tag">Medicine</span>
+        <span className="pp-product-tag">{t("Medicine")}</span>
         <MedicineImage medicine={medicine} />
       </div>
 
       <div className="pp-card-body">
         <span className="pp-category-label">{category}</span>
         <h3>{medicine.name}</h3>
-        <p className="pp-product-description">{medicine.description}</p>
+        <p className="pp-product-description">
+          {t(medicine.description)}
+        </p>
 
         <div className="pp-product-bottom">
           <div className="pp-price">
-            <span>Price</span>
+            <span>{t("Price")}</span>
             <strong>${medicine.price.toFixed(2)}</strong>
           </div>
           <button
             className="pp-details-button"
             onClick={() => onDetails(medicine, category)}
           >
-            Details
+            {t("Details")}
           </button>
         </div>
 
         <button className="pp-buy-button" onClick={() => onBuy(medicine)}>
           <i className="fa-solid fa-cart-shopping" />
-          Add to Cart
+          {t("Add to Cart")}
         </button>
       </div>
     </article>
@@ -175,6 +184,8 @@ function MedicineCard({ medicine, category, onDetails, onBuy }) {
 }
 
 function MedicineDetails({ medicine, category, onClose, onBuy }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") onClose();
@@ -190,13 +201,13 @@ function MedicineDetails({ medicine, category, onClose, onBuy }) {
         className="pp-modal"
         role="dialog"
         aria-modal="true"
-        aria-label={`${medicine.name} details`}
+        aria-label={t("medicineDetails", { name: medicine.name })}
         onClick={(event) => event.stopPropagation()}
       >
         <button
           className="pp-modal-close"
           onClick={onClose}
-          aria-label="Close details"
+          aria-label={t("Close details")}
         >
           <i className="fa-solid fa-xmark" />
         </button>
@@ -207,16 +218,15 @@ function MedicineDetails({ medicine, category, onClose, onBuy }) {
 
         <span className="pp-category-label">{category}</span>
         <h2>{medicine.name}</h2>
-        <p>{medicine.description}</p>
+        <p>{t(medicine.description)}</p>
 
         <div className="pp-modal-price">
-          <span>Price</span>
+          <span>{t("Price")}</span>
           <strong>${medicine.price.toFixed(2)}</strong>
         </div>
 
         <p className="pp-safety-note">
-          Please consult a qualified healthcare professional before using
-          medicine. Prescription medicines require a valid prescription.
+          {t("Please consult a qualified healthcare professional before using medicine. Prescription medicines require a valid prescription.")}
         </p>
 
         <button
@@ -227,7 +237,7 @@ function MedicineDetails({ medicine, category, onClose, onBuy }) {
           }}
         >
           <i className="fa-solid fa-cart-shopping" />
-          Add to Cart
+          {t("Add to Cart")}
         </button>
       </section>
     </div>
@@ -235,6 +245,8 @@ function MedicineDetails({ medicine, category, onClose, onBuy }) {
 }
 
 export default function FindPharmacy() {
+  const { t } = useTranslation();
+
   const [sidebarHidden, setSidebarHidden] = useState(
     () => window.innerWidth <= 768
   );
@@ -243,6 +255,7 @@ export default function FindPharmacy() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedMedicine, setSelectedMedicine] = useState(null);
   const [toast, setToast] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   const allMedicines = useMemo(
     () =>
@@ -291,7 +304,7 @@ export default function FindPharmacy() {
   );
 
   const buy = (medicine) => {
-    setToast(`${medicine.name} added to your demo cart`);
+    setToast(t("addedToCart", { name: medicine.name }));
   };
 
   useEffect(() => {
@@ -319,167 +332,97 @@ export default function FindPharmacy() {
   };
 
   return (
-    <div className="pp-page">
-      <aside className={`sidebar ${sidebarHidden ? "hide" : ""}`}>
-        <div className="logo">
-          <div className="logo-icon">M</div>
-          <span>MyPatientHUB</span>
-        </div>
+    <div className={`find-doctor-layout ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
 
-        <nav className="menu">
-          {menu.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className={item.active ? "active" : ""}
-              onClick={closeOnMobile}
-            >
-              <i className={`fa-solid fa-${item.icon}`} />
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </nav>
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
-        <div className="help">
-          <i className="fa-solid fa-question" />
-        </div>
-      </aside>
+      <main className="main find-pharmacy">
 
-      <main className={`pp-main ${sidebarHidden ? "pp-main-expanded" : ""}`}>
-        <header className="pp-topbar">
-          <div className="pp-topbar-left">
-            <button
-              className="pp-menu-toggle"
-              onClick={() => setSidebarHidden((hidden) => !hidden)}
-              aria-label="Toggle sidebar"
-            >
-              <i className="fa-solid fa-bars"></i>
-            </button>
-
-            <div className="pp-breadcrumb">
-              <Link to="/dashboard" aria-label="Go to Dashboard">
-                <i className="fa-solid fa-house"></i>
-              </Link>
-              <span>/</span>
-              <strong>Find Pharmacy</strong>
-            </div>
-          </div>
-
-          <div className="pp-topbar-right">
-            <div className="pp-top-search">
-              <i className="fa-solid fa-magnifying-glass" />
-              <input
-                type="search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search medicine..."
-                aria-label="Search medicines"
-              />
-            </div>
-
-            <Link to="/settings" className="pp-icon-btn" aria-label="Settings">
-              <i className="fa-solid fa-gear" />
-            </Link>
-
-            <button className="pp-icon-btn" aria-label="Notifications">
-              <i className="fa-solid fa-bell" />
-              <span className="pp-notify-dot" />
-            </button>
-                <Link to="/login" className="pp-logout">
-                  Log out
-                </Link>
-            </div>
-        </header>
+        <Header
+          title={t("Find Pharmacy")}
+          onMenuClick={() => setSidebarOpen((prev) => !prev)}
+        />
 
         <div className="pp-content">
-          <section className="pp-hero">
-            <div className="pp-hero-content">
-              <span className="pp-eyebrow">
-                <i className="fa-solid fa-heart-pulse" />
-                YOUR HEALTH, OUR PRIORITY
+
+          {/* Welcome Card */}
+          <section className="pp-welcome">
+            <div className="pp-welcome-content">
+              <span className="pp-welcome-tag">
+                <i className="fas fa-heartbeat"></i>
+                {t("MyPatientHUB Pharmacy")}
               </span>
-              <h1>Find Your Medicine</h1>
+
+              <h1>
+                {t("Your Health,")}
+                <br />
+                <span>{t("Our Priority.")}</span>
+              </h1>
+
               <p>
-                Explore medicine categories and find the products you need in
-                one convenient place.
+                {t("Find your medicines easily and explore our pharmacy collection to support your health and well-being.")}
               </p>
 
-              <div className="pp-search-box">
-                <i className="fa-solid fa-magnifying-glass" />
-                <input
-                  type="search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search medicine or category..."
-                  aria-label="Search medicines"
-                />
-                {search && (
-                  <button
-                    onClick={() => setSearch("")}
-                    aria-label="Clear search"
-                  >
-                    <i className="fa-solid fa-xmark" />
-                  </button>
-                )}
-              </div>
+              <button
+                className="pp-welcome-btn"
+                onClick={() => {
+                  document
+                    .querySelector(".pp-content")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                <i className="fas fa-pills"></i>
+                {t("Explore Medicines")}
+                <i className="fas fa-arrow-right"></i>
+              </button>
 
-              <div className="pp-pharmacy-note">
-                <i className="fa-solid fa-shield-heart" />
-                Browse medicines and consult your pharmacist when needed.
+              <div className="pp-welcome-features">
+                <span>
+                  <i className="fas fa-check-circle"></i>
+                  {t("Easy Search")}
+                </span>
+
+                <span>
+                  <i className="fas fa-heart"></i>
+                  {t("Health First")}
+                </span>
               </div>
             </div>
 
-            <div className="pp-hero-art">
-              <div className="pp-art-circle">
-                <i className="fa-solid fa-prescription-bottle-medical" />
-              </div>
-              <div className="pp-art-small pp-art-one">
-                <i className="fa-solid fa-heart-pulse" />
-              </div>
-              <div className="pp-art-small pp-art-two">
-                <i className="fa-solid fa-capsules" />
-              </div>
-            </div>
-          </section>
+            <div className="pp-welcome-image">
+              <img
+                src={pharmacy}
+                alt="Pharmacy and healthcare"
+              />
 
-          <section className="pp-stats">
-            <div className="pp-stat-card">
-              <div className="pp-stat-icon pp-stat-blue">
-                <i className="fa-solid fa-pills" />
-              </div>
-              <div>
-                <span>Available Listings</span>
-                <strong>{allMedicines.length}</strong>
+              <div className="pp-welcome-floating">
+                <div className="pp-floating-icon">
+                  <i className="fas fa-shield-heart"></i>
+                </div>
+
+                <div>
+                  <strong>{t("Your Health Matters")}</strong>
+                  <p>{t("Care starts here")}</p>
+                </div>
               </div>
             </div>
 
-            <div className="pp-stat-card">
-              <div className="pp-stat-icon pp-stat-purple">
-                <i className="fa-solid fa-layer-group" />
-              </div>
-              <div>
-                <span>Categories</span>
-                <strong>{CATEGORIES.length}</strong>
-              </div>
-            </div>
-
-            <div className="pp-stat-card">
-              <div className="pp-stat-icon pp-stat-green">
-                <i className="fa-solid fa-prescription-bottle-medical" />
-              </div>
-              <div>
-                <span>Pharmacies Listed</span>
-                <strong>{PHARMACIES.length}</strong>
-              </div>
-            </div>
+            <div className="pp-welcome-decoration"></div>
           </section>
 
           <section className="pp-categories-section">
             <div className="pp-section-heading">
               <div>
-                <span className="pp-section-kicker">EXPLORE</span>
-                <h2>Medicine Categories</h2>
-                <p>Choose a category to browse its listings.</p>
+                <span className="pp-section-kicker">
+                  {t("EXPLORE")}
+                </span>
+                <h2>{t("Medicine Categories")}</h2>
+                <p>
+                  {t("Choose a category to browse its listings.")}
+                </p>
               </div>
             </div>
 
@@ -491,7 +434,7 @@ export default function FindPharmacy() {
                 <span className="pp-chip-emoji">
                   <i className="fa-solid fa-border-all" />
                 </span>
-                All Medicines
+                {t("All Medicines")}
               </button>
 
               {CATEGORIES.map((category) => (
@@ -505,7 +448,7 @@ export default function FindPharmacy() {
                   }
                 >
                   <span className="pp-chip-emoji">{category.emoji}</span>
-                  {category.title}
+                  {t(category.title)}
                 </button>
               ))}
             </div>
@@ -514,10 +457,14 @@ export default function FindPharmacy() {
           <section className="pp-listing-section">
             <div className="pp-listing-heading">
               <div>
-                <span className="pp-section-kicker">PHARMACY CATALOG</span>
-                <h2>Available Medicines</h2>
+                <span className="pp-section-kicker">
+                  {t("PHARMACY CATALOG")}
+                </span>
+                <h2>{t("Available Medicines")}</h2>
               </div>
-              <span className="pp-results-count">{resultCount} results</span>
+              <span className="pp-results-count">
+                {t("resultsCount", { n: resultCount })}
+              </span>
             </div>
 
             {visibleCategories.length === 0 ? (
@@ -525,8 +472,10 @@ export default function FindPharmacy() {
                 <div className="pp-empty-icon">
                   <i className="fa-solid fa-magnifying-glass" />
                 </div>
-                <h3>No medicines found</h3>
-                <p>Try another name or clear your search filters.</p>
+                <h3>{t("No medicines found")}</h3>
+                <p>
+                  {t("Try another name or clear your search filters.")}
+                </p>
                 <button
                   className="pp-primary-button"
                   onClick={() => {
@@ -535,7 +484,7 @@ export default function FindPharmacy() {
                     setActiveCategory("all");
                   }}
                 >
-                  Clear Filters
+                  {t("Clear Filters")}
                 </button>
               </div>
             ) : (
@@ -549,8 +498,12 @@ export default function FindPharmacy() {
                       <span>{category.emoji}</span>
                     </div>
                     <div className="pp-category-title">
-                      <h3>{category.title}</h3>
-                      <span>{category.medicines.length} products</span>
+                      <h3>{t(category.title)}</h3>
+                      <span>
+                        {t("productsCount", {
+                          n: category.medicines.length
+                        })}
+                      </span>
                     </div>
 
                     <div className="pp-local-search">
@@ -564,8 +517,12 @@ export default function FindPharmacy() {
                             [category.id]: event.target.value,
                           }))
                         }
-                        placeholder={`Search ${category.title}...`}
-                        aria-label={`Search ${category.title}`}
+                        placeholder={t("searchIn", {
+                          name: t(category.title)
+                        })}
+                        aria-label={t("searchIn", {
+                          name: t(category.title)
+                        })}
                       />
                     </div>
                   </div>
@@ -575,7 +532,7 @@ export default function FindPharmacy() {
                       <MedicineCard
                         key={medicine.name}
                         medicine={medicine}
-                        category={category.title}
+                        category={t(category.title)}
                         onDetails={openDetails}
                         onBuy={buy}
                       />
@@ -589,7 +546,7 @@ export default function FindPharmacy() {
           <footer className="pp-footer">
             <div>
               <strong>MyPatientHUB</strong>
-              <p>Your health and wellbeing matter.</p>
+              <p>{t("Your health and wellbeing matter.")}</p>
             </div>
             <span>© {new Date().getFullYear()} MyPatientHUB</span>
           </footer>

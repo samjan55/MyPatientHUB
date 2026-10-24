@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import heartImage from '../assets/heart.jpeg'
+import { useTranslation } from 'react-i18next'
+import LanguageSwitcher from '../components/LanguageSwitcher'
+import heartImage from '../assets/hospital-login.jpeg'
+import './login.css'
 
 function Login() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const [lightOn, setLightOn] = useState(false)
   const [email, setEmail] = useState('')
@@ -15,6 +19,9 @@ function Login() {
 
   const [particles, setParticles] = useState([])
   const [signingIn, setSigningIn] = useState(false)
+
+  const [creepy, setCreepy] = useState(false)
+  const [leaving, setLeaving] = useState(false)
 
   useEffect(() => {
     const newParticles = []
@@ -38,13 +45,18 @@ function Login() {
     setEmailError('')
     setPasswordError('')
 
-    if (email === '') {
-      setEmailError('Please enter your email.')
+    const value = email.trim()
+
+    if (value === '') {
+      setEmailError('Please enter your email or phone.')
       return
     }
 
-    if (!email.includes('@')) {
-      setEmailError('Please enter a valid email.')
+    const isEmail = /^\S+@\S+\.\S+$/.test(value)
+    const isPhone = /^\+?[0-9]{9,15}$/.test(value.replace(/[\s-]/g, ''))
+
+    if (!isEmail && !isPhone) {
+      setEmailError('Please enter a valid email or phone number.')
       return
     }
 
@@ -60,12 +72,30 @@ function Login() {
     }, 3000)
   }
 
+  const handleEyes = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - (rect.left + rect.width / 2)) / 50
+    const y = (e.clientY - (rect.top + rect.height / 2)) / 50
+    const clamp = (n) => Math.max(-4, Math.min(4, n * 4))
+
+    e.currentTarget.style.setProperty('--px', `${clamp(x)}px`)
+    e.currentTarget.style.setProperty('--py', `${clamp(y)}px`)
+  }
+
   const handleSignUp = () => {
-    alert('Sign Up page coming soon.')
+    if (creepy) return
+
+    setCreepy(true)
+    setTimeout(() => setLeaving(true), 1000)
+    setTimeout(() => navigate('/signup'), 1400)
   }
 
   return (
-    <div className={`login-page ${lightOn ? 'light-on' : ''}`}>
+    <div
+      className={`login-page ${lightOn ? 'light-on' : ''} ${
+        leaving ? 'leaving' : ''
+      }`}
+    >
 
       {/* ================= LEFT SIDE ================= */}
 
@@ -88,18 +118,18 @@ function Login() {
 
         <div className="heart-content">
 
-          <div className="heart-title">
+          <div className="heart-title" translate="no">
             <span>♥</span>
             MyPatientHUB
           </div>
 
           <h1>
-            Smart Healthcare
+            {t('Smart Healthcare')}
             <br />
-            <span>In Your Hands</span>
+            <span>{t('In Your Hands')}</span>
           </h1>
 
-          <p>Your health. Your care. Your connection.</p>
+          <p>{t('Your health. Your care. Your connection.')}</p>
 
           <div className="big-heart">
 
@@ -107,24 +137,20 @@ function Login() {
 
             <img src={heartImage} alt="Medical Heart" />
 
-            {/* Glass cards around the heart */}
-
             <div className="float-card float-card-1">
               <i className="fa-solid fa-shield-halved"></i>
-              Secure Data
+              {t('Secure Data')}
             </div>
 
             <div className="float-card float-card-2">
               <i className="fa-regular fa-clock"></i>
-              24/7 Care
+              {t('24/7 Care')}
             </div>
 
             <div className="float-card float-card-3">
               <i className="fa-solid fa-file-medical"></i>
-              Smart Records
+              {t('Smart Records')}
             </div>
-
-            {/* ECG line */}
 
             <div className="heart-ecg">
               <svg viewBox="0 0 500 100">
@@ -151,6 +177,23 @@ function Login() {
 
           </div>
 
+          <div className="stats-row">
+            <div>
+              <strong>10K+</strong>
+              <span>{t('Patients')}</span>
+            </div>
+
+            <div>
+              <strong>500+</strong>
+              <span>{t('Doctors')}</span>
+            </div>
+
+            <div>
+              <strong>24/7</strong>
+              <span>{t('Support')}</span>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -160,7 +203,9 @@ function Login() {
 
       <div className="login-side">
 
-        {/* Floating particles */}
+        <div className="login-lang">
+          <LanguageSwitcher />
+        </div>
 
         <div className="login-particles">
           {particles.slice(0, 12).map((particle) => (
@@ -192,8 +237,8 @@ function Login() {
             <div className="lamp-base"></div>
           </button>
 
-          <span className={lightOn ? 'lamp-text-on' : ''}>
-            {lightOn ? 'HEALTH SYSTEM ON' : 'TURN ON THE LIGHT'}
+          <span>
+            {lightOn ? t('HEALTH SYSTEM ON') : t('TURN ON THE LIGHT')}
           </span>
 
         </div>
@@ -208,20 +253,18 @@ function Login() {
             <div className="card-logo-icon">♥</div>
 
             <div>
-              <strong>MyPatientHUB</strong>
-              <small>Healthcare Platform</small>
+              <strong translate="no">MyPatientHUB</strong>
+              <small>{t('Healthcare Platform')}</small>
             </div>
 
           </div>
 
-          <h2>Welcome Back</h2>
+          <h2>{t('Welcome Back')}</h2>
 
           <p className="card-subtitle">
-            Sign in to continue to your account
+            {t('Sign in to continue to your account')}
           </p>
 
-
-          {/* ================= FORM ================= */}
 
           <form onSubmit={handleSubmit}>
 
@@ -229,7 +272,7 @@ function Login() {
 
             <div className="input-group">
 
-              <label>Email or Phone</label>
+              <label>{t('Email or Phone')}</label>
 
               <div className="input-box">
 
@@ -237,7 +280,7 @@ function Login() {
 
                 <input
                   type="text"
-                  placeholder="Enter your email"
+                  placeholder={t('Enter your email or phone')}
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value)
@@ -248,7 +291,7 @@ function Login() {
 
               </div>
 
-              {emailError && <p className="error">{emailError}</p>}
+              {emailError && <p className="error">{t(emailError)}</p>}
 
             </div>
 
@@ -257,7 +300,7 @@ function Login() {
 
             <div className="input-group">
 
-              <label>Password</label>
+              <label>{t('Password')}</label>
 
               <div className="input-box">
 
@@ -265,7 +308,7 @@ function Login() {
 
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder={t('Enter your password')}
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value)
@@ -291,7 +334,7 @@ function Login() {
 
               </div>
 
-              {passwordError && <p className="error">{passwordError}</p>}
+              {passwordError && <p className="error">{t(passwordError)}</p>}
 
             </div>
 
@@ -303,15 +346,15 @@ function Login() {
               <label>
                 <input type="checkbox" disabled={!lightOn || signingIn} />
                 {' '}
-                Remember me
+                {t('Remember me')}
               </label>
 
-              <a href="#">Forgot password?</a>
+              <a href="#">{t('Forgot password?')}</a>
 
             </div>
 
 
-            {/* ================= SIGN IN ================= */}
+            {/* ================= SIGN IN (ambulance) ================= */}
 
             <button
               type="submit"
@@ -319,50 +362,60 @@ function Login() {
               disabled={!lightOn || signingIn}
             >
 
-              <span className="sign-text">SIGN IN</span>
+              <span className="sign-text">{t('SIGN IN')}</span>
 
-              <div className="login-room">
-
-                <div className="room-back-wall"></div>
-                <div className="room-left-wall"></div>
-                <div className="room-right-wall"></div>
-                <div className="room-ceiling"></div>
-                <div className="room-floor"></div>
-
-                <div className="room-door-frame">
-                  <div className="room-door">
-                    <span></span>
-                  </div>
-                </div>
-
-                <div className="walking-person">
-                  <div className="person-head"></div>
-                  <div className="person-body"></div>
-                  <div className="person-arm"></div>
-                  <div className="person-leg person-leg-left"></div>
-                  <div className="person-leg person-leg-right"></div>
-                </div>
-
-              </div>
+              <svg
+                className="ambulance"
+                width="46"
+                height="25"
+                viewBox="0 0 64 34"
+                aria-hidden="true"
+              >
+                <rect x="2" y="6" width="38" height="18" rx="3" fill="#fff" />
+                <path d="M40 12h10l8 7v5H40z" fill="#dfe8ee" />
+                <path
+                  d="M20 10v10M15 15h10"
+                  stroke="#e24b4a"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+                <rect
+                  className="amb-light"
+                  x="14"
+                  y="2"
+                  width="12"
+                  height="4"
+                  rx="1"
+                />
+                <circle cx="14" cy="26" r="5" fill="#1b2b34" stroke="#fff" strokeWidth="1.5" />
+                <circle cx="48" cy="26" r="5" fill="#1b2b34" stroke="#fff" strokeWidth="1.5" />
+              </svg>
 
             </button>
 
 
-            {/* ================= SIGN UP ================= */}
+            {/* ================= SIGN UP (creepy eyes) ================= */}
 
-            <button
-              type="button"
-              className="sign-up-button"
-              onClick={handleSignUp}
-              disabled={!lightOn || signingIn}
+            <div
+              className={`creepy-wrap ${creepy ? 'creepy-go' : ''}`}
+              onMouseMove={handleEyes}
             >
-              SIGN UP
-            </button>
-
+              <div className="signup-wrap">
+                <button
+                  type="button"
+                  className="sign-up-button"
+                  onClick={handleSignUp}
+                >
+                  <span className="signup-plus">+</span>
+                  <span>{t('SignUP')}</span>
+                  <i className="fa-solid fa-arrow-right signup-arrow"></i>
+                </button>
+              </div>
+            </div>
           </form>
 
           <p className="bottom-text">
-            Secure healthcare access with MyPatientHUB
+            {t('Secure healthcare access with MyPatientHUB')}
           </p>
 
         </div>

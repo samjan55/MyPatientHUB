@@ -1,0 +1,2504 @@
+/* =========================================
+   FIND DOCTOR - COMPLETE STYLESHEET
+   MyPatientHUB
+========================================= */
+
+/* =========================================
+   1. GENERAL LAYOUT
+========================================= */
+
+.find-doctor-layout {
+    --doctor-primary: #1677d2;
+    --doctor-secondary: #07528a;
+    --doctor-accent: #39a8ef;
+    --doctor-bg: #f4f8fc;
+    --doctor-text: #243447;
+    --doctor-muted: #718096;
+    --doctor-border: #e2eaf2;
+
+    min-height: 100vh;
+    color: var(--doctor-text);
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--doctor-bg);
+}
+
+.find-doctor-layout * {
+    box-sizing: border-box;
+}
+
+.find-doctor-layout .find-doctor-main {
+    min-width: 0;
+    min-height: 100vh;
+}
+
+.find-doctor-layout .find-doctor-content {
+    width: 100%;
+    min-width: 0;
+    padding: 26px 30px;
+}
+
+/* =========================================
+   2. TOPBAR
+========================================= */
+
+.find-doctor-layout .top-title {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: start;
+    gap: 4px 12px;
+}
+
+.find-doctor-layout .top-title .breadcrumb {
+    grid-column: 1 / -1;
+}
+
+.find-doctor-layout .top-title h2 {
+    margin: 0;
+}
+
+.find-doctor-layout .find-doctor-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: var(--doctor-primary);
+    font: inherit;
+    cursor: pointer;
+}
+
+.find-doctor-layout .find-doctor-logout:hover {
+    color: var(--doctor-secondary);
+}
+
+/* =========================================
+   3. HERO - WELCOME CARD STYLE
+========================================= */
+
+.find-doctor-layout .doctor-header {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 30px 38px;
+    margin-bottom: 30px;
+
+    background: linear-gradient(
+        110deg,
+        #ffffff 0%,
+        #f0f8ff 48%,
+        #c0e2ff 100%
+    );
+
+    border: 1px solid #e1f0ff;
+    border-radius: 25px;
+
+    box-shadow:
+        0 18px 45px rgba(22, 119, 210, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* BACKGROUND DECORATION */
+
+.find-doctor-layout .doctor-header::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    width: 420px;
+    height: 420px;
+
+    right: -100px;
+    top: -170px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(79, 166, 255, 0.25),
+        transparent 70%
+    );
+
+    pointer-events: none;
+}
+
+.find-doctor-layout .doctor-header::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    width: 520px;
+    height: 260px;
+
+    right: -90px;
+    bottom: -170px;
+
+    border-radius: 50%;
+
+    background: rgba(83, 169, 255, 0.18);
+    transform: rotate(-15deg);
+
+    pointer-events: none;
+}
+
+.find-doctor-layout .doctor-header-decoration {
+    position: absolute;
+    z-index: -1;
+
+    width: 210px;
+    height: 210px;
+
+    top: 100px;
+    left: 35%;
+
+    border: 1px solid rgba(22, 119, 210, 0.08);
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+/* =========================================
+   4. HERO BREADCRUMB
+========================================= */
+
+.find-doctor-layout .doctor-breadcrumb {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 11px;
+
+    margin-bottom: 14px;
+
+    color: #718096;
+    font-size: 12px;
+}
+
+.find-doctor-layout .doctor-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #1677d2;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.find-doctor-layout .doctor-breadcrumb a:hover {
+    color: #07528a;
+}
+
+.find-doctor-layout .doctor-breadcrumb > i {
+    font-size: 10px;
+}
+
+/* =========================================
+   5. HERO CONTENT LAYOUT
+========================================= */
+
+.find-doctor-layout .doctor-hero-layout {
+    position: relative;
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(320px, 0.9fr);
+
+    align-items: center;
+    gap: 18px;
+
+    min-height: 150px;
+}
+
+.find-doctor-layout .doctor-hero-text {
+    position: relative;
+    z-index: 5;
+
+    min-width: 0;
+    padding: 12px 0 16px;
+}
+
+/* SMALL BADGE */
+
+.find-doctor-layout .doctor-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 19px;
+    padding: 9px 15px;
+
+    color: #0875d1;
+
+    background: #e6f3ff;
+    border: 1px solid #d5eaff;
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    box-shadow: 0 3px 12px rgba(22, 119, 210, 0.08);
+}
+
+.find-doctor-layout .doctor-hero-eyebrow i {
+    color: #087be8;
+    font-size: 15px;
+}
+
+/* MAIN TITLE */
+
+.find-doctor-layout .doctor-hero-text h1 {
+    margin: 0 0 18px;
+
+    color: #092e5c;
+
+    font-size: clamp(28px, 3vw, 43px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+
+    overflow-wrap: break-word;
+}
+
+.find-doctor-layout .doctor-hero-text h1 span {
+    color: #087be8;
+}
+
+/* DESCRIPTION */
+
+.find-doctor-layout .doctor-hero-text > p {
+    max-width: 470px;
+    margin: 0;
+
+    color: #637b96;
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* =========================================
+   6. HERO BUTTONS
+========================================= */
+
+.find-doctor-layout .doctor-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    margin-top: 27px;
+}
+
+.find-doctor-layout .doctor-hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 48px;
+    padding: 12px 20px;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #269bff,
+        #006be8
+    );
+
+    border: none;
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 18px rgba(22, 119, 210, 0.18);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.find-doctor-layout .doctor-hero-button:hover {
+    transform: translateY(-3px);
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #1687e5,
+        #07528a
+    );
+
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.2);
+}
+
+.find-doctor-layout .doctor-hero-button > i:last-child {
+    transition: transform 0.25s;
+}
+
+.find-doctor-layout .doctor-hero-button:hover > i:last-child {
+    transform: translateX(4px);
+}
+
+/* =========================================
+   7. TRUST INFORMATION
+========================================= */
+
+.find-doctor-layout .doctor-trust {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.find-doctor-layout .doctor-trust-icon {
+    width: 39px;
+    height: 39px;
+
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    color: #1677d2;
+
+    background: #e6f3ff;
+    border: 1px solid #d5eaff;
+    border-radius: 12px;
+
+    font-size: 17px;
+}
+
+.find-doctor-layout .doctor-trust strong,
+.find-doctor-layout .doctor-trust small {
+    display: block;
+}
+
+.find-doctor-layout .doctor-trust strong {
+    margin-bottom: 4px;
+
+    color: #23415f;
+    font-size: 11px;
+}
+
+.find-doctor-layout .doctor-trust small {
+    color: #718096;
+    font-size: 10px;
+}
+
+/* BOTTOM BADGE */
+
+.find-doctor-layout .doctor-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 24px;
+    padding: 9px 13px;
+
+    color: #0875d1;
+
+    background: #e6f3ff;
+    border: 1px solid #d5eaff;
+    border-radius: 30px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.find-doctor-layout .doctor-hero-badge i {
+    color: #18a889;
+    font-size: 14px;
+}
+
+/* =========================================
+   8. DOCTOR IMAGE AREA
+========================================= */
+
+.find-doctor-layout .doctor-hero-visual {
+    position: relative;
+    isolation: isolate;
+
+    min-width: 0;
+    min-height: 345px;
+    height: 100%;
+}
+
+/* SOFT BLUE GLOW */
+
+.find-doctor-layout .doctor-visual-glow {
+    position: absolute;
+    z-index: -2;
+
+    width: 280px;
+    height: 280px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -48%);
+
+    border-radius: 50%;
+
+    background: rgba(22, 119, 210, 0.18);
+    filter: blur(22px);
+}
+
+/* DECORATIVE CIRCLE */
+
+.find-doctor-layout .doctor-visual-circle {
+    position: absolute;
+    z-index: -1;
+
+    width: 270px;
+    height: 270px;
+
+    top: 50%;
+    left: 51%;
+
+    transform: translate(-50%, -46%);
+
+    border: 1px solid rgba(22, 119, 210, 0.15);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 18px rgba(22, 119, 210, 0.035),
+        0 0 0 38px rgba(22, 119, 210, 0.025);
+}
+
+/* =========================================
+   9. MAIN DOCTOR PHOTO - STATIC
+========================================= */
+
+.find-doctor-layout .doctor-hero-main-photo {
+    position: absolute;
+    z-index: 1;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: min(67%, 255px);
+    height: 315px;
+
+    overflow: hidden;
+
+    border: 5px solid rgba(255, 255, 255, 0.95);
+    border-bottom: 0;
+
+    border-radius: 140px 140px 20px 20px;
+
+    background: linear-gradient(
+        #e9f8ff,
+        #a6dcff
+    );
+
+    box-shadow:
+        0 15px 35px rgba(7, 82, 138, 0.2),
+        0 0 0 8px rgba(255, 255, 255, 0.2);
+
+    animation: none;
+}
+
+.find-doctor-layout .doctor-hero-main-photo::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 40%,
+        rgba(5, 58, 100, 0.16)
+    );
+
+    pointer-events: none;
+}
+
+.find-doctor-layout .doctor-hero-main-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center top;
+
+    transition: none;
+}
+
+.find-doctor-layout .doctor-header:hover
+.doctor-hero-main-photo img {
+    transform: none;
+}
+
+/* =========================================
+   10. DOCTOR PHOTO LABEL
+========================================= */
+
+.find-doctor-layout .doctor-photo-label {
+    position: absolute;
+    z-index: 2;
+
+    left: 10px;
+    right: 10px;
+    bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px;
+
+    color: #173c60;
+
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid white;
+    border-radius: 13px;
+
+    box-shadow: 0 5px 18px rgba(0, 32, 71, 0.12);
+
+    backdrop-filter: blur(8px);
+}
+
+.find-doctor-layout .doctor-photo-status {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    background: #20c982;
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 4px rgba(32, 201, 130, 0.13);
+}
+
+.find-doctor-layout .doctor-photo-label > span:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+}
+
+.find-doctor-layout .doctor-photo-label strong,
+.find-doctor-layout .doctor-photo-label small {
+    display: block;
+}
+
+.find-doctor-layout .doctor-photo-label strong {
+    margin-bottom: 4px;
+    font-size: 10px;
+}
+
+.find-doctor-layout .doctor-photo-label small {
+    color: #718096;
+    font-size: 9px;
+}
+
+.find-doctor-layout .doctor-photo-label > i {
+    color: #1677d2;
+    font-size: 18px;
+}
+
+/* =========================================
+   11. SMALL DOCTOR PHOTOS - STATIC
+========================================= */
+
+.find-doctor-layout .doctor-float-photo {
+    position: absolute;
+    z-index: 3;
+
+    width: 83px;
+    height: 83px;
+
+    padding: 5px;
+
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid white;
+    border-radius: 23px;
+
+    box-shadow: 0 10px 28px rgba(10, 66, 115, 0.16);
+
+    animation: none;
+    transition: none;
+}
+
+.find-doctor-layout .doctor-float-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center top;
+
+    border-radius: 18px;
+}
+
+.find-doctor-layout .doctor-float-photo > span {
+    position: absolute;
+
+    right: -7px;
+    bottom: -7px;
+
+    width: 28px;
+    height: 28px;
+
+    display: grid;
+    place-items: center;
+
+    color: white;
+    background: #1677d2;
+
+    border: 3px solid white;
+    border-radius: 10px;
+
+    font-size: 11px;
+}
+
+/* SMALL PHOTO POSITIONS */
+
+.find-doctor-layout .doctor-float-one {
+    top: 30px;
+    left: 2%;
+
+    transform: rotate(-8deg);
+}
+
+.find-doctor-layout .doctor-float-two {
+    top: 76px;
+    right: 1%;
+
+    transform: rotate(8deg);
+}
+
+.find-doctor-layout .doctor-float-three {
+    bottom: 25px;
+    left: 2%;
+
+    transform: rotate(7deg);
+}
+
+/* =========================================
+   12. MEDICAL ICONS - STATIC
+========================================= */
+
+.find-doctor-layout .doctor-visual-cross {
+    position: absolute;
+    z-index: 2;
+
+    display: grid;
+    place-items: center;
+
+    color: #1677d2;
+
+    animation: none;
+}
+
+.find-doctor-layout .doctor-visual-cross i {
+    font-size: 27px;
+}
+
+.find-doctor-layout .cross-one {
+    top: 14px;
+    right: 27%;
+}
+
+.find-doctor-layout .cross-two {
+    bottom: 65px;
+    right: 8%;
+}
+
+.find-doctor-layout .doctor-visual-heart {
+    position: absolute;
+    z-index: 2;
+
+    top: 43%;
+    right: 3%;
+
+    color: #e64e78;
+    font-size: 26px;
+
+    animation: none;
+}
+
+/* =========================================
+   13. FLOATING INFORMATION CARDS - STATIC
+========================================= */
+
+.find-doctor-layout .doctor-floating-card {
+    position: absolute;
+    z-index: 4;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 12px;
+
+    color: #173c60;
+
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid white;
+    border-radius: 13px;
+
+    box-shadow: 0 10px 25px rgba(7, 82, 138, 0.15);
+
+    backdrop-filter: blur(8px);
+
+    animation: none;
+}
+
+.find-doctor-layout .doctor-floating-top {
+    top: 8px;
+    right: 5%;
+}
+
+.find-doctor-layout .doctor-floating-bottom {
+    right: 0;
+    bottom: 12px;
+}
+
+.find-doctor-layout .doctor-floating-icon,
+.find-doctor-layout .doctor-rating-icon {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+
+    color: #1677d2;
+    background: #eaf5ff;
+
+    border-radius: 11px;
+    font-size: 15px;
+}
+
+.find-doctor-layout .doctor-rating-icon {
+    color: #e84f79;
+    background: #fff0f4;
+}
+
+.find-doctor-layout .doctor-floating-card strong,
+.find-doctor-layout .doctor-floating-card small {
+    display: block;
+    white-space: nowrap;
+}
+
+.find-doctor-layout .doctor-floating-card strong {
+    margin-bottom: 4px;
+    font-size: 10px;
+}
+
+.find-doctor-layout .doctor-floating-card small {
+    color: #718096;
+    font-size: 9px;
+}
+
+/* =========================================
+   14. SEARCH CARD
+========================================= */
+
+.find-doctor-layout .search-card {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    margin: 0 auto 38px;
+    padding: 26px;
+
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e7eef7;
+    border-radius: 21px;
+
+    box-shadow: 0 12px 32px rgba(31, 91, 145, 0.07);
+
+    backdrop-filter: blur(12px);
+}
+
+.find-doctor-layout .search-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin-bottom: 23px;
+}
+
+.find-doctor-layout .search-heading-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #1677d2;
+    font-size: 19px;
+
+    background: #eaf5ff;
+    border: 1px solid #d9ecff;
+    border-radius: 15px;
+}
+
+.find-doctor-layout .search-title h2 {
+    margin: 0 0 6px;
+
+    color: #23415f;
+    font-size: 21px;
+}
+
+.find-doctor-layout .search-title p {
+    margin: 0;
+
+    color: #718096;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* SEARCH FORM */
+
+.find-doctor-layout .search-form {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+    gap: 13px;
+}
+
+.find-doctor-layout .search-input {
+    min-width: 0;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 14px;
+
+    background: #f8fbff;
+    border: 1px solid #dfeaf4;
+    border-radius: 12px;
+
+    transition:
+        border-color 0.25s,
+        box-shadow 0.25s;
+}
+
+.find-doctor-layout .search-input:focus-within {
+    background: white;
+    border-color: #1677d2;
+
+    box-shadow: 0 0 0 3px rgba(22, 119, 210, 0.1);
+}
+
+.find-doctor-layout .search-input > i {
+    flex-shrink: 0;
+    color: #1677d2;
+    font-size: 15px;
+}
+
+.find-doctor-layout .search-input input {
+    width: 100%;
+    min-width: 0;
+
+    padding: 0;
+    border: none;
+    outline: none;
+
+    color: #243447;
+    background: transparent;
+
+    font: 13px Arial, sans-serif;
+}
+
+.find-doctor-layout .search-input input::placeholder {
+    color: #91a2b5;
+}
+
+.find-doctor-layout .search-button {
+    min-height: 50px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 0 20px;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #218be8,
+        #07528a
+    );
+
+    border: none;
+    border-radius: 12px;
+
+    font: 700 12px Arial, sans-serif;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 15px rgba(22, 119, 210, 0.15);
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+.find-doctor-layout .search-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 9px 20px rgba(22, 119, 210, 0.24);
+}
+
+/* =========================================
+   15. CHOOSE DOCTOR SECTION
+========================================= */
+
+.find-doctor-layout .choose-doctor {
+    margin: 0 0 38px;
+    padding: 30px;
+
+    background: white;
+    border: 1px solid #e7eef7;
+    border-radius: 22px;
+
+    box-shadow: 0 8px 30px rgba(26, 75, 125, 0.06);
+}
+
+.find-doctor-layout .choose-doctor-heading {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.find-doctor-layout .choose-doctor-heading > span {
+    color: #1677d2;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.find-doctor-layout .choose-doctor-heading h2 {
+    margin: 10px 0;
+
+    color: #123b63;
+    font-size: 28px;
+}
+
+.find-doctor-layout .choose-doctor-heading p {
+    color: #718198;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* DOCTOR GRID */
+
+.find-doctor-layout .doctor-selection {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.find-doctor-layout .doctor-avatar-card {
+    min-width: 0;
+
+    padding: 18px 10px;
+
+    color: #173c60;
+    background: white;
+
+    border: 1px solid #e6edf5;
+    border-radius: 18px;
+
+    text-align: center;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s,
+        border-color 0.25s,
+        box-shadow 0.25s;
+}
+
+.find-doctor-layout .doctor-avatar-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #80baff;
+
+    box-shadow: 0 12px 25px rgba(22, 119, 210, 0.12);
+}
+
+.find-doctor-layout .doctor-avatar-card.active-doctor {
+    border: 2px solid #1677d2;
+    background: #f3f8ff;
+
+    box-shadow: 0 8px 25px rgba(22, 119, 210, 0.12);
+}
+
+/* AVATAR */
+
+.find-doctor-layout .doctor-avatar-placeholder {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    margin: 0 auto 15px;
+    padding: 5px;
+
+    border-radius: 50%;
+    background: #e8f2ff;
+}
+
+.find-doctor-layout .doctor-photo {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center top;
+
+    border-radius: 50%;
+}
+
+.find-doctor-layout .doctor-blue {
+    background: #e0efff;
+}
+
+.find-doctor-layout .doctor-purple {
+    background: #eee7ff;
+}
+
+.find-doctor-layout .doctor-pink {
+    background: #ffe8f0;
+}
+
+.find-doctor-layout .doctor-green {
+    background: #e2f8ed;
+}
+
+.find-doctor-layout .doctor-orange {
+    background: #fff0df;
+}
+
+.find-doctor-layout .doctor-online-dot {
+    position: absolute;
+
+    right: 2px;
+    bottom: 6px;
+
+    width: 14px;
+    height: 14px;
+
+    background: #22c982;
+
+    border: 3px solid white;
+    border-radius: 50%;
+}
+
+.find-doctor-layout .doctor-avatar-card h3 {
+    margin: 0 0 8px;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+}
+
+.find-doctor-layout .doctor-avatar-card > p {
+    margin: 0 0 15px;
+
+    color: #75869a;
+    font-size: 11px;
+}
+
+.find-doctor-layout .doctor-select-label {
+    display: inline-block;
+
+    padding: 7px 11px;
+
+    color: #1677d2;
+    background: #edf6ff;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.find-doctor-layout .active-doctor .doctor-select-label {
+    color: white;
+    background: #1677d2;
+}
+
+/* =========================================
+   16. SELECTED DOCTOR PROFILE
+========================================= */
+
+.find-doctor-layout .selected-doctor-details {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 28px;
+
+    margin-top: 30px;
+    padding: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #f4f9ff,
+        white
+    );
+
+    border: 1px solid #dceafa;
+    border-radius: 20px;
+
+    animation: doctorProfileAppear 0.3s ease;
+}
+
+.find-doctor-layout .selected-doctor-image {
+    position: relative;
+
+    min-height: 250px;
+    overflow: hidden;
+
+    border-radius: 16px;
+}
+
+.find-doctor-layout .doctor-profile-photo {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+
+    object-fit: cover;
+    object-position: center top;
+}
+
+.find-doctor-layout .profile-image-badge {
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+
+    padding: 10px;
+
+    color: white;
+    background: rgba(12, 51, 85, 0.85);
+
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.find-doctor-layout .selected-doctor-info {
+    align-self: center;
+    min-width: 0;
+    padding-right: 20px;
+}
+
+.find-doctor-layout .doctor-available {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #16845c;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.find-doctor-layout .available-dot {
+    width: 8px;
+    height: 8px;
+
+    background: #20c982;
+    border-radius: 50%;
+}
+
+.find-doctor-layout .selected-doctor-info h2 {
+    margin: 12px 0;
+
+    color: #153d63;
+    font-size: 25px;
+}
+
+.find-doctor-layout .selected-doctor-info h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #1677d2;
+    font-size: 16px;
+}
+
+.find-doctor-layout .doctor-experience,
+.find-doctor-layout .doctor-description {
+    color: #687d93;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.find-doctor-layout .doctor-experience i {
+    margin-right: 8px;
+    color: #1677d2;
+}
+
+/* PROFILE BUTTONS */
+
+.find-doctor-layout .doctor-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 22px;
+}
+
+.find-doctor-layout .doctor-profile-actions button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.find-doctor-layout .doctor-profile-button {
+    color: white;
+    background: #1677d2;
+    border: 1px solid #1677d2;
+}
+
+.find-doctor-layout .doctor-profile-button:hover {
+    background: #07528a;
+}
+
+.find-doctor-layout .doctor-message-button {
+    color: #1677d2;
+    background: white;
+    border: 1px solid #c9def5;
+}
+
+.find-doctor-layout .doctor-message-button:hover {
+    background: #edf6ff;
+}
+
+.find-doctor-layout .close-doctor-profile {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    display: grid;
+    place-items: center;
+
+    width: 32px;
+    height: 32px;
+
+    color: #61758a;
+    background: white;
+
+    border: 1px solid #e2eaf3;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+
+/* =========================================
+   17. SECTION HEADINGS
+========================================= */
+
+.find-doctor-layout .doctor-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.find-doctor-layout .small-label {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: #1677d2;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.find-doctor-layout .doctor-section-heading h2,
+.find-doctor-layout .section-heading h2 {
+    margin: 0 0 8px;
+
+    color: #23415f;
+
+    font-size: clamp(22px, 2.4vw, 27px);
+    font-weight: 800;
+}
+
+.find-doctor-layout .doctor-section-heading p,
+.find-doctor-layout .section-heading p {
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.find-doctor-layout .section-heading-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #1677d2;
+    font-size: 22px;
+
+    background: linear-gradient(
+        135deg,
+        #e9f5ff,
+        #f3f0ff
+    );
+
+    border: 1px solid #e1edff;
+    border-radius: 17px;
+}
+
+/* =========================================
+   18. SERVICES AND SPECIALTIES
+========================================= */
+
+.find-doctor-layout .special-services,
+.find-doctor-layout .specialty-section {
+    width: 100%;
+    margin: 0 auto 45px;
+}
+
+.find-doctor-layout .section-heading {
+    margin-bottom: 22px;
+}
+
+.find-doctor-layout .service-grid,
+.find-doctor-layout .specialty-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.find-doctor-layout .service-card,
+.find-doctor-layout a.specialty-card {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border: 1px solid #e3edf6;
+    border-radius: 18px;
+
+    box-shadow: 0 7px 20px rgba(31, 91, 145, 0.05);
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s,
+        border-color 0.25s;
+}
+
+.find-doctor-layout .service-card {
+    min-height: 112px;
+}
+
+.find-doctor-layout a.specialty-card {
+    position: relative;
+
+    min-height: 92px;
+    padding: 18px;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.find-doctor-layout .service-card:hover,
+.find-doctor-layout a.specialty-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #b9dcfb;
+
+    box-shadow: 0 13px 28px rgba(22, 119, 210, 0.1);
+}
+
+/* SERVICE ICONS */
+
+.find-doctor-layout .service-icon,
+.find-doctor-layout .specialty-icon {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #1677d2;
+    background: #e8f4ff;
+
+    border-radius: 15px;
+    font-size: 21px;
+}
+
+.find-doctor-layout .specialty-icon {
+    width: 48px;
+    height: 48px;
+
+    font-size: 19px;
+
+    background: linear-gradient(
+        135deg,
+        #e8f5ff,
+        #f0f2ff
+    );
+
+    border: 1px solid #e1edff;
+
+    transition: transform 0.25s;
+}
+
+.find-doctor-layout .specialty-card:hover .specialty-icon {
+    transform: scale(1.06);
+}
+
+.find-doctor-layout .service-card:nth-child(2) .service-icon {
+    color: #df5474;
+    background: #fff0f2;
+}
+
+.find-doctor-layout .service-card:nth-child(3) .service-icon {
+    color: #7656d8;
+    background: #f0edff;
+}
+
+.find-doctor-layout .service-card:nth-child(4) .service-icon {
+    color: #11976b;
+    background: #e8fbf3;
+}
+
+/* SERVICE TEXT */
+
+.find-doctor-layout .service-content,
+.find-doctor-layout .specialty-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.find-doctor-layout .service-content h3,
+.find-doctor-layout .specialty-content h3 {
+    margin: 0 0 7px;
+
+    color: #23415f;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.find-doctor-layout .service-content p,
+.find-doctor-layout .specialty-content p {
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.find-doctor-layout .service-arrow,
+.find-doctor-layout .specialty-arrow {
+    flex-shrink: 0;
+
+    color: #1677d2;
+    font-size: 12px;
+
+    transition: transform 0.25s;
+}
+
+.find-doctor-layout .service-card:hover .service-arrow,
+.find-doctor-layout .specialty-card:hover .specialty-arrow {
+    transform: translateX(4px);
+}
+
+/* =========================================
+   19. FOOTER
+========================================= */
+
+.find-doctor-layout .doctor-footer {
+    width: 100%;
+
+    margin: 0 auto;
+    padding: 30px 15px 15px;
+
+    text-align: center;
+
+    border-top: 1px solid #e2eaf2;
+
+    color: #718096;
+}
+
+.find-doctor-layout .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    color: #07528a;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.find-doctor-layout .footer-logo i {
+    color: #1677d2;
+    font-size: 22px;
+}
+
+.find-doctor-layout .doctor-footer > p {
+    margin: 10px 0 18px;
+
+    color: #718096;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.find-doctor-layout .footer-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+
+    margin-bottom: 18px;
+}
+
+.find-doctor-layout .footer-links a {
+    color: #396897;
+
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.find-doctor-layout .footer-links a:hover {
+    color: #1677d2;
+}
+
+.find-doctor-layout .copyright {
+    color: #94a3b8;
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   20. LAPTOP / TABLET
+   MAX WIDTH: 1200px
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .find-doctor-layout .find-doctor-content {
+        padding: 22px;
+    }
+
+    .find-doctor-layout .doctor-header {
+        padding: 25px;
+    }
+
+    .find-doctor-layout .doctor-hero-layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(260px, 0.85fr);
+
+        gap: 10px;
+    }
+
+    .find-doctor-layout .doctor-hero-text h1 {
+        font-size: clamp(29px, 3vw, 40px);
+    }
+
+    .find-doctor-layout .doctor-float-photo {
+        width: 70px;
+        height: 70px;
+
+        border-radius: 19px;
+    }
+
+    .find-doctor-layout .doctor-hero-main-photo {
+        width: min(66%, 235px);
+        height: 290px;
+    }
+
+    .find-doctor-layout .doctor-hero-visual {
+        min-height: 320px;
+    }
+
+    .find-doctor-layout .doctor-floating-card {
+        padding: 8px;
+    }
+
+    .find-doctor-layout .search-form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .find-doctor-layout .search-button {
+        grid-column: 1 / -1;
+    }
+
+    .find-doctor-layout .doctor-selection {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* =========================================
+   21. TABLET SIDEBAR
+   MAX WIDTH: 900px
+========================================= */
+
+@media (max-width: 900px) {
+
+    .find-doctor-layout .sidebar {
+        transform: translateX(-100%);
+
+        box-shadow: 10px 0 35px rgba(7, 42, 80, 0.12);
+    }
+
+    .find-doctor-layout .sidebar.hide {
+        transform: translateX(0);
+    }
+
+    .find-doctor-layout .main,
+    .find-doctor-layout .sidebar.hide + .main {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .find-doctor-layout .topbar {
+        padding: 18px;
+    }
+
+    .find-doctor-layout .doctor-hero-layout {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(245px, 0.8fr);
+    }
+
+    .find-doctor-layout .doctor-hero-text h1 {
+        font-size: 30px;
+    }
+
+    .find-doctor-layout .doctor-hero-actions {
+        gap: 12px;
+    }
+
+    .find-doctor-layout .doctor-floating-top {
+        right: 0;
+    }
+}
+
+/* =========================================
+   22. SMALL TABLET / MOBILE
+   MAX WIDTH: 700px
+========================================= */
+
+@media (max-width: 700px) {
+
+    .find-doctor-layout .find-doctor-content {
+        padding: 16px;
+    }
+
+    .find-doctor-layout .doctor-header {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .find-doctor-layout .doctor-hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 10px;
+        min-height: 0;
+    }
+
+    .find-doctor-layout .doctor-hero-text {
+        padding: 10px 0 0;
+    }
+
+    .find-doctor-layout .doctor-hero-text h1 {
+        font-size: clamp(30px, 7vw, 42px);
+    }
+
+    .find-doctor-layout .doctor-hero-text > p {
+        max-width: 500px;
+    }
+
+    .find-doctor-layout .doctor-hero-visual {
+        width: 100%;
+        max-width: 440px;
+
+        min-height: 330px;
+        height: 330px;
+
+        margin: 0 auto;
+    }
+
+    .find-doctor-layout .doctor-hero-main-photo {
+        width: 52%;
+        max-width: 230px;
+        height: 290px;
+    }
+
+    .find-doctor-layout .doctor-visual-circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .find-doctor-layout .doctor-visual-glow {
+        width: 245px;
+        height: 245px;
+    }
+
+    .find-doctor-layout .doctor-floating-top {
+        top: 5px;
+        right: 0;
+    }
+
+    .find-doctor-layout .doctor-floating-bottom {
+        bottom: 5px;
+        right: 0;
+    }
+
+    .find-doctor-layout .doctor-float-one {
+        top: 35px;
+        left: 2%;
+    }
+
+    .find-doctor-layout .doctor-float-two {
+        top: 90px;
+        right: 1%;
+    }
+
+    .find-doctor-layout .doctor-float-three {
+        bottom: 22px;
+        left: 2%;
+    }
+
+    /* SERVICES */
+
+    .find-doctor-layout .service-grid,
+    .find-doctor-layout .specialty-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .find-doctor-layout .service-card {
+        min-height: 100px;
+    }
+
+    /* TOPBAR */
+
+    .find-doctor-layout .topbar {
+        gap: 10px;
+    }
+
+    .find-doctor-layout .top-right {
+        gap: 12px;
+    }
+
+    .find-doctor-layout .top-right .search {
+        display: none;
+    }
+
+    /* DOCTOR SELECTION */
+
+    .find-doctor-layout .choose-doctor {
+        padding: 22px 16px;
+    }
+
+    .find-doctor-layout .selected-doctor-details {
+        grid-template-columns:
+            180px minmax(0, 1fr);
+
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .find-doctor-layout .selected-doctor-info {
+        padding-right: 0;
+    }
+}
+
+/* =========================================
+   23. MOBILE PHONES
+   MAX WIDTH: 480px
+========================================= */
+
+@media (max-width: 480px) {
+
+    /* GENERAL */
+
+    .find-doctor-layout .find-doctor-content {
+        padding: 12px;
+    }
+
+    /* TOPBAR */
+
+    .find-doctor-layout .topbar {
+        min-height: 70px;
+
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .find-doctor-layout .top-title {
+        column-gap: 7px;
+    }
+
+    .find-doctor-layout .top-title h2 {
+        font-size: 15px;
+    }
+
+    .find-doctor-layout .top-title .breadcrumb {
+        font-size: 10px;
+        gap: 6px;
+    }
+
+    .find-doctor-layout .top-right {
+        gap: 9px;
+        font-size: 12px;
+    }
+
+    .find-doctor-layout .find-doctor-logout {
+        gap: 4px;
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .top-right > i {
+        font-size: 13px;
+    }
+
+    /* HERO CARD */
+
+    .find-doctor-layout .doctor-header {
+        padding: 18px 14px 16px;
+
+        border-radius: 19px;
+        margin-bottom: 22px;
+    }
+
+    .find-doctor-layout .doctor-breadcrumb {
+        gap: 8px;
+
+        margin-bottom: 14px;
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .doctor-hero-eyebrow {
+        margin-bottom: 13px;
+
+        padding: 8px 10px;
+
+        font-size: 9px;
+        letter-spacing: 0.6px;
+    }
+
+    .find-doctor-layout .doctor-hero-text h1 {
+        margin-bottom: 13px;
+
+        font-size: clamp(27px, 8.3vw, 34px);
+        letter-spacing: -0.6px;
+    }
+
+    .find-doctor-layout .doctor-hero-text > p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .find-doctor-layout .doctor-hero-actions {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 14px;
+        margin-top: 19px;
+    }
+
+    .find-doctor-layout .doctor-hero-button {
+        min-height: 45px;
+
+        padding: 0 16px;
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .doctor-trust strong {
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .doctor-hero-badge {
+        margin-top: 17px;
+        font-size: 9px;
+    }
+
+    /* MAIN DOCTOR PHOTO */
+
+    .find-doctor-layout .doctor-hero-visual {
+        min-height: 285px;
+        height: 285px;
+
+        margin-top: 5px;
+    }
+
+    .find-doctor-layout .doctor-hero-main-photo {
+        width: 55%;
+        height: 250px;
+
+        border-width: 4px;
+        border-bottom: 0;
+
+        border-radius: 110px 110px 16px 16px;
+    }
+
+    /* PHOTO LABEL */
+
+    .find-doctor-layout .doctor-photo-label {
+        left: 6px;
+        right: 6px;
+        bottom: 7px;
+
+        gap: 5px;
+        padding: 7px;
+
+        border-radius: 10px;
+    }
+
+    .find-doctor-layout .doctor-photo-label strong {
+        font-size: 8px;
+    }
+
+    .find-doctor-layout .doctor-photo-label small {
+        font-size: 7px;
+    }
+
+    .find-doctor-layout .doctor-photo-label > i {
+        font-size: 14px;
+    }
+
+    /* SMALL STATIC PHOTOS */
+
+    .find-doctor-layout .doctor-float-photo {
+        width: 57px;
+        height: 57px;
+
+        padding: 4px;
+        border-radius: 16px;
+    }
+
+    .find-doctor-layout .doctor-float-photo img {
+        border-radius: 12px;
+    }
+
+    .find-doctor-layout .doctor-float-photo > span {
+        width: 22px;
+        height: 22px;
+
+        right: -5px;
+        bottom: -5px;
+
+        border-width: 2px;
+        border-radius: 8px;
+
+        font-size: 9px;
+    }
+
+    .find-doctor-layout .doctor-float-one {
+        top: 36px;
+        left: 0;
+    }
+
+    .find-doctor-layout .doctor-float-two {
+        top: 100px;
+        right: 0;
+    }
+
+    .find-doctor-layout .doctor-float-three {
+        bottom: 20px;
+        left: 0;
+    }
+
+    /* INFORMATION CARDS */
+
+    .find-doctor-layout .doctor-floating-card {
+        gap: 5px;
+        padding: 6px;
+
+        border-radius: 10px;
+    }
+
+    .find-doctor-layout .doctor-floating-icon,
+    .find-doctor-layout .doctor-rating-icon {
+        width: 24px;
+        height: 24px;
+
+        border-radius: 8px;
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .doctor-floating-card strong {
+        font-size: 8px;
+    }
+
+    .find-doctor-layout .doctor-floating-card small {
+        font-size: 7px;
+    }
+
+    .find-doctor-layout .doctor-floating-top {
+        top: 0;
+        right: 0;
+    }
+
+    .find-doctor-layout .doctor-floating-bottom {
+        right: 0;
+        bottom: 0;
+    }
+
+    /* BACKGROUND DECORATION */
+
+    .find-doctor-layout .doctor-visual-circle {
+        width: 190px;
+        height: 190px;
+    }
+
+    .find-doctor-layout .doctor-visual-glow {
+        width: 200px;
+        height: 200px;
+    }
+
+    .find-doctor-layout .doctor-visual-cross i,
+    .find-doctor-layout .doctor-visual-heart {
+        font-size: 19px;
+    }
+
+    .find-doctor-layout .cross-one {
+        right: 25%;
+        top: 10px;
+    }
+
+    .find-doctor-layout .cross-two {
+        right: 6%;
+        bottom: 50px;
+    }
+
+    /* SEARCH CARD */
+
+    .find-doctor-layout .search-card {
+        padding: 17px;
+        margin-bottom: 30px;
+
+        border-radius: 17px;
+    }
+
+    .find-doctor-layout .search-title {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .find-doctor-layout .search-heading-icon {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 12px;
+        font-size: 16px;
+    }
+
+    .find-doctor-layout .search-title h2 {
+        font-size: 17px;
+    }
+
+    .find-doctor-layout .search-title p {
+        font-size: 11px;
+        line-height: 1.7;
+    }
+
+    .find-doctor-layout .search-form {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+    }
+
+    .find-doctor-layout .search-input,
+    .find-doctor-layout .search-button {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .find-doctor-layout .search-button {
+        grid-column: auto;
+    }
+
+    /* CHOOSE DOCTOR */
+
+    .find-doctor-layout .choose-doctor {
+        padding: 20px 12px;
+        border-radius: 17px;
+    }
+
+    .find-doctor-layout .choose-doctor-heading h2 {
+        font-size: 23px;
+    }
+
+    .find-doctor-layout .choose-doctor-heading p {
+        font-size: 12px;
+    }
+
+    .find-doctor-layout .doctor-selection {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .find-doctor-layout .doctor-avatar-card {
+        padding: 15px 8px;
+        border-radius: 15px;
+    }
+
+    .find-doctor-layout .doctor-avatar-placeholder {
+        width: 82px;
+        height: 82px;
+
+        margin-bottom: 12px;
+    }
+
+    .find-doctor-layout .doctor-avatar-card h3 {
+        font-size: 12px;
+    }
+
+    .find-doctor-layout .doctor-avatar-card > p {
+        font-size: 10px;
+    }
+
+    .find-doctor-layout .doctor-select-label {
+        padding: 6px 9px;
+        font-size: 9px;
+    }
+
+    /* SELECTED PROFILE */
+
+    .find-doctor-layout .selected-doctor-details {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+        padding: 17px;
+    }
+
+    .find-doctor-layout .selected-doctor-image {
+        min-height: 240px;
+
+        max-width: 280px;
+        width: 100%;
+
+        margin: 0 auto;
+    }
+
+    .find-doctor-layout .doctor-profile-photo {
+        min-height: 240px;
+    }
+
+    .find-doctor-layout .selected-doctor-info {
+        padding-right: 0;
+    }
+
+    .find-doctor-layout .selected-doctor-info h2 {
+        font-size: 21px;
+        padding-right: 20px;
+    }
+
+    .find-doctor-layout .doctor-profile-actions {
+        flex-direction: column;
+    }
+
+    .find-doctor-layout .doctor-profile-actions button {
+        width: 100%;
+    }
+
+    /* SECTION HEADINGS */
+
+    .find-doctor-layout .doctor-section-heading h2,
+    .find-doctor-layout .section-heading h2 {
+        font-size: 22px;
+    }
+
+    .find-doctor-layout .doctor-section-heading p,
+    .find-doctor-layout .section-heading p {
+        font-size: 12px;
+    }
+
+    .find-doctor-layout .section-heading-icon {
+        width: 43px;
+        height: 43px;
+
+        border-radius: 14px;
+        font-size: 18px;
+    }
+
+    /* SERVICES */
+
+    .find-doctor-layout .service-card {
+        gap: 11px;
+        padding: 15px;
+
+        border-radius: 15px;
+    }
+
+    .find-doctor-layout .service-icon {
+        width: 43px;
+        height: 43px;
+
+        border-radius: 12px;
+        font-size: 18px;
+    }
+
+    .find-doctor-layout .service-content h3 {
+        font-size: 13px;
+    }
+
+    .find-doctor-layout .service-content p {
+        font-size: 11px;
+    }
+
+    /* SPECIALTIES */
+
+    .find-doctor-layout a.specialty-card {
+        min-height: 80px;
+
+        gap: 12px;
+        padding: 13px;
+
+        border-radius: 15px;
+    }
+
+    .find-doctor-layout .specialty-icon {
+        width: 42px;
+        height: 42px;
+
+        border-radius: 12px;
+        font-size: 17px;
+    }
+
+    .find-doctor-layout .specialty-content h3 {
+        font-size: 13px;
+    }
+
+    .find-doctor-layout .specialty-content p {
+        font-size: 11px;
+    }
+
+    .find-doctor-layout .footer-links {
+        gap: 14px;
+    }
+}
+
+/* =========================================
+   24. VERY SMALL PHONES
+   MAX WIDTH: 360px
+========================================= */
+
+@media (max-width: 360px) {
+
+    .find-doctor-layout .doctor-hero-visual {
+        height: 265px;
+        min-height: 265px;
+    }
+
+    .find-doctor-layout .doctor-hero-main-photo {
+        height: 230px;
+        width: 56%;
+    }
+
+    .find-doctor-layout .doctor-float-photo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .find-doctor-layout .doctor-floating-card {
+        max-width: 105px;
+    }
+
+    .find-doctor-layout .doctor-floating-card strong,
+    .find-doctor-layout .doctor-floating-card small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .find-doctor-layout .doctor-floating-icon,
+    .find-doctor-layout .doctor-rating-icon {
+        width: 21px;
+        height: 21px;
+    }
+
+    .find-doctor-layout .doctor-avatar-placeholder {
+        width: 72px;
+        height: 72px;
+    }
+}
+
+/* =========================================
+   25. PROFILE APPEAR ANIMATION
+========================================= */
+
+@keyframes doctorProfileAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   26. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .find-doctor-layout *,
+    .find-doctor-layout *::before,
+    .find-doctor-layout *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+.find-doctor-layout.sidebar-closed .main {
+  width: 100%;
+  margin-left: 0;
+}
+
+/* MOBILE RESPONSIVE FIX */
+@media (max-width: 700px) {
+  .find-doctor-layout {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .find-doctor-layout .find-doctor-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .find-doctor-layout .doctor-header {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .find-doctor-layout .doctor-hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .find-doctor-layout .doctor-hero-visual {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  .find-doctor-layout .doctor-selection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .find-doctor-layout .selected-doctor-details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .find-doctor-layout .service-grid,
+  .find-doctor-layout .specialty-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .find-doctor-layout img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .find-doctor-layout input,
+  .find-doctor-layout select,
+  .find-doctor-layout button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 400px) {
+  .find-doctor-layout .find-doctor-content {
+    padding: 10px;
+  }
+
+  .find-doctor-layout .service-grid,
+  .find-doctor-layout .specialty-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

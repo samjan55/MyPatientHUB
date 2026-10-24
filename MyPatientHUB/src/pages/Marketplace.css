@@ -1,0 +1,1358 @@
+/* =========================================
+   MYPATIENTHUB MARKETPLACE
+   Responsive: Mobile, Tablet, Desktop
+========================================= */
+
+.mp-page,
+.mp-page * {
+  box-sizing: border-box;
+}
+
+.mp-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  overflow-x: hidden;
+  color: #243447;
+  background: #f5f8fc;
+  font-family: inherit;
+}
+
+.mp-page button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.mp-page img {
+  max-width: 100%;
+}
+
+.mp-page button:focus-visible,
+.mp-page input:focus-visible {
+  outline: 2px solid #1677d2;
+  outline-offset: 3px;
+}
+
+/* =========================================
+   1. WELCOME CARD
+========================================= */
+
+.mp-welcome {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  min-height: 300px;
+  padding: 35px 40px;
+  overflow: hidden;
+  border: 1px solid #e0edf8;
+  border-radius: 22px;
+  color: #243447;
+  background: linear-gradient(115deg, #ffffff 0%, #edf7ff 55%, #dceeff 100%);
+  box-shadow: 0 8px 30px rgba(22, 119, 210, 0.08);
+}
+
+/* Decorative background circles */
+
+.mp-welcome::before {
+  position: absolute;
+  top: -100px;
+  right: 180px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: rgba(57, 168, 239, 0.08);
+  content: "";
+  pointer-events: none;
+}
+
+.mp-welcome::after {
+  position: absolute;
+  bottom: -130px;
+  left: 30%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(22, 119, 210, 0.05);
+  content: "";
+  pointer-events: none;
+}
+
+.mp-welcome-content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-width: 0;
+  max-width: 570px;
+}
+
+.mp-welcome-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d8eaff;
+  border-radius: 30px;
+  color: #07528a;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.mp-welcome-tag i {
+  color: #1677d2;
+  font-size: 14px;
+}
+
+.mp-welcome h1 {
+  margin: 17px 0 12px;
+  color: #07528a;
+  font-size: clamp(27px, 3vw, 39px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.mp-welcome p {
+  max-width: 440px;
+  margin: 0;
+  color: #657c93;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.mp-explore-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 23px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  background: linear-gradient(110deg, #07528a, #1677d2);
+  box-shadow: 0 6px 15px rgba(22, 119, 210, 0.2);
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.mp-explore-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(22, 119, 210, 0.25);
+}
+
+.mp-explore-button i {
+  transition: transform 0.2s ease;
+}
+
+.mp-explore-button:hover i {
+  transform: translateX(4px);
+}
+
+/* Welcome card food image */
+
+.mp-welcome-image {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 40%;
+  max-width: 790px;
+  height: 355px;
+  width: 500px;
+  overflow: hidden;
+  border: 6px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  background: #e3eff8;
+  box-shadow: 0 12px 30px rgba(20, 64, 100, 0.15);
+}
+
+.mp-welcome-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.mp-welcome-image:hover img {
+  transform: scale(1.06);
+}
+
+.mp-image-label {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  color: #07528a;
+  background: rgba(255, 255, 255, 0.94);
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+.mp-image-label i {
+  color: #1677d2;
+  font-size: 16px;
+}
+
+/* =========================================
+   2. PAGE TOOLBAR
+========================================= */
+
+.mp-page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 30px 0 18px;
+}
+
+.mp-page-toolbar h2,
+.mp-section-heading h2 {
+  margin: 0;
+  color: #243447;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.mp-page-toolbar p,
+.mp-section-heading p {
+  margin: 7px 0 0;
+  color: #8392ab;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mp-cart-summary {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 1px solid #e5edf5;
+  border-radius: 12px;
+  color: #07528a;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mp-cart-summary > span {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 3px;
+  border-radius: 50%;
+  color: #fff;
+  background: #1677d2;
+}
+
+/* =========================================
+   3. SEARCH BOX
+========================================= */
+
+.mp-search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  height: 47px;
+  margin-bottom: 32px;
+  padding: 0 15px;
+  border: 1px solid #e2eaf2;
+  border-radius: 12px;
+  color: #8392ab;
+  background: #fff;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mp-search-box:focus-within {
+  border-color: #1677d2;
+  box-shadow: 0 0 0 3px rgba(22, 119, 210, 0.08);
+}
+
+.mp-search-box input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  outline: none;
+  color: #243447;
+  background: transparent;
+  font-size: 13px;
+}
+
+.mp-search-box input:focus-visible {
+  outline: none;
+}
+
+.mp-search-box input::placeholder {
+  color: #9aa8ba;
+}
+
+.mp-search-box button {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 7px;
+  color: #8392ab;
+  background: transparent;
+}
+
+.mp-search-box button:hover {
+  color: #1677d2;
+  background: #edf6ff;
+}
+
+/* =========================================
+   4. GENERAL SECTIONS
+========================================= */
+
+.mp-section {
+  margin: 35px 0;
+  scroll-margin-top: 25px;
+}
+
+.mp-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.mp-section-heading > div {
+  min-width: 0;
+}
+
+.mp-empty {
+  grid-column: 1 / -1;
+  padding: 28px 18px;
+  border: 1px dashed #dce6f0;
+  border-radius: 12px;
+  color: #8392ab;
+  background: #fff;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* =========================================
+   5. FOOD CATEGORIES
+========================================= */
+
+.mp-category-list {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.mp-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 145px;
+  padding: 12px 8px;
+  overflow: hidden;
+  border: 1px solid #e8eef5;
+  border-radius: 15px;
+  color: #43566d;
+  background: #fff;
+  transition: border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mp-category:hover,
+.mp-category.active {
+  transform: translateY(-3px);
+  border-color: #1677d2;
+  color: #07528a;
+  background: #eaf5ff;
+  box-shadow: 0 5px 15px rgba(22, 119, 210, 0.08);
+}
+
+.mp-category-image {
+  display: block;
+  width: 95px;
+  height: 95px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #edf3f8;
+}
+
+.mp-category > span:last-child {
+  max-width: 100%;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.mp-category-icon {
+  display: none !important;
+}
+
+/* =========================================
+   6. FOOD GRID
+========================================= */
+
+.mp-food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.mp-food-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e9eff5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(26, 67, 105, 0.04);
+  transition: transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mp-food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(26, 67, 105, 0.1);
+}
+
+.mp-food-image-wrap {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  background: #edf3f8;
+}
+
+.mp-food-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.mp-food-card:hover .mp-food-image {
+  transform: scale(1.04);
+}
+
+.mp-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 65px);
+  padding: 6px 10px;
+  overflow: hidden;
+  border-radius: 7px;
+  color: #fff;
+  background: #1677d2;
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mp-favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  color: #1677d2;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.mp-favorite:hover {
+  transform: scale(1.08);
+  color: #e34d69;
+}
+
+.mp-food-details {
+  padding: 16px;
+}
+
+.mp-food-category {
+  color: #1677d2;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mp-food-details h3 {
+  margin: 8px 0;
+  color: #243447;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.mp-food-restaurant {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  color: #8392ab;
+  font-size: 12px;
+}
+
+.mp-food-restaurant i {
+  flex-shrink: 0;
+  color: #1677d2;
+}
+
+.mp-food-restaurant span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mp-food-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.mp-food-price {
+  color: #07528a;
+  font-size: 21px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.mp-add-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 9px;
+  color: #fff;
+  background: #1677d2;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.mp-add-button:hover {
+  background: #07528a;
+}
+
+.mp-view-restaurant {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px 0 0;
+  border: none;
+  border-top: 1px solid #edf1f6;
+  color: #1677d2;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.mp-view-restaurant:hover {
+  color: #07528a;
+}
+
+/* =========================================
+   7. RESTAURANT GRID
+========================================= */
+
+.mp-restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.mp-restaurant-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e6edf5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(26, 67, 105, 0.04);
+  transition: transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mp-restaurant-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 24px rgba(26, 67, 105, 0.09);
+}
+
+.mp-restaurant-image {
+  display: block;
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+  background: #edf3f8;
+}
+
+.mp-restaurant-details {
+  padding: 18px;
+}
+
+.mp-restaurant-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.mp-restaurant-title h3 {
+  min-width: 0;
+  margin: 0;
+  color: #243447;
+  font-size: 18px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.mp-rating {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 5px;
+  color: #d89b13;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mp-restaurant-details > p {
+  margin: 12px 0;
+  color: #8392ab;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.mp-restaurant-hours {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 14px;
+  color: #43566d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.mp-restaurant-hours i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #1677d2;
+}
+
+.mp-restaurant-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.mp-open,
+.mp-closed {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mp-open {
+  color: #13864c;
+  background: #e5f8ee;
+}
+
+.mp-closed {
+  color: #d64141;
+  background: #fff0ef;
+}
+
+.mp-restaurant-status > span:last-child {
+  color: #8392ab;
+  font-size: 12px;
+}
+
+.mp-restaurant-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 17px;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 9px;
+  color: #fff;
+  background: #1677d2;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.mp-restaurant-button:hover {
+  background: #07528a;
+}
+
+/* =========================================
+   8. RESTAURANT DETAILS MODAL
+========================================= */
+
+.mp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(15, 35, 55, 0.65);
+  overscroll-behavior: contain;
+}
+
+.mp-restaurant-modal {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.mp-modal-close {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  color: #243447;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.mp-modal-close:hover {
+  color: #1677d2;
+}
+
+.mp-modal-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #edf3f8;
+}
+
+.mp-modal-content {
+  padding: 22px;
+}
+
+.mp-modal-content h2 {
+  margin: 0 0 10px;
+  color: #243447;
+  font-size: 25px;
+  line-height: 1.4;
+}
+
+.mp-modal-rating {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #d89b13;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mp-modal-content > p {
+  color: #8392ab;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.mp-modal-hours {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f3f8fd;
+}
+
+.mp-modal-hours > i {
+  flex-shrink: 0;
+  color: #1677d2;
+  font-size: 20px;
+}
+
+.mp-modal-hours > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mp-modal-hours b {
+  color: #243447;
+  font-size: 13px;
+}
+
+.mp-modal-hours div span {
+  color: #8392ab;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.mp-modal-content > h3 {
+  margin: 20px 0 12px;
+  color: #243447;
+  font-size: 18px;
+}
+
+.mp-modal-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mp-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #e9eff5;
+  border-radius: 12px;
+}
+
+.mp-menu-item img {
+  display: block;
+  flex-shrink: 0;
+  width: 60px;
+  height: 55px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #edf3f8;
+}
+
+.mp-menu-item > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.mp-menu-item b {
+  color: #243447;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.mp-menu-item > div span {
+  color: #8392ab;
+  font-size: 11px;
+}
+
+.mp-menu-item strong {
+  flex-shrink: 0;
+  color: #07528a;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.mp-menu-item button {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background: #1677d2;
+}
+
+.mp-menu-item button:hover {
+  background: #07528a;
+}
+
+/* =========================================
+   9. NOTICE MESSAGE
+========================================= */
+
+.mp-notice {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 40px);
+  padding: 14px 18px;
+  border-radius: 12px;
+  color: #fff;
+  background: #07528a;
+  box-shadow: 0 8px 25px rgba(7, 82, 138, 0.2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mp-notice i {
+  flex-shrink: 0;
+  color: #8af0ba;
+}
+
+/* =========================================
+   10. LARGE SCREENS
+========================================= */
+
+@media (min-width: 1400px) {
+  .mp-page {
+    padding: 30px;
+  }
+
+  .mp-food-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .mp-restaurant-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mp-category-list {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .mp-welcome {
+    min-height: 320px;
+    padding: 40px 45px;
+  }
+
+  .mp-welcome-image {
+    height: 250px;
+  }
+}
+
+/* =========================================
+   11. TABLETS AND SMALL LAPTOPS
+========================================= */
+
+@media (max-width: 1000px) {
+  .mp-page {
+    padding: 20px;
+  }
+
+  .mp-welcome {
+    min-height: 270px;
+    gap: 20px;
+    padding: 28px;
+  }
+
+  .mp-welcome-image {
+    flex-basis: 38%;
+    height: 210px;
+  }
+
+  .mp-welcome h1 {
+    font-size: 30px;
+  }
+
+  .mp-category-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .mp-food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mp-restaurant-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mp-category-image {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* =========================================
+   12. MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .mp-page {
+    padding: 14px;
+  }
+
+  .mp-welcome {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    min-height: 0;
+    padding: 22px 18px;
+    border-radius: 17px;
+  }
+
+  .mp-welcome-content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .mp-welcome-tag {
+    font-size: 10px;
+  }
+
+  .mp-welcome h1 {
+    margin-top: 14px;
+    font-size: 27px;
+  }
+
+  .mp-welcome p {
+    font-size: 12px;
+  }
+
+  .mp-explore-button {
+    margin-top: 18px;
+    padding: 11px 15px;
+    font-size: 12px;
+  }
+
+  .mp-welcome-image {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: 190px;
+    border-width: 4px;
+    border-radius: 14px;
+  }
+
+  .mp-image-label {
+    right: 9px;
+    bottom: 9px;
+    left: 9px;
+    padding: 9px 11px;
+    font-size: 11px;
+  }
+
+  .mp-page-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .mp-page-toolbar h2,
+  .mp-section-heading h2 {
+    font-size: 20px;
+  }
+
+  .mp-cart-summary {
+    align-self: flex-start;
+  }
+
+  .mp-search-box {
+    max-width: none;
+    margin-bottom: 25px;
+  }
+
+  .mp-section {
+    margin: 28px 0;
+  }
+
+  .mp-section-heading {
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .mp-category-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .mp-category {
+    min-height: 115px;
+    padding: 10px 5px;
+    gap: 8px;
+  }
+
+  .mp-category-image {
+    width: 62px;
+    height: 62px;
+    border-radius: 10px;
+  }
+
+  .mp-category > span:last-child {
+    font-size: 11px;
+  }
+
+  .mp-food-grid,
+  .mp-restaurant-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+  }
+
+  .mp-food-image-wrap,
+  .mp-restaurant-image {
+    height: 210px;
+  }
+
+  .mp-food-details {
+    padding: 15px;
+  }
+
+  .mp-food-details h3 {
+    font-size: 17px;
+  }
+
+  .mp-food-price {
+    font-size: 19px;
+  }
+
+  .mp-restaurant-details {
+    padding: 15px;
+  }
+
+  .mp-restaurant-title h3 {
+    font-size: 17px;
+  }
+
+  .mp-modal-overlay {
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .mp-restaurant-modal {
+    max-height: 95vh;
+    margin: auto 0;
+    border-radius: 14px;
+  }
+
+  .mp-modal-image {
+    height: 190px;
+  }
+
+  .mp-modal-content {
+    padding: 16px;
+  }
+
+  .mp-modal-content h2 {
+    font-size: 21px;
+  }
+
+  .mp-modal-hours {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  .mp-modal-hours > div {
+    flex-basis: 60%;
+  }
+
+  .mp-menu-item {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .mp-menu-item img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mp-menu-item b {
+    font-size: 12px;
+  }
+
+  .mp-menu-item strong {
+    font-size: 12px;
+  }
+
+  .mp-menu-item button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mp-notice {
+    right: 12px;
+    bottom: 12px;
+    padding: 12px 14px;
+  }
+}
+
+/* =========================================
+   13. VERY SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 360px) {
+  .mp-page {
+    padding: 10px;
+  }
+
+  .mp-welcome {
+    padding: 20px 15px;
+  }
+
+  .mp-welcome h1 {
+    font-size: 24px;
+  }
+
+  .mp-welcome-image {
+    height: 165px;
+  }
+
+  .mp-category-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mp-food-bottom {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .mp-restaurant-title {
+    flex-wrap: wrap;
+  }
+
+  .mp-menu-item {
+    gap: 6px;
+  }
+
+  .mp-menu-item img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mp-menu-item strong {
+    font-size: 11px;
+  }
+}/* Fix welcome card overlapping */
+
+.mp-welcome-content {
+  position: relative;
+  z-index: 2;
+}
+
+.mp-welcome-features {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.mp-welcome-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #52677e;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mp-welcome-image {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.mp-image-label {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .mp-welcome-features {
+    gap: 12px;
+    margin-top: 18px;
+  }
+}
+
+/* Mobile: image under the text */
+@media (max-width: 600px) {
+  .mp-welcome {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .mp-welcome-content {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    flex: none;
+  }
+
+  .mp-welcome-image {
+    order: 2;
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: 190px;
+  }
+}
+
+@media (max-width: 360px) {
+  .mp-welcome-image {
+    height: 165px;
+  }
+}

@@ -1,18 +1,10 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
-const menu = [
-  { icon: 'house', label: 'Dashboard', active: true },
-  { icon: 'calendar', label: 'Appointments' },
-  { icon: 'user-doctor', label: 'Find Doctor', to: '/finddoctor' },
-  { icon: 'hospital', label: 'Find Clinic', to: '/findclinic' },
-  { icon: 'message', label: 'Chat' },
-  { icon: 'store', label: 'Find MarketPlace', to:'/marketplace'},
-  { icon: 'pills', label: 'Find Pharmacy', to: '/findpharmacy' },
-  { icon: 'users', label: 'My Dependents', to: '/mydependents' },
-  { icon: 'user', label: 'My Account' },
-  { icon: 'gear', label: 'Settings' },
-]
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import hospitalImage from '../assets/hospital.jpeg'
+import Sidebar from '../components/Sidebar'
+import Header from '../components/Header'
+import './Dashboard.css'
 
 const cards = [
   {
@@ -45,148 +37,349 @@ const cards = [
     title: 'Smart Market Usage by app',
     chart: 'market-chart',
     prefix: 'market',
-    button: false,
+    button: true,
     items: [
       { icon: 'utensils', color: 'pink', name: 'Food Panda', pct: '25%' },
       { icon: 'motorcycle', color: 'blue', name: 'Grab Food', pct: '3%' },
       { icon: 'heart-pulse', color: 'green', name: 'MySejahtera', pct: '15%' },
     ],
   },
+  {
+    title: 'Health Index',
+    type: 'health',
+  },
 ]
+
+function getGreeting() {
+  const hour = new Date().getHours()
+
+  if (hour < 12) return 'Good Morning'
+  if (hour < 17) return 'Good Afternoon'
+  return 'Good Evening'
+}
 
 function Dashboard() {
   const navigate = useNavigate()
-  const [sidebarHidden, setSidebarHidden] = useState(false)
+  const { t } = useTranslation()
+
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedDetails, setSelectedDetails] = useState(false)
+
+  const userName = localStorage.getItem('userName') || t('Guest')
+  const greeting = t(getGreeting())
+  const query = searchTerm.trim().toLowerCase()
+
+  const filteredCards = cards.filter((card) =>
+    t(card.title).toLowerCase().includes(query)
+  )
 
   return (
-    <div className="dashboard">
-      <aside className={`sidebar ${sidebarHidden ? 'hide' : ''}`}>
-        <div className="logo">
-          <div className="logo-icon">M</div>
-          <span>MyPatientHUB</span>
-        </div>
+    <div className={`dashboard ${sidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
 
-        <div className="menu">
-          {menu.map((item) => {
-            const inner = (
-              <>
-                <i className={`fa-solid fa-${item.icon}`}></i>
-                <span>{item.label}</span>
-              </>
-            )
-            return item.to ? (
-              <Link key={item.label} to={item.to}>{inner}</Link>
-            ) : (
-              <a key={item.label} href="#" className={item.active ? 'active' : ''}>
-                {inner}
-              </a>
-            )
-          })}
-        </div>
-
-        <div className="help">
-          <i className="fa-solid fa-question"></i>
-        </div>
-      </aside>
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <main className="main">
-        <header className="topbar">
-          <div className="top-title">
-            <div className="breadcrumb">
-              <i className="fa-solid fa-house"></i>
-              <span>/</span>
-              <span>Dashboard</span>
-            </div>
 
-            <button
-              className="menu-toggle"
-              onClick={() => setSidebarHidden(!sidebarHidden)}
-            >
-              <i className="fa-solid fa-bars"></i>
-            </button>
-
-            <h2>Dashboard</h2>
-          </div>
-
-          <div className="top-right">
-            <div className="search">
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="Type here..." />
-            </div>
-
-            <span id="logout" className="logout" onClick={() => navigate('/')}>
-              <i className="fa-solid fa-circle-user"></i>
-              Log out
-            </span>
-
-            <i className="fa-solid fa-gear"></i>
-            <i className="fa-solid fa-bell"></i>
-          </div>
-        </header>
+        <Header
+          title="Dashboard"
+          onMenuClick={() => setSidebarOpen((prev) => !prev)}
+          onSearch={setSearchTerm}
+        />
 
         <section className="content">
-          <h1>Welcome To MyPatientHUB!</h1>
 
-          <div className="cards">
-            {cards.map((card) => (
-              <div className="card" key={card.title}>
-                <div className="card-title">
-                  <h3>{card.title}</h3>
-                  <i className="fa-solid fa-circle-info"></i>
-                </div>
-
-                <div className="chart-content">
-                  <div className={`donut ${card.chart}`}></div>
-
-                  <div className="chart-list">
-                    {card.items.map((it) => (
-                      <p key={it.name}>
-                        <i className={`fa-solid fa-${it.icon} ${card.prefix}-icon ${it.color}`}></i>
-                        <span>{it.name}</span>
-                        <b>{it.pct}</b>
-                      </p>
-                    ))}
-                  </div>
-                </div>
-
-                {card.button && <button className="details">MORE DETAILS</button>}
-              </div>
-            ))}
-
-            <div className="card health-card">
-              <div className="card-title">
-                <h3>Health Index</h3>
-                <i className="fa-solid fa-circle-info"></i>
+          {/* WELCOME CARD */}
+          <div className="welcome-card">
+            <div className="welcome-content">
+              <div className="welcome-badge">
+                <i className="fa-solid fa-heart-pulse"></i>
+                <span translate="no">MYPATIENTHUB</span>
               </div>
 
-              <div className="health-number">
-                70%
-                <span>+3%</span>
+              <h1 className="welcome-title">
+                {greeting}،
+                <br />
+                <span>{userName}! 👋</span>
+              </h1>
+
+              <p className="welcome-text">
+                {t('welcomeText')}
+              </p>
+
+              <div className="welcome-buttons">
+                <button
+                  className="welcome-primary"
+                  onClick={() => navigate('/finddoctor')}
+                >
+                  <i className="fa-solid fa-user-doctor"></i>
+                  {t('Find Doctor')}
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button onClick={() => navigate('/findclinic')}>
+                  <i className="fa-solid fa-hospital"></i>
+                  {t('Find Clinic')}
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button onClick={() => navigate('/findpharmacy')}>
+                  <i className="fa-solid fa-pills"></i>
+                  {t('Pharmacy')}
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
               </div>
 
-              <div className="health-chart">
-                <svg className="health-line" viewBox="0 0 600 150">
-                  <path
-                    d="M0 135 Q60 105 120 125 Q180 145 240 85 Q300 30 360 100 Q420 145 480 75 Q540 35 600 20"
-                    fill="none"
-                    stroke="#30345f"
-                    strokeWidth="2"
-                  ></path>
-                </svg>
+              <div className="welcome-footer">
+                <span>
+                  <i className="fa-solid fa-shield-heart"></i>
+                  {t('Your Health, Our Priority')}
+                </span>
+
+                <span>
+                  <i className="fa-solid fa-lock"></i>
+                  {t('Care Made Simple')}
+                </span>
               </div>
             </div>
+
+            <div className="welcome-image">
+              <img
+                src={hospitalImage}
+                alt="MyPatientHUB Hospital"
+                className="hospital-image"
+              />
+
+              <div className="hospital-tint"></div>
+              <div className="hospital-glow"></div>
+
+              <div className="medical-circle circle-one">
+                <i className="fa-solid fa-stethoscope"></i>
+              </div>
+
+              <div className="medical-circle circle-two">
+                <i className="fa-solid fa-heart-pulse"></i>
+              </div>
+
+              <div className="medical-circle circle-three">
+                <i className="fa-solid fa-kit-medical"></i>
+              </div>
+
+              <div className="medical-circle circle-four">
+                <i className="fa-solid fa-pills"></i>
+              </div>
+
+              <div className="medical-circle circle-five">
+                <i className="fa-solid fa-syringe"></i>
+              </div>
+            </div>
+
+            <div className="welcome-wave"></div>
           </div>
+
+          <h1>{t('welcomeTitle', { name: 'MyPatientHUB' })}</h1>
+
+          {/* FOUR DASHBOARD CARDS */}
+          <div className="cards">
+            {filteredCards.map((card) => {
+              if (card.type === 'health') {
+                return (
+                  <div className="card health-card" key={card.title}>
+                    <div className="card-title">
+                      <h3>{t('Health Index')}</h3>
+                      <i className="fa-solid fa-circle-info"></i>
+                    </div>
+
+                    <div className="health-number">
+                      70%
+                      <span>+3%</span>
+                    </div>
+
+                    <div className="health-chart">
+                      <svg
+                        className="health-line"
+                        viewBox="0 0 600 150"
+                      >
+                        <path
+                          d="M0 135 Q60 105 120 125 Q180 145 240 85 Q300 30 360 100 Q420 145 480 75 Q540 35 600 20"
+                          fill="none"
+                          stroke="#30345f"
+                          strokeWidth="2"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                )
+              }
+
+              return (
+                <div className="card" key={card.title}>
+                  <div className="card-title">
+                    <h3>{t(card.title)}</h3>
+                    <i className="fa-solid fa-circle-info"></i>
+                  </div>
+
+                  <div className="chart-content">
+                    <div className={`donut ${card.chart}`}></div>
+
+                    <div className="chart-list">
+                      {card.items.map((item) => (
+                        <p key={item.name}>
+                          <i
+                            className={`fa-solid fa-${item.icon} ${card.prefix}-icon ${item.color}`}
+                          ></i>
+                          <span>{t(item.name)}</span>
+                          <b>{item.pct}</b>
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {card.button && (
+                    <button
+                      className="details"
+                      onClick={() => setSelectedDetails(card)}
+                    >
+                      {t('MORE DETAILS')}
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </button>
+                  )}
+                </div>
+              )
+            })}
+
+            {query !== '' && filteredCards.length === 0 && (
+              <div className="no-results">
+                <i className="fa-solid fa-magnifying-glass"></i>
+                <h3>{t('noResults')}</h3>
+                <p>{t('tryLetters')}</p>
+              </div>
+            )}
+          </div>
+          {/* MORE DETAILS MODAL */}
+{selectedDetails && (
+  <div
+    className="dashboard-details-overlay"
+    onClick={() => setSelectedDetails(null)}
+  >
+    <div
+      className="dashboard-details-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="details-title"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* HEADER */}
+      <button
+        type="button"
+        className="dashboard-details-close"
+        onClick={() => setSelectedDetails(null)}
+        aria-label="Close details"
+      >
+        &times;
+      </button>
+
+      <div className="dashboard-details-header">
+        <div className="dashboard-details-icon">
+          <i className="fa-solid fa-chart-pie"></i>
+        </div>
+
+        <span className="dashboard-details-label">
+          DASHBOARD ANALYTICS
+        </span>
+
+        <h2 id="details-title">
+          {t(selectedDetails.title)}
+        </h2>
+
+        <p>
+          {t('Detailed overview of your dashboard data')}
+        </p>
+      </div>
+
+      {/* TOTAL */}
+      <div className="dashboard-details-summary">
+        <div>
+          <span>{t('Total Listed Items')}</span>
+
+          <h3>{selectedDetails.items.length}</h3>
+
+          <p>{t('Items in this category')}</p>
+        </div>
+
+        <div className="dashboard-details-summary-icon">
+          <i className="fa-solid fa-chart-line"></i>
+        </div>
+      </div>
+
+      {/* DETAILS LIST */}
+      <div className="dashboard-details-list">
+        <h3>{t('Detailed Information')}</h3>
+
+        {selectedDetails.items.map((item) => (
+          <div
+            className="dashboard-details-row"
+            key={item.name}
+          >
+            <div className={`dashboard-details-item-icon ${item.color}`}>
+              <i className={`fa-solid fa-${item.icon}`}></i>
+            </div>
+
+            <div className="dashboard-details-item-info">
+              <h4>{t(item.name)}</h4>
+
+              <div className="dashboard-details-progress">
+                <span
+                  style={{
+                    width: `${parseFloat(item.pct)}%`,
+                  }}
+                ></span>
+              </div>
+            </div>
+
+            <strong>{item.pct}</strong>
+          </div>
+        ))}
+      </div>
+
+      {/* FOOTER */}
+      <div className="dashboard-details-note">
+        <i className="fa-solid fa-circle-info"></i>
+
+        <p>
+          {t(
+            'These percentages represent the sample data displayed in this dashboard.'
+          )}
+        </p>
+      </div>
+
+      <button
+        type="button"
+        className="dashboard-details-done"
+        onClick={() => setSelectedDetails(null)}
+      >
+        {t('Close Details')}
+        <i className="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+)}
         </section>
 
         <footer className="dashboard-footer">
-          <p>© 2026, made with ♥ by MyPatientHUB for a better web.</p>
+          <p>{t('footerText')}</p>
+
           <div>
-            <a href="#">MyPatientHUB</a>
-            <a href="#">About Us</a>
-            <a href="#">Blog</a>
+            <a href="#" translate="no">MyPatientHUB</a>
+            <a href="#">{t('About Us')}</a>
+            <a href="#">{t('Blog')}</a>
           </div>
         </footer>
       </main>
+
     </div>
   )
 }

@@ -1,5 +1,5 @@
 /* =========================================
-   MYPATIENTHUB LOGIN - CLEAN VERSION
+   MYPATIENTHUB LOGIN - FINAL VERSION
 ========================================= */
 
 * {
@@ -14,10 +14,16 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 
-  /* یک پس‌زمینه برای کل صفحه (خط وسط نمی‌افتد) */
   background:
-    radial-gradient(circle at 27% 50%, rgba(0, 110, 190, .18), transparent 45%),
-    linear-gradient(135deg, #020b12, #03131f, #020b12);
+    radial-gradient(circle at 25% 50%, rgba(22, 119, 210, 0.14), transparent 45%),
+    linear-gradient(135deg, #eaf5ff, #f8fcff, #dceeff);
+}
+
+/* محو شدن صفحه هنگام رفتن به Sign Up */
+
+.login-page.leaving {
+  opacity: 0;
+  transition: opacity .4s ease;
 }
 
 
@@ -91,27 +97,30 @@
 .big-heart img {
   position: relative;
   z-index: 5;
-  width: 400px;
-  height: 430px;
+  width: 600px;
+  height: 630px;
   object-fit: contain;
   opacity: .25;
   filter: brightness(.45) saturate(.7);
-  transition: 1s ease;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 78%);
-  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 78%);
-}
+  transition: opacity 1s ease, filter 1s ease;
 
-.light-on .big-heart img {
-  opacity: 1;
-  filter:
-    brightness(1.15)
-    saturate(1.55)
-    contrast(1.1)
-    drop-shadow(0 0 10px rgba(20, 180, 255, .7))
-    drop-shadow(0 0 30px rgba(255, 40, 100, .5));
-  animation: heartbeat 1.7s infinite;
-}
+  /* تصویر ثابت بماند */
+  animation: none !important;
+  transform: none !important;
 
+  /* لبه‌های نرم تصویر */
+  -webkit-mask-image: radial-gradient(
+    ellipse closest-side at center,
+    #000 55%,
+    transparent 100%
+  );
+
+  mask-image: radial-gradient(
+    ellipse closest-side at center,
+    #000 55%,
+    transparent 100%
+  );
+}
 .heart-glow {
   position: absolute;
   width: 440px;
@@ -132,20 +141,6 @@
 .light-on .heart-glow {
   opacity: 1;
   animation: heartGlow 2s infinite;
-}
-
-@keyframes heartbeat {
-  0%   { transform: scale(1); }
-  10%  { transform: scale(1.05); }
-  20%  { transform: scale(1); }
-  30%  { transform: scale(1.07); }
-  45%  { transform: scale(1); }
-  100% { transform: scale(1); }
-}
-
-@keyframes heartGlow {
-  0%, 100% { transform: scale(.9);  opacity: .5; }
-  50%      { transform: scale(1.15); opacity: 1; }
 }
 
 
@@ -190,6 +185,35 @@
 
 
 /* =========================================
+   STATS ROW
+========================================= */
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.stats-row div {
+  text-align: center;
+}
+
+.stats-row strong {
+  display: block;
+  font-size: 22px;
+  color: #32c2f5;
+  text-shadow: 0 0 14px rgba(50, 194, 245, .4);
+}
+
+.stats-row span {
+  font-size: 11px;
+  color: #7894a5;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
    LEFT PARTICLES
 ========================================= */
 
@@ -220,6 +244,51 @@
 
 
 /* =========================================
+   FLOATING GLASS CARDS AROUND HEART
+========================================= */
+
+.float-card {
+  position: absolute;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(76, 215, 255, .25);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .35), 0 0 18px rgba(50, 190, 245, .15);
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1s ease .5s, transform 1s ease .5s;
+}
+
+.float-card i {
+  color: #32c2f5;
+  font-size: 16px;
+}
+
+.light-on .float-card {
+  opacity: 1;
+  transform: translateY(0);
+  animation: floatY 4s ease-in-out infinite;
+}
+
+.float-card-1 { top: 20px;    left: -60px; }
+.float-card-2 { top: 190px;   right: -110px; animation-delay: 1s; }
+.float-card-3 { bottom: 70px; left: -50px;  animation-delay: 2s; }
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+
+/* =========================================
    RIGHT LOGIN SIDE
 ========================================= */
 
@@ -234,9 +303,6 @@
   padding: 80px 70px 40px;
   overflow: hidden;
 }
-
-
-/* Right side floating particles */
 
 .login-particles {
   position: absolute;
@@ -268,7 +334,6 @@
 
 /* =========================================
    LAMP
-   (z-index پایین است تا نور زیر کارت برود)
 ========================================= */
 
 .lamp-area {
@@ -277,7 +342,7 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;   /* نوشته بالای چراغ */
   align-items: center;
   z-index: 1;
 }
@@ -346,7 +411,7 @@
 }
 
 .lamp-area span {
-  margin-top: 10px;
+  margin: 0 0 8px;
   color: #4edcff;
   font-size: 12px;
   font-weight: bold;
@@ -359,9 +424,6 @@
   color: #5dffb0;
   text-shadow: 0 0 10px rgba(93, 255, 176, .7);
 }
-
-
-/* Lamp light */
 
 .lamp-light {
   position: absolute;
@@ -408,11 +470,10 @@
   margin-top: 110px;
   border-radius: 25px;
 
-  /* تقریباً کاملاً مات، تا نور چراغ رنگ آن را عوض نکند */
   background: linear-gradient(
     145deg,
-    rgb(12, 36, 43),
-    rgb(4, 18, 26)
+    #ffffff,
+    #edf7ff
   );
 
   border: 1px solid rgba(76, 215, 220, .16);
@@ -420,7 +481,6 @@
     0 30px 80px rgba(0, 0, 0, .55),
     inset 0 1px rgba(255, 255, 255, .06);
 
-  /* قبل از روشن شدن چراغ: کاملاً پنهان */
   opacity: 0;
   visibility: hidden;
   transform: translateY(30px) scale(.95);
@@ -548,15 +608,6 @@
   color: #526975;
 }
 
-/* جلوگیری از نوار سفید autofill کروم */
-.input-box input:-webkit-autofill,
-.input-box input:-webkit-autofill:hover,
-.input-box input:-webkit-autofill:focus {
-  -webkit-text-fill-color: white;
-  caret-color: white;
-  -webkit-box-shadow: 0 0 0 1000px #0a1d28 inset;
-  transition: background-color 9999s ease-in-out 0s;
-}
 
 .error {
   margin-top: 5px;
@@ -564,9 +615,23 @@
   font-size: 10px;
 }
 
+.eye-btn {
+  border: none;
+  background: transparent;
+  color: #547e91;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 14px;
+  transition: color .3s;
+}
+
+.eye-btn:hover {
+  color: #38bde9;
+}
+
 
 /* =========================================
-   OPTIONS
+   OPTIONS + BUTTONS
 ========================================= */
 
 .login-options {
@@ -585,11 +650,6 @@
   color: #38bde9;
   text-decoration: none;
 }
-
-
-/* =========================================
-   BUTTONS
-========================================= */
 
 .sign-in-button,
 .sign-up-button {
@@ -616,18 +676,6 @@
   box-shadow: 0 12px 30px rgba(0, 160, 230, .3);
 }
 
-.sign-up-button {
-  margin-top: 12px;
-  background: rgba(255, 255, 255, .025);
-  border: 1px solid rgba(60, 190, 225, .3);
-  color: #42c4ee;
-}
-
-.sign-up-button:hover {
-  background: rgba(35, 175, 220, .1);
-  border-color: #32bce9;
-}
-
 .bottom-text {
   text-align: center;
   color: #526b79;
@@ -642,7 +690,7 @@ input:disabled {
 
 
 /* =========================================
-   SIGN IN: ROOM + DOOR + PERSON
+   SIGN IN: AMBULANCE
 ========================================= */
 
 .sign-text {
@@ -655,275 +703,165 @@ input:disabled {
   transition: opacity .3s;
 }
 
-.signing-in .sign-text {
-  opacity: 0;
-}
-
-/* ---------- Room ---------- */
-
-.login-room {
+.ambulance {
   position: absolute;
-  right: 12px;
-  bottom: 5px;
-  width: 42px;
-  height: 36px;
-  overflow: hidden;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, .06);
-  box-shadow:
-    inset 0 0 8px rgba(255, 255, 255, .12),
-    0 0 10px rgba(50, 220, 255, .4);
-  z-index: 3;
-}
-
-.room-back-wall {
-  position: absolute;
-  left: 7px;
-  top: 6px;
-  width: 28px;
-  height: 25px;
-  background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(30,160,220,.2));
-  border: 1px solid rgba(255, 255, 255, .25);
-  z-index: 1;
-}
-
-.room-left-wall {
-  position: absolute;
-  left: 0;
-  top: 6px;
-  width: 9px;
-  height: 27px;
-  background: linear-gradient(to right, rgba(255,255,255,.2), rgba(20,120,180,.25));
-  transform: skewY(-18deg);
-  transform-origin: right;
-  z-index: 3;
-}
-
-.room-right-wall {
-  position: absolute;
-  right: 0;
-  top: 6px;
-  width: 9px;
-  height: 27px;
-  background: linear-gradient(to left, rgba(255,255,255,.2), rgba(20,120,180,.25));
-  transform: skewY(18deg);
-  transform-origin: left;
-  z-index: 3;
-}
-
-.room-ceiling {
-  position: absolute;
-  left: 7px;
-  top: 0;
-  width: 28px;
-  height: 7px;
-  background: rgba(255, 255, 255, .22);
-  z-index: 4;
-}
-
-.room-floor {
-  position: absolute;
-  left: 5px;
-  bottom: 0;
-  width: 32px;
-  height: 9px;
-  background: linear-gradient(to bottom, rgba(30,180,230,.3), rgba(255,255,255,.1));
-  z-index: 4;
-}
-
-/* ---------- Door ---------- */
-
-.room-door-frame {
-  position: absolute;
-  right: 7px;
+  left: 12px;
   bottom: 4px;
-  width: 16px;
-  height: 27px;
-  perspective: 100px;
-  border: 1px solid rgba(255, 255, 255, .7);
-  box-shadow: 0 0 7px rgba(70, 220, 255, .7);
-  z-index: 9;
+  z-index: 6;
+  pointer-events: none;
 }
 
-.room-door {
-  position: absolute;
-  inset: 1px;
-  background: linear-gradient(135deg, #07528a, #168ed0);
-  transform-origin: left center;
-  z-index: 10;
+.amb-light {
+  fill: #ff5c76;
 }
 
-.room-door span {
-  position: absolute;
-  right: 2px;
-  top: 50%;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 4px white;
+/* وقتی Sign In زده شد */
+
+.signing-in .sign-text {
+  opacity: .35;
 }
 
-/* ---------- Person ---------- */
-
-.walking-person {
-  position: absolute;
-  left: 50%;
-  top: 10px;
-  width: 12px;
-  height: 26px;
-  opacity: 0;
-  transform: translateX(-50%);
-  z-index: 10;
+.signing-in .ambulance {
+  animation:
+    ambDrive 2.6s ease-in forwards,
+    ambBump .2s linear infinite alternate;
 }
 
-.person-head {
-  position: absolute;
-  top: 0;
-  left: 3px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: white;
+.signing-in .amb-light {
+  animation: ambLight .3s steps(1) infinite;
 }
 
-.person-body {
-  position: absolute;
-  top: 8px;
-  left: 5px;
-  width: 3px;
-  height: 9px;
-  border-radius: 3px;
-  background: white;
+.sign-in-button.signing-in {
+  animation: ambGlow .5s steps(1) infinite;
 }
 
-.person-arm {
-  position: absolute;
-  top: 9px;
-  left: 1px;
-  width: 11px;
-  height: 2px;
-  background: white;
+@keyframes ambDrive {
+  0%   { left: 12px; }
+  12%  { left: 12px; }
+  100% { left: calc(100% + 10px); }
 }
 
-.person-leg {
-  position: absolute;
-  top: 16px;
-  width: 3px;
-  height: 9px;
-  background: white;
-  transform-origin: top;
-  animation: walkingLegs .2s infinite alternate;
+@keyframes ambBump {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-1.5px); }
 }
 
-.person-leg-left  { left: 3px; }
-.person-leg-right { left: 7px; animation-direction: alternate-reverse; }
-
-/* ---------- Animations ---------- */
-
-.signing-in .walking-person {
-  opacity: 1;
-  animation: walkFromSignToRoom 2.7s ease-in-out forwards;
+@keyframes ambLight {
+  0%   { fill: #ff3b3b; }
+  50%  { fill: #378add; }
 }
 
-.signing-in .room-door {
-  animation: doorOpenClose 1.6s ease-in-out 1.3s forwards;
-}
-
-.signing-in .login-room {
-  animation: roomGlow 2.7s ease-in-out forwards;
-}
-
-@keyframes walkingLegs {
-  to { transform: rotate(30deg); }
-}
-
-@keyframes walkFromSignToRoom {
-  0%   { left: 50%; opacity: 1; transform: translateX(-50%) scale(1); }
-  55%  { left: 75%; opacity: 1; transform: translateX(-50%) scale(.9); }
-  78%  { left: 88%; opacity: 1; transform: translateX(-50%) scale(.7); }
-  100% { left: 92%; opacity: 0; transform: translateX(-50%) scale(.35); }
-}
-
-@keyframes doorOpenClose {
-  0%   { transform: rotateY(0deg); }
-  25%  { transform: rotateY(-105deg); }
-  65%  { transform: rotateY(-105deg); }
-  100% { transform: rotateY(0deg); }
-}
-
-@keyframes roomGlow {
-  0%, 100% {
-    box-shadow: inset 0 0 8px rgba(255,255,255,.12), 0 0 8px rgba(50,220,255,.3);
-  }
-  50% {
-    box-shadow: inset 0 0 15px rgba(255,255,255,.4), 0 0 20px rgba(50,220,255,.9);
-  }
-}
-
-
-
-/* =========================================
-   PASSWORD EYE BUTTON
-========================================= */
-
-.eye-btn {
-  border: none;
-  background: transparent;
-  color: #547e91;
-  cursor: pointer;
-  padding: 4px;
-  font-size: 14px;
-  transition: color .3s;
-}
-
-.eye-btn:hover {
-  color: #38bde9;
+@keyframes ambGlow {
+  0%   { box-shadow: 0 0 18px rgba(255, 60, 80, .75); }
+  50%  { box-shadow: 0 0 18px rgba(55, 138, 221, .9); }
 }
 
 
 /* =========================================
-   FLOATING GLASS CARDS AROUND HEART
+   CREEPY SIGN UP BUTTON
+========================================= */
+/* =========================================
+   MODERN MEDICAL SIGN UP BUTTON
 ========================================= */
 
-.float-card {
-  position: absolute;
-  z-index: 15;
+.signup-wrap {
+  position: relative;
+  margin-top: 14px;
+  border-radius: 13px;
+}
+
+.signup-wrap .sign-up-button {
+  position: relative;
+  width: 100%;
+  height: 50px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(76, 215, 255, .25);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, .35), 0 0 18px rgba(50, 190, 245, .15);
-  font-size: 12px;
+  justify-content: center;
+  gap: 12px;
+  overflow: hidden;
+
+  border: 1px solid #168ed0;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #eaf7ff, #d6efff);
+  color: #07528a;
+
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .35s ease;
+}
+
+/* نور متحرک روی دکمه */
+
+.signup-wrap .sign-up-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, .85),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left .65s ease;
+}
+
+.signup-wrap .sign-up-button:hover::before {
+  left: 150%;
+}
+
+/* علامت طبی */
+
+.signup-plus {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #1677d2;
+  color: white;
+  border-radius: 8px;
+  font-size: 22px;
   font-weight: bold;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 1s ease .5s, transform 1s ease .5s;
+  line-height: 1;
+
+  transition: transform .5s ease;
 }
 
-.float-card i {
-  color: #32c2f5;
-  font-size: 16px;
+.signup-wrap .sign-up-button:hover .signup-plus {
+  transform: rotate(180deg);
 }
 
-.light-on .float-card {
-  opacity: 1;
-  transform: translateY(0);
-  animation: floatY 4s ease-in-out infinite;
+/* فلش */
+
+.signup-arrow {
+  position: absolute;
+  right: 18px;
+  font-size: 14px;
+  transition: transform .3s ease;
 }
 
-.float-card-1 { top: 40px;  left: -30px; }
-.float-card-2 { top: 190px; right: -50px; animation-delay: 1s; }
-.float-card-3 { bottom: 50px; left: -20px; animation-delay: 2s; }
+.signup-wrap .sign-up-button:hover .signup-arrow {
+  transform: translateX(5px);
+}
 
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-9px); }
+/* Hover */
+
+.signup-wrap .sign-up-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d7efff, #bde5ff);
+  border-color: #07528a;
+  box-shadow: 0 8px 25px rgba(22, 119, 210, .22);
+  transform: translateY(-2px);
+}
+
+.signup-wrap .sign-up-button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
 }
 
 /* =========================================
@@ -955,6 +893,10 @@ input:disabled {
     height: 290px;
   }
 
+  .stats-row {
+    gap: 24px;
+  }
+
   .login-side {
     width: 100%;
     min-height: 55vh;
@@ -973,4 +915,566 @@ input:disabled {
     margin-top: 25px;
     padding: 28px;
   }
+}
+/* LIGHT MEDICAL LOGIN THEME */
+
+.login-page {
+  color: #07528a;
+}
+
+.login-card {
+  border: 1px solid #d5eaff;
+  box-shadow: 0 20px 60px rgba(22, 119, 210, 0.12);
+}
+
+.login-card h2 {
+  color: #07528a;
+}
+
+.login-card .card-subtitle {
+  color: #64748b;
+}
+
+.login-card .input-group label {
+  color: #396897;
+}
+
+.login-card .input-box {
+  background: #f5faff;
+  border: 1px solid #d5eaff;
+}
+
+.login-card .input-box input {
+  color: #23415f;
+}
+
+.login-card .input-box input::placeholder {
+  color: #8aa0b5;
+}
+
+.login-card .login-options label {
+  color: #64748b;
+}
+
+.login-card .bottom-text {
+  color: #64748b;
+}
+/* =====================================
+   MYPATIENTHUB - PREMIUM LOGIN DESIGN
+===================================== */
+
+/* Background */
+
+.login-page {
+  background:
+    radial-gradient(
+      circle at 18% 40%,
+      rgba(40, 170, 255, 0.15),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(0, 220, 255, 0.10),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #e8f5ff,
+      #ffffff,
+      #dceeff
+    );
+}
+
+/* Hospital image */
+
+.big-heart img {
+  opacity: 1;
+  filter:
+    brightness(1.05)
+    contrast(1.06)
+    saturate(1.12);
+
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Hospital glow */
+
+.heart-glow {
+  background: radial-gradient(
+    circle,
+    rgba(0, 190, 255, 0.22),
+    rgba(22, 119, 210, 0.12),
+    transparent 75%
+  );
+
+  filter: blur(45px);
+}
+
+/* Main heading */
+
+.heart-content h1 {
+  color: #07528a;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.heart-content h1 span {
+  color: #168ed0;
+}
+
+/* Glass cards */
+
+.float-card {
+  color: #07528a;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  border: 1px solid rgba(22, 119, 210, 0.18);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 12px 35px rgba(22, 119, 210, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Premium login card */
+
+.login-card {
+  background: rgba(255, 255, 255, 0.84);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border: 1px solid rgba(22, 119, 210, 0.20);
+
+  border-radius: 26px;
+
+  box-shadow:
+    0 25px 65px rgba(22, 119, 210, 0.16),
+    0 8px 25px rgba(0, 80, 150, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Input fields */
+
+.login-card .input-box {
+  background: rgba(245, 250, 255, 0.95);
+
+  border: 1px solid #d5eaff;
+
+  border-radius: 13px;
+
+  transition: all 0.3s ease;
+}
+
+.login-card .input-box:focus-within {
+  border-color: #168ed0;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px rgba(22, 119, 210, 0.10);
+}
+
+/* Sign In button */
+
+.login-card .sign-in-button {
+  background: linear-gradient(
+    135deg,
+    #24b4ee,
+    #1677d2,
+    #07528a
+  );
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 10px 25px rgba(22, 119, 210, 0.24);
+}
+
+.login-card .sign-in-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(22, 119, 210, 0.35);
+}
+
+/* Keep Sign In text visible */
+
+.login-card button.sign-in-button .sign-text,
+.login-card button.sign-in-button.signing-in .sign-text {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Medical ECG */
+
+.heart-ecg polyline {
+  stroke: #00bce8;
+
+  stroke-width: 3;
+
+  filter:
+    drop-shadow(0 0 5px rgba(0, 188, 232, 0.6));
+}
+
+/* Lamp beam */
+
+.lamp-light {
+  background: linear-gradient(
+    to bottom,
+    rgba(105, 235, 255, 0.85),
+    rgba(60, 205, 255, 0.48),
+    rgba(22, 119, 210, 0.12),
+    transparent
+  );
+
+  filter: blur(10px);
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+  .login-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 28px 24px;
+  }
+
+  .big-heart img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .heart-content h1 {
+    font-size: 27px;
+  }
+}
+/* =====================================
+   LOGIN DESIGN - VISUAL IMPROVEMENTS
+===================================== */
+
+/* Hospital section */
+
+.heart-content {
+  padding-top: 0;
+}
+
+.heart-content h1 {
+  margin-top: 18px;
+  font-size: 39px;
+}
+
+.big-heart {
+  margin-top: -20px;
+}
+
+/* Hospital image stays still */
+
+.big-heart img {
+  opacity: 1;
+  filter: brightness(1.06) contrast(1.08) saturate(1.12);
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Floating medical cards */
+
+.float-card {
+  padding: 13px 18px;
+  border-radius: 15px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(22, 119, 210, 0.18);
+  box-shadow: 0 8px 25px rgba(22, 119, 210, 0.12);
+}
+
+.float-card-1 {
+  top: 45px;
+  left: -20px;
+}
+
+.float-card-2 {
+  top: 190px;
+  right: -45px;
+}
+
+.float-card-3 {
+  bottom: 65px;
+  left: -10px;
+}
+
+/* ECG position */
+
+.heart-ecg {
+  bottom: 0;
+  height: 65px;
+}
+
+/* Login card */
+
+.login-card {
+  border-radius: 26px;
+  border: 1px solid rgba(22, 119, 210, 0.25);
+
+  box-shadow:
+    0 25px 65px rgba(22, 119, 210, 0.17),
+    0 8px 25px rgba(0, 80, 150, 0.06);
+}
+
+/* Lamp glow */
+
+.lamp-on .lamp-head::after {
+  opacity: 1;
+  box-shadow:
+    0 0 15px #55ddff,
+    0 0 35px rgba(85, 221, 255, 0.8),
+    0 0 55px rgba(85, 221, 255, 0.5);
+}
+
+/* Softer lamp beam */
+
+.lamp-light {
+  filter: blur(18px);
+}
+
+.lamp-on .lamp-light {
+  opacity: 0.75;
+}
+
+/* Mobile */
+
+@media (max-width: 850px) {
+  .heart-content h1 {
+    font-size: 27px;
+  }
+
+  .big-heart {
+    margin-top: 10px;
+  }
+
+  .float-card {
+    display: none;
+  }
+
+  .heart-ecg {
+    bottom: -10px;
+  }
+}
+/* =========================================
+   PREMIUM HOSPITAL LAMP LIGHT
+========================================= */
+
+/* چراغ بالای کارت */
+
+.lamp-area {
+  z-index: 25;
+}
+
+/* ظاهر سر چراغ */
+
+.lamp-head {
+  background: linear-gradient(
+    145deg,
+    #243d55,
+    #091e33
+  );
+
+  border: 1px solid rgba(120, 220, 255, 0.3);
+
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,0.15),
+    0 6px 15px rgba(0,60,120,0.2);
+}
+
+/* چراغ روشن */
+
+.lamp-on .lamp-head {
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,0.2),
+    0 0 20px rgba(0,210,255,0.5),
+    0 0 40px rgba(0,210,255,0.25);
+}
+
+/* قسمت نورانی زیر چراغ */
+
+.lamp-on .lamp-head::after {
+  opacity: 1;
+
+  background: #b9faff;
+
+  box-shadow:
+    0 0 12px #9af5ff,
+    0 0 30px #4de1ff,
+    0 0 55px rgba(0,200,255,0.8);
+}
+
+/* نور اصلی */
+
+.lamp-light {
+  top: 33px;
+  left: -155px;
+
+  width: 410px;
+  height: 270px;
+
+  opacity: 0;
+
+  clip-path: polygon(
+    50% 0%,
+    96% 100%,
+    4% 100%
+  );
+
+  background: linear-gradient(
+    to bottom,
+    rgba(185,250,255,0.85) 0%,
+    rgba(80,225,255,0.55) 20%,
+    rgba(30,190,245,0.28) 55%,
+    rgba(22,119,210,0.05) 85%,
+    transparent 100%
+  );
+
+  filter: blur(15px);
+
+  transition: opacity 0.8s ease;
+}
+
+/* نور روشن */
+
+.lamp-on .lamp-light {
+  opacity: 0.85;
+
+  animation: premiumLampGlow 4s ease-in-out infinite;
+}
+
+/* حرکت نرم نور */
+
+@keyframes premiumLampGlow {
+  0%, 100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* هاله نور اطراف چراغ */
+
+.lamp::before {
+  content: "";
+
+  position: absolute;
+  top: 12px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 140px;
+  height: 140px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(0,210,255,0.35),
+    transparent 70%
+  );
+
+  filter: blur(25px);
+
+  opacity: 0;
+
+  transition: opacity 0.8s ease;
+
+  pointer-events: none;
+}
+
+.lamp-on::before {
+  opacity: 1;
+}/* نور نرم روی قسمت بالایی کارت */
+
+.login-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 12%;
+
+  width: 76%;
+  height: 100px;
+
+  background: radial-gradient(
+    ellipse at top,
+    rgba(65,215,255,0.18),
+    transparent 75%
+  );
+
+  pointer-events: none;
+
+  border-radius: 25px;
+}
+
+/* درخشش ملایم کارت هنگام روشن بودن چراغ */
+
+.light-on .login-card {
+  box-shadow:
+    0 25px 65px rgba(22,119,210,0.17),
+    0 0 35px rgba(0,200,255,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+}
+.light-on .float-card {
+  animation: none !important;
+  transform: none !important;
+}
+/* =====================================
+   FIX BLACK INPUT BACKGROUND
+===================================== */
+
+.login-card .input-box {
+  background: #f5faff;
+  border: 1px solid #d5eaff;
+}
+
+.login-card .input-box input {
+  background: transparent;
+  color: #23415f;
+  -webkit-text-fill-color: #23415f;
+  caret-color: #1677d2;
+}
+
+/* Chrome Autofill Fix */
+
+.login-card .input-box input:-webkit-autofill,
+.login-card .input-box input:-webkit-autofill:hover,
+.login-card .input-box input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #23415f !important;
+  caret-color: #1677d2;
+
+  -webkit-box-shadow: 0 0 0 1000px #f5faff inset !important;
+
+  box-shadow: 0 0 0 1000px #f5faff inset !important;
+
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Selected text */
+
+.login-card .input-box input::selection {
+  background: #b8e7ff;
+  color: #07528a;
+}
+
+.login-side {
+  position: relative;
+}
+
+.login-lang {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+  z-index: 50;
 }

@@ -1,0 +1,25 @@
+*{
+  font-family: 'Vazirmatn',sans-serif;
+}
+
+
+
+
+
+@media (max-width: 900px) {
+  /* سایدبار باز: محتوا به کنار سایدبار می‌رود */
+  .sidebar-open > main {
+    margin-left: 210px !important;
+    width: calc(100% - 210px) !important;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  /* سایدبار بسته: محتوا تمام‌عرض */
+  .sidebar-closed > main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+
+}
