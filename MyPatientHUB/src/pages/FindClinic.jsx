@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 
 import medicalCityImage from '../assets/medicalCityImage.jpeg'
-import heartImage from '../assets/Heart.jpeg'
+import heartImage from '../assets/heart.jpeg'
 import dentalImage from '../assets/dental.jpeg'
 import CityImage from '../assets/city.jpeg'
 import hospitalImage from '../assets/clinic-d.jpeg'

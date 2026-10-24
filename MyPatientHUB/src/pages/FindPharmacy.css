@@ -2060,7 +2060,6 @@ overflow-wrap: anywhere;
 display: -webkit-box;
 flex: 1;
 -webkit-box-orient: vertical;
--webkit-line-clamp: 3;
 overflow: hidden;
 min-height: 48px;
 margin: 0 0 12px;
