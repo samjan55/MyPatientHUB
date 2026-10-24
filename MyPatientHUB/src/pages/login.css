@@ -1,4 +1,4 @@
-/* =========================================
+ /* =========================================
    MYPATIENTHUB LOGIN - FINAL VERSION
 ========================================= */
 
@@ -1466,15 +1466,4 @@ input:disabled {
 .login-card .input-box input::selection {
   background: #b8e7ff;
   color: #07528a;
-}
-
-.login-side {
-  position: relative;
-}
-
-.login-lang {
-  position: absolute;
-  top: 16px;
-  inset-inline-end: 16px;
-  z-index: 50;
 }
