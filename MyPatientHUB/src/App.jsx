@@ -16,7 +16,6 @@ import MyAccount from './pages/MyAccount'
 import Settings from './pages/Settings'
 import ChatBot from './components/ChatBot'
 import Layout from './components/Layout'
-
 function App() {
   return (
     <BrowserRouter>
@@ -29,7 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/register-as" element={<RegisterAs />} />
-          
+         <Route path="/specilty" element={<Specialty/>}/>
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/finddoctor" element={<FindDoctor />} />

@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import MapView from '../components/MapView'
-import './style.css'
+import './Specialty.css'
 
 const selects = ['Specialty', 'Gender', 'Condition', 'Languages']
 const ages = [
