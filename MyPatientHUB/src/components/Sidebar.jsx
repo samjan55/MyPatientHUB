@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
   FaHeartbeat,
+  FaChild,
   FaTimes,
   FaThLarge,
   FaCalendarCheck,
@@ -15,7 +16,7 @@ import {
   FaCog,
   FaSignOutAlt
 } from 'react-icons/fa';
-
+import bodyMap from '../pages/BodyMap';
 import './Sidebar.css';
 
 function Sidebar({ isOpen = false, onClose = () => {} }) {
@@ -24,6 +25,7 @@ function Sidebar({ isOpen = false, onClose = () => {} }) {
 
   const menuItems = [
     { title: 'Dashboard', icon: <FaThLarge />, path: '/dashboard' },
+    { title: 'BodyMap', icon: <FaChild />, path: '/bodymap' },
     { title: 'Appointments', icon: <FaCalendarCheck />, path: '/appointments' },
     { title: 'Find Doctor', icon: <FaUserMd />, path: '/finddoctor' },
     { title: 'Find Clinic', icon: <FaHospital />, path: '/findclinic' },

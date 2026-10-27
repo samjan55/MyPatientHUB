@@ -1,0 +1,621 @@
+ .bm-layout,
+.bm-layout * {
+  box-sizing: border-box;
+}
+
+.bm-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.bm-heading {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.bm-heading h2 {
+  margin: 0 0 6px;
+  color: #07528a;
+  font-size: 26px;
+}
+
+.bm-heading p {
+  margin: 0;
+  color: #8392ab;
+  font-size: 14px;
+}
+
+/* ===== دکمه اورژانس ===== */
+
+.bm-sos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 22px;
+  padding: 12px 18px;
+  border: 2px solid #ffc9c9;
+  border-radius: 16px;
+  background: #fff0f0;
+  color: #b3261e;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.bm-sos span {
+  font-size: 28px;
+}
+
+.bm-sos:hover {
+  background: #ffe3e3;
+}
+
+/* ===== چیدمان اصلی ===== */
+
+.bm-two-col {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+}
+
+.bm-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* ===== عکس آناتومی + زوم ===== */
+
+.bm-anatomy-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bm-anatomy-card,
+.bm-zoom-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dceafa;
+  border-radius: 20px;
+  background: #f4f9ff;
+  box-shadow: 0 8px 30px rgba(22, 119, 210, 0.08);
+}
+
+.bm-anatomy-image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.bm-anatomy-image > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bm-body-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 40%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bm-body-hotspot:hover,
+.bm-body-hotspot.active {
+  border-color: #1677d2;
+  background: rgba(22, 119, 210, 0.28);
+}
+
+.bm-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #1677d2;
+  box-shadow: 0 0 0 0 rgba(22, 119, 210, 0.6);
+  animation: bmPing 2s infinite;
+  pointer-events: none;
+}
+
+.bm-body-hotspot.active .bm-pin {
+  background: #e53935;
+  box-shadow: 0 0 0 6px rgba(229, 57, 53, 0.3);
+  animation: none;
+}
+
+@keyframes bmPing {
+  70% {
+    box-shadow: 0 0 0 12px rgba(22, 119, 210, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 119, 210, 0);
+  }
+}
+
+.bm-anatomy-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px;
+  color: #07528a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bm-anatomy-footer button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1677d2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bm-zoom-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  color: #07528a;
+}
+
+.bm-zoom-heading span {
+  font-size: 22px;
+}
+
+/* پنجره زوم مربع است */
+.bm-zoom-window {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #edf5ff;
+}
+
+.bm-zoom-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: 0 0;
+  transition: transform 0.45s ease;
+  will-change: transform;
+}
+
+.bm-zoom-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bm-zoom-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 20px;
+  color: #07528a;
+  text-align: center;
+}
+
+.bm-zoom-empty span {
+  font-size: 38px;
+}
+
+.bm-zoom-empty h3 {
+  margin: 8px 0 4px;
+}
+
+.bm-zoom-empty p {
+  margin: 0;
+  color: #8392ab;
+  font-size: 13px;
+}
+
+/* ===== دایره‌های رنگی ===== */
+
+.bm-parts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 18px;
+  width: 100%;
+  padding: 16px 14px;
+  border: 1px solid #e5effa;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(22, 119, 210, 0.08);
+}
+
+.bm-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bm-part-circle {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border: 4px solid var(--ring);
+  border-radius: 50%;
+  background: var(--c);
+  font-size: 36px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bm-part:hover .bm-part-circle {
+  transform: scale(1.06);
+}
+
+.bm-part.on .bm-part-circle {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 5px rgba(22, 119, 210, 0.35);
+}
+
+.bm-part-label {
+  color: #43566d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ===== داکترها ===== */
+
+.bm-result {
+  width: 100%;
+  padding: 24px;
+  scroll-margin-top: 80px;
+  border: 1px solid #e5effa;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(22, 119, 210, 0.08);
+}
+
+.bm-hint {
+  padding: 40px 0;
+  color: #8392ab;
+  font-size: 18px;
+  text-align: center;
+}
+
+.bm-selected {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.bm-selected h2 {
+  margin: 0;
+  color: #07528a;
+}
+
+.bm-selected-circle {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border: 4px solid var(--ring);
+  border-radius: 50%;
+  background: var(--c);
+  font-size: 30px;
+}
+
+.bm-urgent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px;
+  border: 2px solid #ffc9c9;
+  border-radius: 14px;
+  background: #fff0f0;
+  color: #b3261e;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.bm-urgent-icon {
+  font-size: 34px;
+}
+
+.bm-doctors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.bm-doctor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 14px;
+  border: 3px solid var(--ring);
+  border-radius: 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.bm-photo {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  margin-bottom: 12px;
+}
+
+.bm-photo img {
+  width: 100%;
+  height: 100%;
+  border: 5px solid var(--ring);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.bm-badge {
+  position: absolute;
+  right: -6px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 3px solid var(--ring);
+  border-radius: 50%;
+  background: var(--c);
+  font-size: 18px;
+}
+
+.bm-doctor h3 {
+  margin: 0 0 4px;
+  color: #243447;
+  font-size: 16px;
+}
+
+.bm-doctor p {
+  margin: 0 0 8px;
+  color: #8392ab;
+  font-size: 12px;
+}
+
+.bm-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  color: #43566d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bm-book,
+.bm-hospital {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #1caa79;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.bm-book i,
+.bm-hospital i {
+  font-size: 20px;
+}
+
+.bm-book:hover {
+  background: #148a60;
+}
+
+.bm-hospital {
+  margin-top: 16px;
+  background: #e53935;
+}
+
+.bm-hospital:hover {
+  background: #b3261e;
+}
+
+.bm-disclaimer {
+  margin: 20px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #edf1f6;
+  color: #8392ab;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ===== موبایل و تبلت: همه زیر هم ===== */
+
+@media (max-width: 900px) {
+  .bm-content {
+    padding: 14px;
+  }
+
+  .bm-two-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bm-side {
+    display: contents;
+  }
+
+  .bm-parts {
+    order: 1;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .bm-anatomy {
+    order: 2;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .bm-result {
+    order: 3;
+    padding: 16px;
+  }
+
+  .bm-part-circle {
+    width: 68px;
+    height: 68px;
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-pin,
+  .bm-zoom-stage,
+  .bm-part-circle {
+    animation: none;
+    transition: none;
+  }
+}
+/* ===== نمایش عکس، زوم و اعضای بدن پهلوی هم ===== */
+
+@media (min-width: 901px) {
+  .bm-content {
+    max-width: 1600px;
+    padding: 16px;
+  }
+
+  .bm-two-col {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.9fr)
+      minmax(250px, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  /* عکس بدن */
+  .bm-anatomy {
+    min-width: 0;
+  }
+
+  /* عکس و زوم کنار هم */
+  .bm-anatomy-viewer {
+    display: contents;
+  }
+
+  .bm-anatomy-card {
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .bm-zoom-card {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  /* کارت‌های اعضای بدن در ستون سوم */
+  .bm-side {
+    grid-column: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .bm-parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 8px;
+  }
+
+  .bm-part-circle {
+    width: 58px;
+    height: 58px;
+    font-size: 28px;
+  }
+}
+
+/* در صفحه‌های کوچک، چیدمان قبلی موبایل حفظ شود */
+@media (max-width: 900px) {
+  .bm-two-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bm-anatomy-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+/* Desktop: Body | Zoom | Body Parts */
+@media (min-width: 901px) {
+  .bm-content {
+    max-width: 1600px;
+    width: 100%;
+  }
+
+  .bm-two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(280px, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .bm-anatomy,
+  .bm-anatomy-viewer {
+    display: contents;
+  }
+
+  .bm-anatomy-card {
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .bm-zoom-card {
+    grid-column: 2;
+    min-width: 0;
+    width: 100%;
+    align-self: start;
+  }
+
+  .bm-side {
+    grid-column: 3;
+    min-width: 0;
+  }
+}

@@ -1,209 +1,512 @@
-import '@fortawesome/fontawesome-free/css/all.min.css'
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import Header from '../components/Header'
-import Sidebar from '../components/Sidebar'
-import './Marketplace.css'
-import afghani from '../assets/afghani.jpeg'
-import pizza from '../assets/pizza.jpeg'
-import kabab from '../assets/kabab.jpeg'
-import burger from '../assets/burger.jpeg'
-import chiken from '../assets/cheken.jpeg'
-import drink from '../assets/drink.jpeg'
-import pasta from '../assets/pasta.jpeg'
-import caftereia from '../assets/cafeteria.jpeg'
-import namak from '../assets/namak.jpeg'
-import zifyat from '../assets/ziyfat.jpeg'
-import afiyat from '../assets/afiyat.jpeg'
-import cloud from '../assets/cloud.jpeg'
-import kaboora from '../assets/kaboora.jpeg'
-import cakeland from '../assets/cakeland.jpeg'
-import buakhara from '../assets/buakhara.jpeg'
-import orange from '../assets/orange .jpeg'
-import chikenkebab from '../assets/chiken kebab.jpeg'
-import chikenpizza from '../assets/chikenpizza.jpeg'
-import cake from '../assets/cake.jpeg'
-import classicburger from '../assets/classicburger.jpeg'
-import pepsi from '../assets/pepsi.jpeg'
-import welcardImage from '../assets/welc market.jpeg'
+ import { useMemo, useState } from "react";
+import "./Marketplace.css";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import  vegetablesoup from '../assets/Vegetable Soup.jpeg'
+import  chickensoup from '../assets/Chicken Soup.jpeg'
+import  LentilSoup from '../assets/Lentil Soup.jpeg'
+import  PumpkinSoup from '../assets/Pumpkin Soup.jpeg'
+import  Carrot from '../assets/Carrot.jpeg'
+import  egg1 from '../assets/Egg1.jpeg'
+import  egg2 from '../assets/Egg2.jpeg'
+import  egg3 from '../assets/Egg3.jpeg'
+import  milk from '../assets/Milk.jpeg'
+import  yogurt from '../assets/yogurt.jpeg'
+import  rice from '../assets/softrice.jpeg'
+import  oat from '../assets/Oats.jpeg'
+import  fish from '../assets/fish.jpeg'
+import  orange from '../assets/orange2.jpeg'
+import  fruits from '../assets/friuts.jpeg'
+import  kiwi from '../assets/kiwi.jpeg'
+import  mango from '../assets/mango.jpeg'
+import  choclate from '../assets/Chaclet  milke.jpeg'
+import  pasta from '../assets/pasta.jpeg'
 
-/* =========================
-   FOOD CATEGORIES
-========================= */
 
-const categories = [
-  { id: 1, name: 'Qabili Palaw', image: afghani },
-  { id: 2, name: 'Pizza', image: pizza },
-  { id: 3, name: 'Breakfast', image: '/food3.jpeg' },
-  { id: 4, name: 'Kebab', image: kabab },
-  { id: 5, name: 'Burger', image: burger },
-  { id: 6, name: 'Chicken Wings', image: chiken },
-  { id: 7, name: 'Drinks', image: drink },
-  { id: 8, name: 'Salad', image: '/food8.jpeg' },
-  { id: 9, name: 'Pasta', image: pasta },
-  { id: 10, name: 'Desserts', image: '/food10.jpeg' },
-]
 
-/* =========================
-   FOOD PRODUCTS
-========================= */
 
-const foods = [
-  { id: 1, name: 'Afghan Qabili Palaw', category: 'Qabili Palaw', price: 7, image: afghani, restaurantId: 1, isNew: true, popular: true },
-  { id: 2, name: 'Chicken Pizza', category: 'Pizza', price: 8, image: chikenpizza, restaurantId: 2, isNew: true, popular: true },
-  { id: 3, name: 'Breakfast Special', category: 'Breakfast', price: 4, image: '/food8.jpeg', restaurantId: 1, isNew: true, popular: false },
-  { id: 4, name: 'Chicken Kebab', category: 'Kebab', price: 6, image: chikenkebab, restaurantId: 3, isNew: false, popular: true },
-  { id: 5, name: 'Classic Burger', category: 'Burger', price: 5, image: classicburger, restaurantId: 4, isNew: false, popular: true },
-  { id: 6, name: 'Spicy Chicken Wings', category: 'Chicken Wings', price: 5, image: chiken, restaurantId: 3, isNew: true, popular: true },
-  { id: 7, name: 'Pepsi', category: 'Drinks', price: 1, image: pepsi, restaurantId: 2, isNew: false, popular: true },
-  { id: 8, name: 'Fresh Salad Bowl', category: 'Salad', price: 4, image: '/food8.jpeg', restaurantId: 5, isNew: false, popular: false },
-  { id: 9, name: 'Chicken Alfredo Pasta', category: 'Pasta', price: 9, image: '/food13.jpeg', restaurantId: 4, isNew: true, popular: true },
-  { id: 10, name: 'Chocolate Cake', category: 'Desserts', price: 3, image: cake, restaurantId: 6, isNew: false, popular: true },
-  { id: 11, name: 'French Toast', category: 'Breakfast', price: 3, image: '/food11.jpeg', restaurantId: 1, isNew: false, popular: false },
-  { id: 12, name: 'Avocado Toast', category: 'Breakfast', price: 4, image: '/food6.jpeg', restaurantId: 5, isNew: true, popular: false },
-  { id: 13, name: 'Cheese Pizza', category: 'Pizza', price: 7, image: '/food13.jpeg', restaurantId: 2, isNew: false, popular: true },
-  { id: 14, name: 'Beef Burger', category: 'Burger', price: 6, image: burger, restaurantId: 4, isNew: true, popular: true },
-  { id: 15, name: 'Grilled Chicken Kebab', category: 'Kebab', price: 7, image: '/food4.jpeg', restaurantId: 3, isNew: false, popular: true },
-  { id: 16, name: 'Orange Juice', category: 'Drinks', price: 2, image: orange, restaurantId: 6, isNew: true, popular: false },
-  { id: 17, name: 'Vegetable Salad', category: 'Salad', price: 4, image: '/food8.jpeg', restaurantId: 5, isNew: false, popular: true },
-]
 
-/* =========================
-   RESTAURANTS
-   delivery = فقط عدد دقیقه
-========================= */
 
-const restaurants = [
-  { id: 1, name: 'Cafeteria', image: caftereia, rating: 4.8, open: '08:00', close: '22:00', hours: '8:00 AM – 10:00 PM', delivery: '20–30', description: 'Afghan dishes, breakfast and traditional meals.' },
-  { id: 2, name: 'Namak', image: namak, rating: 4.7, open: '09:00', close: '23:00', hours: '9:00 AM – 11:00 PM', delivery: '25–35', description: 'Pizza, soft drinks and delicious fast food.' },
-  { id: 3, name: 'CAKE LAND', image: cakeland, rating: 4.6, open: '11:00', close: '23:00', hours: '11:00 AM – 11:00 PM', delivery: '30–40', description: 'Grilled chicken, kebab and chicken wings.' },
-  { id: 4, name: 'Burger House', image: buakhara, rating: 4.5, open: '10:00', close: '22:00', hours: '10:00 AM – 10:00 PM', delivery: '20–30', description: 'Fresh burgers, pasta and tasty meals.' },
-  { id: 5, name: 'Green Garden Cafe', image: kaboora, rating: 4.6, open: '07:00', close: '21:00', hours: '7:00 AM – 9:00 PM', delivery: '15–25', description: 'Breakfast, fresh salads and healthy food.' },
-  { id: 6, name: 'Sweet Corner', image: afiyat, rating: 4.9, open: '09:00', close: '22:00', hours: '9:00 AM – 10:00 PM', delivery: '20–30', description: 'Cakes, desserts, juices and sweet treats.' },
-  { id: 7, name: 'Family Restaurant', image: cloud, rating: 4.7, open: '08:00', close: '23:00', hours: '8:00 AM – 11:00 PM', delivery: '30–40', description: 'Family meals, Afghan food and international dishes.' },
-  { id: 8, name: 'Fresh Bites', image: zifyat, rating: 4.5, open: '08:00', close: '21:00', hours: '8:00 AM – 9:00 PM', delivery: '15–25', description: 'Fresh sandwiches, salads and light meals.' },
-]
+
+
+
+/* ================= PRODUCTS ================= */
+
+const products = [
+  // SOUPS
+  {
+    id: 1,
+    name: "Vegetable Soup",
+    category: "Soups",
+    price: 150,
+    image: vegetablesoup,
+    description: "A warm vegetable soup for a light meal.",
+    ingredients: "Vegetables, water, and seasonings.",
+    tags: ["Soups", "Soft Foods", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 2,
+    name: "Chicken Soup",
+    category: "Soups",
+    price: 200,
+    icon: "🍲",
+    image: chickensoup,
+    description: "Warm chicken soup with vegetables.",
+    ingredients: "Chicken, carrots, water, and seasonings.",
+    tags: ["Soups", "Protein Foods", "Soft Foods"],
+    type: "food",
+  },
+  {
+    id: 3,
+    name: "Lentil Soup",
+    category: "Soups",
+    price: 170,
+    icon: "🥣",
+    image:LentilSoup,
+    description: "A warm and filling lentil soup.",
+    ingredients: "Lentils, water, and vegetables.",
+    tags: ["Soups", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 4,
+    name: "Pumpkin Soup",
+    category: "Soups",
+    price: 180,
+    icon: "🍵",
+    image: PumpkinSoup,
+    description: "Smooth pumpkin soup with a mild flavor.",
+    ingredients: "Pumpkin, water, and seasonings.",
+    tags: ["Soups", "Soft Foods"],
+    type: "food",
+  },
+ 
+
+  // FRUITS
+  {
+    id: 9,
+    name: "Kiwi",
+    category: "Fruits",
+    price: 80,
+    icon: "🥝",
+    image: kiwi,
+    description: "Fresh kiwi.",
+    ingredients: "Fresh kiwis.",
+    tags: ["Fruits", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 10,
+    name: "Mango",
+    category: "Fruits",
+    price: 70,
+    icon:"🥭",
+    image: mango,
+    description: "Fresh Mango.",
+    ingredients: "Fresh mangos.",
+    tags: ["Fruits", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 11,
+    name: "Orange",
+    category: "Fruits",
+    price: 90,
+    icon: "🍊",
+    image: orange,
+    description: "Fresh oranges.",
+    ingredients: "Fresh oranges.",
+    tags: ["Fruits", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 12,
+    name: "fruits",
+    category: "Fruits",
+    price: 120,
+    icon: "🍇",
+    image: fruits,
+    description: "Fresh fruits.",
+    ingredients: "Fresh fruits.",
+    tags: ["Fruits", "Healthy Eating"],
+    type: "food",
+  },
+
+  // EGGS
+  {
+    id: 13,
+    name: "Boiled Eggs",
+    category: "Eggs",
+    price: 60,
+    icon: "🥚",
+    image: egg3,
+    description: "Fresh boiled eggs.",
+    ingredients: "Eggs.",
+    tags: ["Eggs", "Protein Foods"],
+    type: "food",
+  },
+  {
+    id: 14,
+    name: "Scrambled Eggs",
+    category: "Eggs",
+    price: 100,
+    icon: "🍳",
+    image: egg2,
+    description: "Soft scrambled eggs.",
+    ingredients: "Eggs and a small amount of oil.",
+    tags: ["Eggs", "Protein Foods"],
+    type: "food",
+  },
+  {
+    id: 15,
+    name: "Omelette",
+    category: "Eggs",
+    price: 120,
+    icon: "🍳",
+    image: egg1,
+    description: "Freshly prepared omelette.",
+    ingredients: "Eggs, vegetables, and seasonings.",
+    tags: ["Eggs", "Protein Foods"],
+    type: "food",
+  },
+
+  // DAIRY
+  {
+    id: 16,
+    name: "Milk",
+    category: "Dairy Products",
+    price: 90,
+    icon: "🥛",
+    image: milk,
+    description: "Fresh milk.",
+    ingredients: "Milk.",
+    tags: ["Dairy Products"],
+    type: "food",
+  },
+  {
+    id: 17,
+    name: "Yogurt",
+    category: "Dairy Products",
+    price: 80,
+    icon: "🥣",
+    image: yogurt,
+    description: "Plain yogurt.",
+    ingredients: "Milk and yogurt cultures.",
+    tags: ["Dairy Products"],
+    type: "food",
+  },
+  {
+    id: 18,
+    name: " Chocolate Milk",
+    category: "Dairy Products",
+    price: 90,
+    icon: "🥛",
+    image: choclate,
+    description: "Fresh milk.",
+    ingredients: "Milk.",
+    tags: ["Dairy Products"],
+    type: "food",
+  },
+  
+
+  // PROTEIN
+  {
+    id: 19,
+    name: "Pasta",
+    category: "Protein Foods",
+    price: 350,
+    image: pasta,
+    description: "Grilled chicken meal.",
+    ingredients: "Chicken and seasonings.",
+    tags: ["Protein Foods", "Healthy Eating"],
+    type: "food",
+  },
+  {
+    id: 20,
+    name: "Grilled Fish",
+    category: "Protein Foods",
+    price: 400,
+    icon: "🐟",
+    image: fish,
+    description: "Fresh grilled fish.",
+    ingredients: "Fish and seasonings.",
+    tags: ["Protein Foods"],
+    type: "food",
+  },
+
+  // SOFT FOODS
+  {
+    id: 21,
+    name: "Soft Rice Meal",
+    category: "Soft Foods",
+    price: 160,
+    icon: "🍚",
+    image: rice,
+    description: "Soft-cooked rice.",
+    ingredients: "Rice and water.",
+    tags: ["Soft Foods"],
+    type: "food",
+  },
+  {
+    id: 22,
+    name: "Oatmeal Bowl",
+    category: "Soft Foods",
+    price: 120,
+    icon: "🥣",
+    image: oat,
+    description: "Warm oatmeal.",
+    ingredients: "Oats, water, or milk.",
+    tags: ["Soft Foods", "Healthy Eating"],
+    type: "food",
+  },
+
+  // MEDICAL PRODUCTS
+  {
+    id: 23,
+    name: "Blood Pressure Monitor",
+    category: "Home Monitoring",
+    price: 1800,
+    icon: "🩺",
+    description: "Measure blood pressure at home.",
+    ingredients: "Check package specifications.",
+    tags: ["Home Monitoring"],
+    type: "medical",
+  },
+  {
+    id: 24,
+    name: "Blood Glucose Meter",
+    category: "Home Monitoring",
+    price: 1400,
+    icon: "🩸",
+    description: "Measure blood glucose.",
+    ingredients: "Check package specifications.",
+    tags: ["Home Monitoring"],
+    type: "medical",
+  },
+  {
+    id: 25,
+    name: "Digital Thermometer",
+    category: "Monitoring Devices",
+    price: 450,
+    icon: "🌡️",
+    description: "Digital body temperature monitor.",
+    ingredients: "Check package specifications.",
+    tags: ["Monitoring Devices"],
+    type: "medical",
+  },
+  {
+    id: 26,
+    name: "First Aid Kit",
+    category: "First Aid",
+    price: 650,
+    icon: "🧰",
+    description: "Basic first-aid supplies.",
+    ingredients: "Contents depend on the selected kit.",
+    tags: ["First Aid"],
+    type: "medical",
+  },
+  {
+    id: 27,
+    name: "Walking Cane",
+    category: "Mobility Support",
+    price: 900,
+    icon: "🦯",
+    description: "Walking support aid.",
+    ingredients: "Check product specifications.",
+    tags: ["Mobility Support"],
+    type: "medical",
+  },
+  {
+    id: 28,
+    name: "Personal Care Kit",
+    category: "Personal Care",
+    price: 500,
+    icon: "🧴",
+    description: "Everyday personal-care products.",
+    ingredients: "Check individual product labels.",
+    tags: ["Personal Care"],
+    type: "medical",
+  },
+];
+
+/* ================= CATEGORIES ================= */
+
+const foodCategories = [
+  { name: "All Categories", icon: "🍴" },
+  { name: "Soups", icon: "🍲" },
+  { name: "Fruits", icon: "🍎" },
+  { name: "Eggs", icon: "🥚" },
+  { name: "Dairy Products", icon: "🥛" },
+  { name: "Protein Foods", icon: "🍗" },
+  { name: "Soft Foods", icon: "🍚" },
+];
+
+const medicalCategories = [
+  { name: "Home Monitoring", icon: "🩺" },
+  { name: "Monitoring Devices", icon: "🌡️" },
+  { name: "First Aid", icon: "🧰" },
+  { name: "Mobility Support", icon: "🦯" },
+  { name: "Personal Care", icon: "🧴" },
+];
+
+/* ================= MARKETPLACE ================= */
 
 function Marketplace() {
-  const { t } = useTranslation()
+  const [page, setPage] = useState("home");
+  const [category, setCategory] = useState("All Healthy Food");
+  const [openCategory, setOpenCategory] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const [search, setSearch] = useState('')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [selectedRestaurant, setSelectedRestaurant] = useState(null)
-  const [cart, setCart] = useState([])
-  const [notice, setNotice] = useState(null)
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("featured");
 
-  // ساعت کاری: AM و PM به زبان انتخاب‌شده
-  const fmtHours = (hours) =>
-    hours.replace(/AM/g, t('AM')).replace(/PM/g, t('PM'))
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // جستجو هم با نام انگلیسی و هم با نام دری یا پشتو
-  const filteredFoods = foods.filter((food) => {
-    const query = search.toLowerCase().trim()
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-    const matchesSearch =
-      !query ||
-      `${food.name} ${t(food.name)} ${food.category} ${t(food.category)}`
-        .toLowerCase()
-        .includes(query)
+  /* ================= FILTER PRODUCTS ================= */
 
-    const matchesCategory =
-      activeCategory === 'All' || food.category === activeCategory
+  const visibleProducts = useMemo(() => {
+    let result = products.filter((product) => {
+      if (page === "food" && product.type !== "food") return false;
+      if (page === "medical" && product.type !== "medical") return false;
 
-    return matchesSearch && matchesCategory
-  })
+      const text =
+        `${product.name} ${product.category} ${product.description}`.toLowerCase();
 
-  const newFoods = filteredFoods.filter((food) => food.isNew)
-  const popularFoods = filteredFoods.filter((food) => food.popular)
+      const matchesSearch = text.includes(search.toLowerCase());
 
-  const selectedFoods = selectedRestaurant
-    ? foods.filter((food) => food.restaurantId === selectedRestaurant.id)
-    : []
+      const matchesCategory =
+        category === "All Healthy Food" ||
+        category === "All Supplies" ||
+        product.category === category ||
+        product.tags.includes(category);
 
-  function addToCart(food) {
-    setCart((previous) => [...previous, food])
-    setNotice(food)
+      const matchesItem =
+        !selectedItem || product.name === selectedItem;
 
-    setTimeout(() => {
-      setNotice(null)
-    }, 2500)
-  }
+      return matchesSearch && matchesCategory && matchesItem;
+    });
 
-  function isRestaurantOpen(restaurant) {
-    const now = new Date()
-    const current = now.getHours() * 60 + now.getMinutes()
-
-    const [openHour, openMinute] = restaurant.open.split(':').map(Number)
-    const [closeHour, closeMinute] = restaurant.close.split(':').map(Number)
-
-    const opening = openHour * 60 + openMinute
-    const closing = closeHour * 60 + closeMinute
-
-    if (closing < opening) {
-      return current >= opening || current < closing
+    if (sort === "low") {
+      result.sort((a, b) => a.price - b.price);
     }
 
-    return current >= opening && current < closing
+    if (sort === "high") {
+      result.sort((a, b) => b.price - a.price);
+    }
+
+    if (sort === "name") {
+      result.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    return result;
+  }, [page, category, selectedItem, search, sort]);
+
+  /* ================= CART ================= */
+
+  const cartCount = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const cartTotal = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  function openPage(nextPage) {
+    setPage(nextPage);
+
+    setCategory(
+      nextPage === "medical"
+        ? "All Supplies"
+        : "All Healthy Food"
+    );
+
+    setOpenCategory(null);
+    setSelectedItem(null);
+    setSearch("");
+    setSort("featured");
+    setShowCart(false);
+    setSelectedProduct(null);
+    setMessage("");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function renderFoodCard(food) {
-    const restaurant = restaurants.find(
-      (item) => item.id === food.restaurantId
-    )
+  function addToCart(product) {
+    setCart((current) => {
+      const existing = current.find(
+        (item) => item.id === product.id
+      );
 
-    return (
-      <article className="mp-food-card" key={food.id}>
-        <div className="mp-food-image-wrap">
-          <img
-            className="mp-food-image"
-            src={food.image}
-            alt={t(food.name)}
-          />
+      if (existing) {
+        return current.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
 
-          {food.isNew && <span className="mp-badge">{t('NEW')}</span>}
-        </div>
+      return [...current, { ...product, quantity: 1 }];
+    });
 
-        <div className="mp-food-details">
-          <span className="mp-food-category">{t(food.category)}</span>
-
-          <h3>{t(food.name)}</h3>
-
-          <p className="mp-food-restaurant">
-            <i className="fa-solid fa-store"></i>
-            {restaurant && t(restaurant.name)}
-          </p>
-
-          <div className="mp-food-bottom">
-            <span className="mp-food-price" dir="ltr">
-              ${food.price.toFixed(2)}
-            </span>
-
-            <button
-              className="mp-add-button"
-              onClick={() => addToCart(food)}
-            >
-              <i className="fa-solid fa-plus"></i>
-              {t('Add')}
-            </button>
-          </div>
-
-          <button
-            className="mp-view-restaurant"
-            onClick={() => setSelectedRestaurant(restaurant)}
-          >
-            {t('View Restaurant')}
-            <i className="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </article>
-    )
+    setMessage(`${product.name} added to your cart.`);
+    setSelectedProduct(null);
   }
+
+  function changeQuantity(id, amount) {
+    setCart((current) =>
+      current
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity + amount }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  }
+
+  function toggleFavorite(id) {
+    setFavorites((current) =>
+      current.includes(id)
+        ? current.filter((itemId) => itemId !== id)
+        : [...current, id]
+    );
+  }
+
+  const categories =
+    page === "medical"
+      ? medicalCategories
+      : foodCategories;
+
+  function selectCategory(name) {
+    setOpenCategory((current) =>
+      current === name ? null : name
+    );
+
+    setCategory(name);
+    setSelectedItem(null);
+    setSearch("");
+  }
+
+  function selectProduct(name) {
+    setSelectedItem(name);
+    setSearch("");
+  }
+
+  /* ================= JSX ================= */
 
   return (
     <div
-      className={`marketplace-layout ${
-        sidebarOpen ? 'sidebar-open' : 'sidebar-closed'
+      className={`marketplace ${
+        sidebarOpen ? "sidebar-open" : "sidebar-closed"
       }`}
     >
       <Sidebar
@@ -211,338 +514,758 @@ function Marketplace() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <main className="main">
+      <div className="mph-main">
         <Header
           title="Marketplace"
-          onMenuClick={() => setSidebarOpen((previous) => !previous)}
+          onMenuClick={() =>
+            setSidebarOpen((prev) => !prev)
+          }
           onSearch={setSearch}
         />
 
-        <section className="content mp-page">
+        <main className="mph-content">
 
-          {/* WELCOME CARD */}
-          <section className="mp-welcome">
-            <div className="mp-welcome-content">
-              <span className="mp-welcome-tag">
-                <i className="fas fa-heartbeat"></i>
-                {t('HEALTHY FOOD MARKETPLACE')}
-              </span>
+          {/* ================= HOME ================= */}
 
-              <h1>
-                {t('Eat Healthy,')}
-                <br />
-                {t('Live Better!')}
-              </h1>
+          {page === "home" ? (
+            <>
+              <section className="mph-welcome">
+                <div className="mph-welcome-content">
+                  <span className="mph-eyebrow">
+                    YOUR WELLNESS, YOUR WAY
+                  </span>
 
-              <p>
-                {t(
-                  'Discover delicious meals from your favorite restaurants and enjoy fresh food for a healthier lifestyle.'
-                )}
-              </p>
+                  <h1>
+                    Welcome to Your Care Marketplace
+                  </h1>
 
-              <button
-                className="mp-explore-button"
-                onClick={() =>
-                  document.getElementById('mp-categories')?.scrollIntoView({
-                    behavior: 'smooth',
-                  })
-                }
-              >
-                {t('Explore Foods')}
-                <i className="fas fa-arrow-right"></i>
-              </button>
-            </div>
-
-            <div className="mp-welcome-image">
-              <img
-                src={welcardImage}
-                alt={t('Delicious Afghan Food')}
-              />
-
-              <div className="mp-image-label">
-                <i className="fas fa-star"></i>
-                {t('Delicious Afghan Food')}
-              </div>
-            </div>
-          </section>
-
-          {/* SEARCH AND CART */}
-          <div className="mp-page-toolbar">
-            <div>
-              <h2>{t('Find Your Favorite Food')}</h2>
-              <p>{t('Explore food and restaurants.')}</p>
-            </div>
-
-            <div className="mp-cart-summary">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {t('My Cart')}
-              <span>{cart.length}</span>
-            </div>
-          </div>
-
-          <div className="mp-search-box">
-            <i className="fa-solid fa-magnifying-glass"></i>
-
-            <input
-              type="text"
-              placeholder={t('Search food...')}
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-
-            {search && (
-              <button
-                onClick={() => setSearch('')}
-                aria-label={t('Clear search')}
-              >
-                <i className="fa-solid fa-xmark"></i>
-              </button>
-            )}
-          </div>
-
-          {/* CATEGORIES */}
-          <section className="mp-section" id="mp-categories">
-            <div className="mp-section-heading">
-              <div>
-                <h2>{t('Categories')}</h2>
-                <p>{t('Choose your favorite food category.')}</p>
-              </div>
-            </div>
-
-            <div className="mp-category-list">
-              {categories.map((category) => (
-                <button
-                  className={`mp-category ${
-                    activeCategory === category.name ? 'active' : ''
-                  }`}
-                  key={category.id}
-                  onClick={() =>
-                    setActiveCategory((previous) =>
-                      previous === category.name ? 'All' : category.name
-                    )
-                  }
-                >
-                  <img
-                    className="mp-category-image"
-                    src={category.image}
-                    alt={t(category.name)}
-                  />
-
-                  <span>{t(category.name)}</span>
-                </button>
-              ))}
-            </div>
-          </section>
-
-          {/* NEW ARRIVALS */}
-          <section className="mp-section">
-            <div className="mp-section-heading">
-              <div>
-                <h2>{t('New Arrivals')}</h2>
-                <p>{t('Discover new food choices.')}</p>
-              </div>
-            </div>
-
-            <div className="mp-food-grid">
-              {newFoods.length ? (
-                newFoods.map(renderFoodCard)
-              ) : (
-                <p className="mp-empty">{t('No foods found.')}</p>
-              )}
-            </div>
-          </section>
-
-          {/* POPULAR FOODS */}
-          <section className="mp-section">
-            <div className="mp-section-heading">
-              <div>
-                <h2>{t('Popular Foods')}</h2>
-                <p>{t('Popular meals to explore.')}</p>
-              </div>
-            </div>
-
-            <div className="mp-food-grid">
-              {popularFoods.length ? (
-                popularFoods.map(renderFoodCard)
-              ) : (
-                <p className="mp-empty">{t('No foods found.')}</p>
-              )}
-            </div>
-          </section>
-
-          {/* RESTAURANTS */}
-          <section className="mp-section" id="mp-restaurants">
-            <div className="mp-section-heading">
-              <div>
-                <h2>{t('Restaurants')}</h2>
-                <p>{t('Explore restaurant menus and opening hours.')}</p>
-              </div>
-            </div>
-
-            <div className="mp-restaurant-grid">
-              {restaurants.map((restaurant) => (
-                <article
-                  className="mp-restaurant-card"
-                  key={restaurant.id}
-                >
-                  <img
-                    className="mp-restaurant-image"
-                    src={restaurant.image}
-                    alt={t(restaurant.name)}
-                  />
-
-                  <div className="mp-restaurant-details">
-                    <div className="mp-restaurant-title">
-                      <h3>{t(restaurant.name)}</h3>
-
-                      <span className="mp-rating">
-                        <i className="fa-solid fa-star"></i>
-                        {restaurant.rating}
-                      </span>
-                    </div>
-
-                    <p>{t(restaurant.description)}</p>
-
-                    <div className="mp-restaurant-hours">
-                      <i className="fa-regular fa-clock"></i>
-                      {fmtHours(restaurant.hours)}
-                    </div>
-
-                    <div className="mp-restaurant-status">
-                      <span
-                        className={
-                          isRestaurantOpen(restaurant)
-                            ? 'mp-open'
-                            : 'mp-closed'
-                        }
-                      >
-                        {isRestaurantOpen(restaurant)
-                          ? t('Open Now')
-                          : t('Closed')}
-                      </span>
-
-                      <span>
-                        <i className="fa-solid fa-motorcycle"></i>{' '}
-                        {t('minutes', { range: restaurant.delivery })}
-                      </span>
-                    </div>
-
-                    <button
-                      className="mp-restaurant-button"
-                      onClick={() => setSelectedRestaurant(restaurant)}
-                    >
-                      {t('View Restaurant')}
-                      <i className="fa-solid fa-arrow-right"></i>
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          {/* RESTAURANT MENU MODAL */}
-          {selectedRestaurant && (
-            <div
-              className="mp-modal-overlay"
-              onClick={() => setSelectedRestaurant(null)}
-            >
-              <section
-                className="mp-restaurant-modal"
-                role="dialog"
-                aria-modal="true"
-                aria-label={t(selectedRestaurant.name)}
-                onClick={(event) => event.stopPropagation()}
-              >
-                <button
-                  className="mp-modal-close"
-                  onClick={() => setSelectedRestaurant(null)}
-                  aria-label={t('Close')}
-                >
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
-
-                <img
-                  className="mp-modal-image"
-                  src={selectedRestaurant.image}
-                  alt={t(selectedRestaurant.name)}
-                />
-
-                <div className="mp-modal-content">
-                  <h2>{t(selectedRestaurant.name)}</h2>
-
-                  <div className="mp-modal-rating">
-                    <i className="fa-solid fa-star"></i>
-                    {t('ratingText', { rating: selectedRestaurant.rating })}
-                  </div>
-
-                  <p>{t(selectedRestaurant.description)}</p>
-
-                  <div className="mp-modal-hours">
-                    <i className="fa-regular fa-clock"></i>
-
-                    <div>
-                      <b>{t('Opening Hours')}</b>
-                      <span>{fmtHours(selectedRestaurant.hours)}</span>
-                    </div>
-
-                    <span
-                      className={
-                        isRestaurantOpen(selectedRestaurant)
-                          ? 'mp-open'
-                          : 'mp-closed'
-                      }
-                    >
-                      {isRestaurantOpen(selectedRestaurant)
-                        ? t('Open Now')
-                        : t('Closed')}
-                    </span>
-                  </div>
-
-                  <h3>{t('Restaurant Menu')}</h3>
-
-                  <div className="mp-modal-menu">
-                    {selectedFoods.map((food) => (
-                      <div className="mp-menu-item" key={food.id}>
-                        <img src={food.image} alt={t(food.name)} />
-
-                        <div>
-                          <b>{t(food.name)}</b>
-                          <span>{t(food.category)}</span>
-                        </div>
-
-                        <strong dir="ltr">${food.price.toFixed(2)}</strong>
-
-                        <button
-                          onClick={() => addToCart(food)}
-                          aria-label={t('addAria', { name: t(food.name) })}
-                        >
-                          <i className="fa-solid fa-plus"></i>
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  <p>
+                    Explore healthy food and everyday care
+                    essentials in one simple place.
+                  </p>
 
                   <button
-                    className="mp-restaurant-button"
-                    onClick={() => setSelectedRestaurant(null)}
+                    className="mph-primary-button"
+                    onClick={() => openPage("food")}
+                    type="button"
                   >
-                    {t('Back to Marketplace')}
+                    Explore Healthy Food →
+                  </button>
+                </div>
+
+                <div
+                  className="mph-welcome-art"
+                  aria-hidden="true"
+                >
+                  <span>🥗</span>
+                  <span>💙</span>
+                  <span>🩺</span>
+                </div>
+              </section>
+
+              <section className="mph-section">
+                <div className="mph-section-heading">
+                  <div>
+                    <span className="mph-eyebrow">
+                      SHOP YOUR NEEDS
+                    </span>
+
+                    <h2>
+                      What are you looking for?
+                    </h2>
+
+                    <p>
+                      Choose a section to explore products.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mph-main-categories">
+                  <button
+                    className="mph-main-category mph-food-category"
+                    onClick={() => openPage("food")}
+                    type="button"
+                  >
+                    <div className="mph-main-art">
+                      🥗
+                    </div>
+
+                    <div className="mph-main-text">
+                      <span className="mph-category-label">
+                        HEALTHY LIVING
+                      </span>
+
+                      <h3>Health Food</h3>
+
+                      <p>
+                        Explore soups, vegetables, fruits,
+                        eggs, dairy and healthy meals.
+                      </p>
+
+                      <span className="mph-explore-link">
+                        Explore Healthy Food →
+                      </span>
+                    </div>
+                  </button>
+
+                  <button
+                    className="mph-main-category mph-medical-category"
+                    onClick={() => openPage("medical")}
+                    type="button"
+                  >
+                    <div className="mph-main-art">
+                      🩺
+                    </div>
+
+                    <div className="mph-main-text">
+                      <span className="mph-category-label">
+                        DAILY CARE
+                      </span>
+
+                      <h3>Patient Essentials</h3>
+
+                      <p>
+                        Find monitoring devices, first-aid
+                        supplies and personal-care products.
+                      </p>
+
+                      <span className="mph-explore-link">
+                        Explore Patient Essentials →
+                      </span>
+                    </div>
                   </button>
                 </div>
               </section>
+
+              <section className="mph-section">
+                <div className="mph-section-heading">
+                  <div>
+                    <span className="mph-eyebrow">
+                      PRODUCT COLLECTION
+                    </span>
+
+                    <h2>Explore Products</h2>
+                  </div>
+                </div>
+
+                <div className="mph-preview-grid">
+                  {products.slice(0, 4).map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      favorites={favorites}
+                      onFavorite={toggleFavorite}
+                      onDetails={setSelectedProduct}
+                      onAdd={addToCart}
+                    />
+                  ))}
+                </div>
+              </section>
+            </>
+          ) : (
+            <>
+
+              {/* ================= BACK BUTTON ================= */}
+
+              <button
+                className="mph-back-button"
+                onClick={() => openPage("home")}
+                type="button"
+              >
+                ← Back to Marketplace
+              </button>
+
+              {/* ================= BANNER ================= */}
+
+              <section
+                className={`mph-subpage-banner ${
+                  page === "food"
+                    ? "mph-food-banner"
+                    : "mph-medical-banner"
+                }`}
+              >
+                <div>
+                  <span className="mph-eyebrow">
+                    {page === "food"
+                      ? "HEALTHY LIVING"
+                      : "PATIENT CARE"}
+                  </span>
+
+                  <h1>
+                    {page === "food"
+                      ? "Health Food"
+                      : "Patient Essentials"}
+                  </h1>
+
+                  <p>
+                    {page === "food"
+                      ? "Explore healthy food categories and choose your favorite products."
+                      : "Explore medical equipment and patient-care supplies."}
+                  </p>
+                </div>
+
+                <span className="mph-subpage-icon">
+                  {page === "food" ? "🥗" : "🩺"}
+                </span>
+              </section>
+
+              {/* ================= DROPDOWN CATEGORIES ================= */}
+
+              <section className="mph-section">
+                <div className="mph-section-heading">
+                  <div>
+                    <h2>
+                      {page === "food"
+                        ? "Food Categories"
+                        : "Care Categories"}
+                    </h2>
+
+                    <p>
+                      Click a category to explore its products.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mph-food-dropdowns">
+                  {categories.map((item) => {
+                    const categoryProducts = products.filter(
+                      (product) =>
+                        product.type === page &&
+                        product.category === item.name
+                    );
+
+                    // Food products use type "food".
+                    // Medical products use type "medical".
+                    const items = products.filter(
+                      (product) =>
+                        product.type === page &&
+                        product.category === item.name
+                    );
+
+                    return (
+                      <div
+                        className="mph-dropdown"
+                        key={item.name}
+                      >
+                        <button
+                          className="mph-dropdown-btn"
+                          type="button"
+                          onClick={() =>
+                            selectCategory(item.name)
+                          }
+                        >
+                          <span>
+                            {item.icon} {item.name}
+                          </span>
+
+                          <span>
+                            {openCategory === item.name
+                              ? "▲"
+                              : "▼"}
+                          </span>
+                        </button>
+
+                        {openCategory === item.name && (
+                          <div className="mph-dropdown-content">
+
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedItem(null);
+                                setSearch("");
+                              }}
+                            >
+                              View All {item.name}
+                            </button>
+
+                            {items.map((product) => (
+                              <button
+                                key={product.id}
+                                type="button"
+                                onClick={() =>
+                                  selectProduct(product.name)
+                                }
+                              >
+                                {product.icon} {product.name}
+                              </button>
+                            ))}
+
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* ================= PRODUCTS ================= */}
+
+              <section className="mph-section">
+                <div className="mph-toolbar">
+                  <div>
+                    <h2>
+                      {selectedItem ||
+                        (category === "All Healthy Food" ||
+                        category === "All Supplies"
+                          ? "Available Products"
+                          : category)}
+                    </h2>
+
+                    <p>
+                      {visibleProducts.length} products found
+                    </p>
+                  </div>
+
+                  <div className="mph-filters">
+                    <input
+                      type="search"
+                      placeholder="Search products..."
+                      value={search}
+                      onChange={(event) =>
+                        setSearch(event.target.value)
+                      }
+                      aria-label="Search products"
+                    />
+
+                    <select
+                      value={sort}
+                      onChange={(event) =>
+                        setSort(event.target.value)
+                      }
+                      aria-label="Sort products"
+                    >
+                      <option value="featured">
+                        Featured
+                      </option>
+
+                      <option value="low">
+                        Price: Low to High
+                      </option>
+
+                      <option value="high">
+                        Price: High to Low
+                      </option>
+
+                      <option value="name">
+                        Name: A to Z
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                {selectedItem && (
+                  <button
+                    className="mph-back-button"
+                    type="button"
+                    onClick={() => setSelectedItem(null)}
+                  >
+                    ← View All {category}
+                  </button>
+                )}
+
+                {visibleProducts.length > 0 ? (
+                  <div className="mph-product-grid">
+                    {visibleProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        favorites={favorites}
+                        onFavorite={toggleFavorite}
+                        onDetails={setSelectedProduct}
+                        onAdd={addToCart}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mph-empty-state">
+                    <span>🔎</span>
+
+                    <h3>No products found</h3>
+
+                    <p>
+                      Try another search or select another
+                      category.
+                    </p>
+
+                    <button
+                      className="mph-primary-button"
+                      type="button"
+                      onClick={() => {
+                        setSearch("");
+                        setSelectedItem(null);
+                        setCategory(
+                          page === "food"
+                            ? "All Healthy Food"
+                            : "All Supplies"
+                        );
+                        setOpenCategory(null);
+                      }}
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                )}
+              </section>
+            </>
+          )}
+
+          {/* ================= CART BUTTON ================= */}
+
+          <button
+            className="mph-primary-button"
+            type="button"
+            onClick={() => setShowCart(true)}
+          >
+            🛒 Shopping Cart ({cartCount})
+          </button>
+
+          {/* ================= MESSAGE ================= */}
+
+          {message && (
+            <div className="mph-toast" role="status">
+              ✓ {message}
+
+              <button
+                onClick={() => setMessage("")}
+                aria-label="Dismiss message"
+                type="button"
+              >
+                ×
+              </button>
             </div>
           )}
 
-          {notice && (
-            <div className="mp-notice">
-              <i className="fa-solid fa-circle-check"></i>
-              {t('foodAddedToCart', { name: t(notice.name) })}
+          {/* ================= FOOTER ================= */}
+
+          <footer className="mph-footer">
+            <span>✚ MyPatientHUB</span>
+
+            <p>
+              Product information is for general guidance.
+              Check labels and consult your healthcare
+              professional about individual dietary needs.
+            </p>
+          </footer>
+        </main>
+      </div>
+
+      {/* ================= PRODUCT DETAILS ================= */}
+
+      {selectedProduct && (
+        <div
+          className="mph-overlay"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedProduct(null);
+            }
+          }}
+        >
+          <section
+            className="mph-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mph-product-title"
+          >
+            <button
+              className="mph-close-button"
+              onClick={() => setSelectedProduct(null)}
+              aria-label="Close details"
+              type="button"
+            >
+              ×
+            </button>
+
+            <div className="mph-modal-art">
+              {selectedProduct.icon}
             </div>
-          )}
-        </section>
-      </main>
+
+            <span className="mph-eyebrow">
+              {selectedProduct.category}
+            </span>
+
+            <h2 id="mph-product-title">
+              {selectedProduct.name}
+            </h2>
+
+            <div className="mph-modal-price">
+              {selectedProduct.price.toLocaleString()} AFN
+            </div>
+
+            <p>{selectedProduct.description}</p>
+
+            <div className="mph-detail-box">
+              <strong>
+                Ingredients / Product Information
+              </strong>
+
+              <p>{selectedProduct.ingredients}</p>
+            </div>
+
+            {selectedProduct.type === "food" && (
+              <div className="mph-detail-box">
+                <strong>Nutrition Information</strong>
+
+                <p>
+                  Verified nutrition values are not available
+                  in this demo. Check the product label or
+                  ask the seller for confirmed information.
+                </p>
+              </div>
+            )}
+
+            <div className="mph-detail-box">
+              <strong>
+                Dietary and Safety Information
+              </strong>
+
+              <p>
+                Allergens and suitability have not been
+                independently verified. Check labels and
+                ingredients before use.
+              </p>
+            </div>
+
+            <button
+              className="mph-primary-button mph-full-button"
+              onClick={() => addToCart(selectedProduct)}
+              type="button"
+            >
+              Add to Cart ·{" "}
+              {selectedProduct.price.toLocaleString()} AFN
+            </button>
+          </section>
+        </div>
+      )}
+
+      {/* ================= SHOPPING CART ================= */}
+
+      {showCart && (
+        <div
+          className="mph-overlay"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setShowCart(false);
+            }
+          }}
+        >
+          <section
+            className="mph-cart-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mph-cart-title"
+          >
+            <div className="mph-cart-heading">
+              <div>
+                <span className="mph-eyebrow">
+                  YOUR SELECTIONS
+                </span>
+
+                <h2 id="mph-cart-title">
+                  Shopping Cart
+                </h2>
+              </div>
+
+              <button
+                className="mph-close-button"
+                onClick={() => setShowCart(false)}
+                aria-label="Close cart"
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+
+            {cart.length === 0 ? (
+              <div className="mph-empty-state">
+                <span>🛒</span>
+
+                <h3>Your cart is empty</h3>
+
+                <p>
+                  Explore products and add what you need.
+                </p>
+
+                <button
+                  className="mph-primary-button"
+                  onClick={() => setShowCart(false)}
+                  type="button"
+                >
+                  Continue Shopping
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="mph-cart-items">
+                  {cart.map((item) => (
+                    <div
+                      className="mph-cart-item"
+                      key={item.id}
+                    >
+                      <div className="mph-cart-item-icon">
+                        {item.icon}
+                      </div>
+
+                      <div className="mph-cart-item-info">
+                        <strong>{item.name}</strong>
+
+                        <span>
+                          {item.price.toLocaleString()} AFN each
+                        </span>
+
+                        <div className="mph-quantity">
+                          <button
+                            onClick={() =>
+                              changeQuantity(item.id, -1)
+                            }
+                            aria-label={`Decrease ${item.name}`}
+                            type="button"
+                          >
+                            −
+                          </button>
+
+                          <span>{item.quantity}</span>
+
+                          <button
+                            onClick={() =>
+                              changeQuantity(item.id, 1)
+                            }
+                            aria-label={`Increase ${item.name}`}
+                            type="button"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      <strong>
+                        {(
+                          item.price * item.quantity
+                        ).toLocaleString()} AFN
+                      </strong>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mph-cart-total">
+                  <span>Subtotal</span>
+
+                  <strong>
+                    {cartTotal.toLocaleString()} AFN
+                  </strong>
+                </div>
+
+                <p className="mph-demo-note">
+                  Demo only. Delivery, payment and real
+                  orders are not implemented.
+                </p>
+
+                <button
+                  className="mph-primary-button mph-full-button"
+                  onClick={() =>
+                    setMessage(
+                      "Demo only. No order or payment has been processed."
+                    )
+                  }
+                  type="button"
+                >
+                  Review Demo Cart
+                </button>
+
+                <button
+                  className="mph-clear-cart"
+                  onClick={() => setCart([])}
+                  type="button"
+                >
+                  Clear Cart
+                </button>
+              </>
+            )}
+          </section>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Marketplace
+/* ================= PRODUCT CARD ================= */
+
+function ProductCard({
+  product,
+  favorites,
+  onFavorite,
+  onDetails,
+  onAdd,
+}) {
+  const isFavorite = favorites.includes(product.id);
+
+  return (
+    <article className="mph-product-card">
+      <div
+        className={`mph-product-art ${
+          product.type === "food"
+            ? "food-art"
+            : "medical-art"
+        }`}
+      >
+      {product.image ? (
+  <img
+    src={product.image}
+    alt={product.name}
+    className="mph-product-image"
+  />
+) : (
+  <span>{product.icon}</span>
+)}
+        <button
+          className={`mph-favorite-button ${
+            isFavorite ? "favorited" : ""
+          }`}
+          onClick={() => onFavorite(product.id)}
+          aria-label={
+            isFavorite
+              ? "Remove from favorites"
+              : "Add to favorites"
+          }
+          type="button"
+        >
+          {isFavorite ? "♥" : "♡"}
+        </button>
+      </div>
+
+      <div className="mph-product-info">
+        <span className="mph-product-category">
+          {product.category}
+        </span>
+
+        <h3>{product.name}</h3>
+
+        <p>{product.description}</p>
+
+        <div className="mph-product-bottom">
+          <strong>
+            {product.price.toLocaleString()} AFN
+          </strong>
+
+          <button
+            className="mph-add-button"
+            onClick={() => onAdd(product)}
+            aria-label={`Add ${product.name} to cart`}
+            type="button"
+          >
+            +
+          </button>
+        </div>
+
+        <button
+          className="mph-details-link"
+          onClick={() => onDetails(product)}
+          type="button"
+        >
+          View Details →
+        </button>
+      </div>
+    </article>
+  );
+}
+
+export default Marketplace;

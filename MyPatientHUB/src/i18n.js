@@ -17,12 +17,14 @@ import depents from './Locales/depents.js'
 import settings from './Locales/settings'
 import singup from './Locales/signup.js'
 import register from './Locales/register'
+import bodymap from './Locales/bodymap.js'
 
 
 
 
 
-const pages = [dashboard, appointment, login, findDoctor, findclinic,pharmacy,chat, marketplace, depents,myaccount, settings, singup, register,]
+
+const pages = [dashboard, appointment, login, findDoctor, findclinic,pharmacy,chat, marketplace, depents,myaccount, settings, singup, register, bodymap,]
 
 function merge(lang, base) {
   return pages.reduce((all, page) => ({ ...all, ...page[lang] }), base)
