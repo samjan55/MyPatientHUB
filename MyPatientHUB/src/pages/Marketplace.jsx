@@ -1,39 +1,32 @@
  import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./Marketplace.css";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import  vegetablesoup from '../assets/Vegetable Soup.jpeg'
-import  chickensoup from '../assets/Chicken Soup.jpeg'
-import  LentilSoup from '../assets/Lentil Soup.jpeg'
-import  PumpkinSoup from '../assets/Pumpkin Soup.jpeg'
-import  Carrot from '../assets/Carrot.jpeg'
-import  egg1 from '../assets/Egg1.jpeg'
-import  egg2 from '../assets/Egg2.jpeg'
-import  egg3 from '../assets/Egg3.jpeg'
-import  milk from '../assets/Milk.jpeg'
-import  yogurt from '../assets/yogurt.jpeg'
-import  rice from '../assets/softrice.jpeg'
-import  oat from '../assets/Oats.jpeg'
-import  fish from '../assets/fish.jpeg'
-import  orange from '../assets/orange2.jpeg'
-import  fruits from '../assets/friuts.jpeg'
-import  kiwi from '../assets/kiwi.jpeg'
-import  mango from '../assets/mango.jpeg'
-import  choclate from '../assets/Chaclet  milke.jpeg'
-import  pasta from '../assets/pasta.jpeg'
 
-
-
-
-
-
-
-
+import vegetablesoup from "../assets/Vegetable Soup.jpeg";
+import chickensoup from "../assets/Chicken Soup.jpeg";
+import LentilSoup from "../assets/Lentil Soup.jpeg";
+import PumpkinSoup from "../assets/Pumpkin Soup.jpeg";
+import Carrot from "../assets/Carrot.jpeg";
+import egg1 from "../assets/Egg1.jpeg";
+import egg2 from "../assets/Egg2.jpeg";
+import egg3 from "../assets/Egg3.jpeg";
+import milk from "../assets/Milk.jpeg";
+import yogurt from "../assets/yogurt.jpeg";
+import rice from "../assets/softrice.jpeg";
+import oat from "../assets/Oats.jpeg";
+import fish from "../assets/fish.jpeg";
+import orange from "../assets/orange2.jpeg";
+import fruits from "../assets/friuts.jpeg";
+import kiwi from "../assets/kiwi.jpeg";
+import mango from "../assets/mango.jpeg";
+import choclate from "../assets/Chaclet  milke.jpeg";
+import pasta from "../assets/pasta.jpeg";
 
 /* ================= PRODUCTS ================= */
 
 const products = [
-  // SOUPS
   {
     id: 1,
     name: "Vegetable Soup",
@@ -63,7 +56,7 @@ const products = [
     category: "Soups",
     price: 170,
     icon: "🥣",
-    image:LentilSoup,
+    image: LentilSoup,
     description: "A warm and filling lentil soup.",
     ingredients: "Lentils, water, and vegetables.",
     tags: ["Soups", "Healthy Eating"],
@@ -81,9 +74,6 @@ const products = [
     tags: ["Soups", "Soft Foods"],
     type: "food",
   },
- 
-
-  // FRUITS
   {
     id: 9,
     name: "Kiwi",
@@ -101,7 +91,7 @@ const products = [
     name: "Mango",
     category: "Fruits",
     price: 70,
-    icon:"🥭",
+    icon: "🥭",
     image: mango,
     description: "Fresh Mango.",
     ingredients: "Fresh mangos.",
@@ -132,8 +122,6 @@ const products = [
     tags: ["Fruits", "Healthy Eating"],
     type: "food",
   },
-
-  // EGGS
   {
     id: 13,
     name: "Boiled Eggs",
@@ -170,8 +158,6 @@ const products = [
     tags: ["Eggs", "Protein Foods"],
     type: "food",
   },
-
-  // DAIRY
   {
     id: 16,
     name: "Milk",
@@ -208,9 +194,6 @@ const products = [
     tags: ["Dairy Products"],
     type: "food",
   },
-  
-
-  // PROTEIN
   {
     id: 19,
     name: "Pasta",
@@ -234,8 +217,6 @@ const products = [
     tags: ["Protein Foods"],
     type: "food",
   },
-
-  // SOFT FOODS
   {
     id: 21,
     name: "Soft Rice Meal",
@@ -260,8 +241,6 @@ const products = [
     tags: ["Soft Foods", "Healthy Eating"],
     type: "food",
   },
-
-  // MEDICAL PRODUCTS
   {
     id: 23,
     name: "Blood Pressure Monitor",
@@ -333,40 +312,76 @@ const products = [
 /* ================= CATEGORIES ================= */
 
 const foodCategories = [
-  { name: "All Categories", icon: "🍴" },
-  { name: "Soups", icon: "🍲" },
-  { name: "Fruits", icon: "🍎" },
-  { name: "Eggs", icon: "🥚" },
-  { name: "Dairy Products", icon: "🥛" },
-  { name: "Protein Foods", icon: "🍗" },
-  { name: "Soft Foods", icon: "🍚" },
+  { name: "All Categories", icon: "🍴", key: "allCategories" },
+  { name: "Soups", icon: "🍲", key: "soups" },
+  { name: "Fruits", icon: "🍎", key: "fruits" },
+  { name: "Eggs", icon: "🥚", key: "eggs" },
+  { name: "Dairy Products", icon: "🥛", key: "dairy" },
+  { name: "Protein Foods", icon: "🍗", key: "protein" },
+  { name: "Soft Foods", icon: "🍚", key: "softFoods" },
 ];
 
 const medicalCategories = [
-  { name: "Home Monitoring", icon: "🩺" },
-  { name: "Monitoring Devices", icon: "🌡️" },
-  { name: "First Aid", icon: "🧰" },
-  { name: "Mobility Support", icon: "🦯" },
-  { name: "Personal Care", icon: "🧴" },
+  { name: "Home Monitoring", icon: "🩺", key: "homeMonitoring" },
+  { name: "Monitoring Devices", icon: "🌡️", key: "monitoringDevices" },
+  { name: "First Aid", icon: "🧰", key: "firstAid" },
+  { name: "Mobility Support", icon: "🦯", key: "mobility" },
+  { name: "Personal Care", icon: "🧴", key: "personalCare" },
 ];
+
+const categoryKeys = {
+  "All Categories": "allCategories",
+  "All Healthy Food": "allHealthyFood",
+  "All Supplies": "allSupplies",
+  Soups: "soups",
+  Fruits: "fruits",
+  Eggs: "eggs",
+  "Dairy Products": "dairy",
+  "Protein Foods": "protein",
+  "Soft Foods": "softFoods",
+  "Home Monitoring": "homeMonitoring",
+  "Monitoring Devices": "monitoringDevices",
+  "First Aid": "firstAid",
+  "Mobility Support": "mobility",
+  "Personal Care": "personalCare",
+};
 
 /* ================= MARKETPLACE ================= */
 
 function Marketplace() {
+  const { t, i18n } = useTranslation();
+
+  const tr = (key) => t(`marketplace.${key}`);
+
+  const productName = (product) =>
+    t(`marketplace.product.${product.id}.name`, {
+      defaultValue: product.name.trim(),
+    });
+
+  const productDescription = (product) =>
+    t(`marketplace.product.${product.id}.description`, {
+      defaultValue: product.description,
+    });
+
+  const productIngredients = (product) =>
+    t(`marketplace.product.${product.id}.ingredients`, {
+      defaultValue: product.ingredients,
+    });
+
+  const categoryName = (name) =>
+    categoryKeys[name] ? tr(categoryKeys[name]) : name;
+
   const [page, setPage] = useState("home");
   const [category, setCategory] = useState("All Healthy Food");
   const [openCategory, setOpenCategory] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("featured");
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [message, setMessage] = useState("");
-
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   /* ================= FILTER PRODUCTS ================= */
@@ -376,10 +391,17 @@ function Marketplace() {
       if (page === "food" && product.type !== "food") return false;
       if (page === "medical" && product.type !== "medical") return false;
 
-      const text =
-        `${product.name} ${product.category} ${product.description}`.toLowerCase();
+      const translatedText = [
+        productName(product),
+        categoryName(product.category),
+        productDescription(product),
+      ]
+        .join(" ")
+        .toLowerCase();
 
-      const matchesSearch = text.includes(search.toLowerCase());
+      const matchesSearch = translatedText.includes(
+        search.toLowerCase()
+      );
 
       const matchesCategory =
         category === "All Healthy Food" ||
@@ -402,11 +424,13 @@ function Marketplace() {
     }
 
     if (sort === "name") {
-      result.sort((a, b) => a.name.localeCompare(b.name));
+      result.sort((a, b) =>
+        productName(a).localeCompare(productName(b))
+      );
     }
 
     return result;
-  }, [page, category, selectedItem, search, sort]);
+  }, [page, category, selectedItem, search, sort, i18n.language]);
 
   /* ================= CART ================= */
 
@@ -457,7 +481,7 @@ function Marketplace() {
       return [...current, { ...product, quantity: 1 }];
     });
 
-    setMessage(`${product.name} added to your cart.`);
+    setMessage(`${productName(product)} — ${tr("addedToCart")}`);
     setSelectedProduct(null);
   }
 
@@ -482,9 +506,7 @@ function Marketplace() {
   }
 
   const categories =
-    page === "medical"
-      ? medicalCategories
-      : foodCategories;
+    page === "medical" ? medicalCategories : foodCategories;
 
   function selectCategory(name) {
     setOpenCategory((current) =>
@@ -516,15 +538,12 @@ function Marketplace() {
 
       <div className="mph-main">
         <Header
-          title="Marketplace"
-          onMenuClick={() =>
-            setSidebarOpen((prev) => !prev)
-          }
+          title={tr("title")}
+          onMenuClick={() => setSidebarOpen((prev) => !prev)}
           onSearch={setSearch}
         />
 
         <main className="mph-content">
-
           {/* ================= HOME ================= */}
 
           {page === "home" ? (
@@ -532,31 +551,23 @@ function Marketplace() {
               <section className="mph-welcome">
                 <div className="mph-welcome-content">
                   <span className="mph-eyebrow">
-                    YOUR WELLNESS, YOUR WAY
+                    {tr("eyebrowCare")}
                   </span>
 
-                  <h1>
-                    Welcome to Your Care Marketplace
-                  </h1>
+                  <h1>{tr("welcome")}</h1>
 
-                  <p>
-                    Explore healthy food and everyday care
-                    essentials in one simple place.
-                  </p>
+                  <p>{tr("intro")}</p>
 
                   <button
                     className="mph-primary-button"
                     onClick={() => openPage("food")}
                     type="button"
                   >
-                    Explore Healthy Food →
+                    {tr("exploreFood")} →
                   </button>
                 </div>
 
-                <div
-                  className="mph-welcome-art"
-                  aria-hidden="true"
-                >
+                <div className="mph-welcome-art" aria-hidden="true">
                   <span>🥗</span>
                   <span>💙</span>
                   <span>🩺</span>
@@ -567,16 +578,12 @@ function Marketplace() {
                 <div className="mph-section-heading">
                   <div>
                     <span className="mph-eyebrow">
-                      SHOP YOUR NEEDS
+                      {tr("shopNeeds")}
                     </span>
 
-                    <h2>
-                      What are you looking for?
-                    </h2>
+                    <h2>{tr("lookingFor")}</h2>
 
-                    <p>
-                      Choose a section to explore products.
-                    </p>
+                    <p>{tr("chooseSection")}</p>
                   </div>
                 </div>
 
@@ -586,24 +593,19 @@ function Marketplace() {
                     onClick={() => openPage("food")}
                     type="button"
                   >
-                    <div className="mph-main-art">
-                      🥗
-                    </div>
+                    <div className="mph-main-art">🥗</div>
 
                     <div className="mph-main-text">
                       <span className="mph-category-label">
-                        HEALTHY LIVING
+                        {tr("healthyLiving")}
                       </span>
 
-                      <h3>Health Food</h3>
+                      <h3>{tr("healthFood")}</h3>
 
-                      <p>
-                        Explore soups, vegetables, fruits,
-                        eggs, dairy and healthy meals.
-                      </p>
+                      <p>{tr("foodDescription")}</p>
 
                       <span className="mph-explore-link">
-                        Explore Healthy Food →
+                        {tr("exploreFood")} →
                       </span>
                     </div>
                   </button>
@@ -613,24 +615,19 @@ function Marketplace() {
                     onClick={() => openPage("medical")}
                     type="button"
                   >
-                    <div className="mph-main-art">
-                      🩺
-                    </div>
+                    <div className="mph-main-art">🩺</div>
 
                     <div className="mph-main-text">
                       <span className="mph-category-label">
-                        DAILY CARE
+                        {tr("dailyCare")}
                       </span>
 
-                      <h3>Patient Essentials</h3>
+                      <h3>{tr("patientEssentials")}</h3>
 
-                      <p>
-                        Find monitoring devices, first-aid
-                        supplies and personal-care products.
-                      </p>
+                      <p>{tr("careDescription")}</p>
 
                       <span className="mph-explore-link">
-                        Explore Patient Essentials →
+                        {tr("exploreEssentials")} →
                       </span>
                     </div>
                   </button>
@@ -641,10 +638,10 @@ function Marketplace() {
                 <div className="mph-section-heading">
                   <div>
                     <span className="mph-eyebrow">
-                      PRODUCT COLLECTION
+                      {tr("productCollection")}
                     </span>
 
-                    <h2>Explore Products</h2>
+                    <h2>{tr("exploreProducts")}</h2>
                   </div>
                 </div>
 
@@ -657,6 +654,8 @@ function Marketplace() {
                       onFavorite={toggleFavorite}
                       onDetails={setSelectedProduct}
                       onAdd={addToCart}
+                      t={t}
+                      categoryName={categoryName}
                     />
                   ))}
                 </div>
@@ -664,7 +663,6 @@ function Marketplace() {
             </>
           ) : (
             <>
-
               {/* ================= BACK BUTTON ================= */}
 
               <button
@@ -672,7 +670,7 @@ function Marketplace() {
                 onClick={() => openPage("home")}
                 type="button"
               >
-                ← Back to Marketplace
+                ← {tr("back")}
               </button>
 
               {/* ================= BANNER ================= */}
@@ -687,20 +685,20 @@ function Marketplace() {
                 <div>
                   <span className="mph-eyebrow">
                     {page === "food"
-                      ? "HEALTHY LIVING"
-                      : "PATIENT CARE"}
+                      ? tr("healthyLiving")
+                      : tr("patientCare")}
                   </span>
 
                   <h1>
                     {page === "food"
-                      ? "Health Food"
-                      : "Patient Essentials"}
+                      ? tr("healthFood")
+                      : tr("patientEssentials")}
                   </h1>
 
                   <p>
                     {page === "food"
-                      ? "Explore healthy food categories and choose your favorite products."
-                      : "Explore medical equipment and patient-care supplies."}
+                      ? tr("foodDescription")
+                      : tr("careDescription")}
                   </p>
                 </div>
 
@@ -709,33 +707,23 @@ function Marketplace() {
                 </span>
               </section>
 
-              {/* ================= DROPDOWN CATEGORIES ================= */}
+              {/* ================= CATEGORIES ================= */}
 
               <section className="mph-section">
                 <div className="mph-section-heading">
                   <div>
                     <h2>
                       {page === "food"
-                        ? "Food Categories"
-                        : "Care Categories"}
+                        ? tr("foodCategories")
+                        : tr("careCategories")}
                     </h2>
 
-                    <p>
-                      Click a category to explore its products.
-                    </p>
+                    <p>{tr("categoryHint")}</p>
                   </div>
                 </div>
 
                 <div className="mph-food-dropdowns">
                   {categories.map((item) => {
-                    const categoryProducts = products.filter(
-                      (product) =>
-                        product.type === page &&
-                        product.category === item.name
-                    );
-
-                    // Food products use type "food".
-                    // Medical products use type "medical".
                     const items = products.filter(
                       (product) =>
                         product.type === page &&
@@ -750,24 +738,22 @@ function Marketplace() {
                         <button
                           className="mph-dropdown-btn"
                           type="button"
-                          onClick={() =>
-                            selectCategory(item.name)
-                          }
+                          onClick={() => selectCategory(item.name)}
                         >
                           <span>
-                            {item.icon} {item.name}
+                            {item.icon}{" "}
+                            {item.key === "allCategories"
+                              ? tr(item.key)
+                              : categoryName(item.name)}
                           </span>
 
                           <span>
-                            {openCategory === item.name
-                              ? "▲"
-                              : "▼"}
+                            {openCategory === item.name ? "▲" : "▼"}
                           </span>
                         </button>
 
                         {openCategory === item.name && (
                           <div className="mph-dropdown-content">
-
                             <button
                               type="button"
                               onClick={() => {
@@ -775,7 +761,8 @@ function Marketplace() {
                                 setSearch("");
                               }}
                             >
-                              View All {item.name}
+                              {tr("viewAll")}{" "}
+                              {categoryName(item.name)}
                             </button>
 
                             {items.map((product) => (
@@ -786,10 +773,9 @@ function Marketplace() {
                                   selectProduct(product.name)
                                 }
                               >
-                                {product.icon} {product.name}
+                                {product.icon} {productName(product)}
                               </button>
                             ))}
-
                           </div>
                         )}
                       </div>
@@ -804,27 +790,33 @@ function Marketplace() {
                 <div className="mph-toolbar">
                   <div>
                     <h2>
-                      {selectedItem ||
-                        (category === "All Healthy Food" ||
-                        category === "All Supplies"
-                          ? "Available Products"
-                          : category)}
+                      {selectedItem
+                        ? productName(
+                            products.find(
+                              (product) =>
+                                product.name === selectedItem
+                            ) || { id: 0, name: selectedItem }
+                          )
+                        : category === "All Healthy Food" ||
+                            category === "All Supplies"
+                          ? tr("availableProducts")
+                          : categoryName(category)}
                     </h2>
 
                     <p>
-                      {visibleProducts.length} products found
+                      {visibleProducts.length} {tr("productsFound")}
                     </p>
                   </div>
 
                   <div className="mph-filters">
                     <input
                       type="search"
-                      placeholder="Search products..."
+                      placeholder={tr("search")}
                       value={search}
                       onChange={(event) =>
                         setSearch(event.target.value)
                       }
-                      aria-label="Search products"
+                      aria-label={tr("search")}
                     />
 
                     <select
@@ -832,22 +824,22 @@ function Marketplace() {
                       onChange={(event) =>
                         setSort(event.target.value)
                       }
-                      aria-label="Sort products"
+                      aria-label={tr("nameSort")}
                     >
                       <option value="featured">
-                        Featured
+                        {tr("featured")}
                       </option>
 
                       <option value="low">
-                        Price: Low to High
+                        {tr("priceLow")}
                       </option>
 
                       <option value="high">
-                        Price: High to Low
+                        {tr("priceHigh")}
                       </option>
 
                       <option value="name">
-                        Name: A to Z
+                        {tr("nameSort")}
                       </option>
                     </select>
                   </div>
@@ -859,7 +851,7 @@ function Marketplace() {
                     type="button"
                     onClick={() => setSelectedItem(null)}
                   >
-                    ← View All {category}
+                    ← {tr("viewAll")} {categoryName(category)}
                   </button>
                 )}
 
@@ -873,6 +865,8 @@ function Marketplace() {
                         onFavorite={toggleFavorite}
                         onDetails={setSelectedProduct}
                         onAdd={addToCart}
+                        t={t}
+                        categoryName={categoryName}
                       />
                     ))}
                   </div>
@@ -880,12 +874,9 @@ function Marketplace() {
                   <div className="mph-empty-state">
                     <span>🔎</span>
 
-                    <h3>No products found</h3>
+                    <h3>{tr("noProducts")}</h3>
 
-                    <p>
-                      Try another search or select another
-                      category.
-                    </p>
+                    <p>{tr("tryAgain")}</p>
 
                     <button
                       className="mph-primary-button"
@@ -901,7 +892,7 @@ function Marketplace() {
                         setOpenCategory(null);
                       }}
                     >
-                      Clear Filters
+                      {tr("clearFilters")}
                     </button>
                   </div>
                 )}
@@ -916,7 +907,7 @@ function Marketplace() {
             type="button"
             onClick={() => setShowCart(true)}
           >
-            🛒 Shopping Cart ({cartCount})
+            🛒 {tr("cart")} ({cartCount})
           </button>
 
           {/* ================= MESSAGE ================= */}
@@ -927,7 +918,7 @@ function Marketplace() {
 
               <button
                 onClick={() => setMessage("")}
-                aria-label="Dismiss message"
+                aria-label={tr("dismissMessage")}
                 type="button"
               >
                 ×
@@ -940,11 +931,7 @@ function Marketplace() {
           <footer className="mph-footer">
             <span>✚ MyPatientHUB</span>
 
-            <p>
-              Product information is for general guidance.
-              Check labels and consult your healthcare
-              professional about individual dietary needs.
-            </p>
+            <p>{tr("footer")}</p>
           </footer>
         </main>
       </div>
@@ -969,7 +956,7 @@ function Marketplace() {
             <button
               className="mph-close-button"
               onClick={() => setSelectedProduct(null)}
-              aria-label="Close details"
+              aria-label={tr("closeDetails")}
               type="button"
             >
               ×
@@ -980,49 +967,34 @@ function Marketplace() {
             </div>
 
             <span className="mph-eyebrow">
-              {selectedProduct.category}
+              {categoryName(selectedProduct.category)}
             </span>
 
             <h2 id="mph-product-title">
-              {selectedProduct.name}
+              {productName(selectedProduct)}
             </h2>
 
             <div className="mph-modal-price">
               {selectedProduct.price.toLocaleString()} AFN
             </div>
 
-            <p>{selectedProduct.description}</p>
+            <p>{productDescription(selectedProduct)}</p>
 
             <div className="mph-detail-box">
-              <strong>
-                Ingredients / Product Information
-              </strong>
-
-              <p>{selectedProduct.ingredients}</p>
+              <strong>{tr("ingredients")}</strong>
+              <p>{productIngredients(selectedProduct)}</p>
             </div>
 
             {selectedProduct.type === "food" && (
               <div className="mph-detail-box">
-                <strong>Nutrition Information</strong>
-
-                <p>
-                  Verified nutrition values are not available
-                  in this demo. Check the product label or
-                  ask the seller for confirmed information.
-                </p>
+                <strong>{tr("nutrition")}</strong>
+                <p>{tr("nutritionUnavailable")}</p>
               </div>
             )}
 
             <div className="mph-detail-box">
-              <strong>
-                Dietary and Safety Information
-              </strong>
-
-              <p>
-                Allergens and suitability have not been
-                independently verified. Check labels and
-                ingredients before use.
-              </p>
+              <strong>{tr("safety")}</strong>
+              <p>{tr("safetyUnavailable")}</p>
             </div>
 
             <button
@@ -1030,7 +1002,7 @@ function Marketplace() {
               onClick={() => addToCart(selectedProduct)}
               type="button"
             >
-              Add to Cart ·{" "}
+              {tr("addToCart")} ·{" "}
               {selectedProduct.price.toLocaleString()} AFN
             </button>
           </section>
@@ -1057,18 +1029,16 @@ function Marketplace() {
             <div className="mph-cart-heading">
               <div>
                 <span className="mph-eyebrow">
-                  YOUR SELECTIONS
+                  {tr("cartSelections")}
                 </span>
 
-                <h2 id="mph-cart-title">
-                  Shopping Cart
-                </h2>
+                <h2 id="mph-cart-title">{tr("cart")}</h2>
               </div>
 
               <button
                 className="mph-close-button"
                 onClick={() => setShowCart(false)}
-                aria-label="Close cart"
+                aria-label={tr("cart")}
                 type="button"
               >
                 ×
@@ -1079,18 +1049,16 @@ function Marketplace() {
               <div className="mph-empty-state">
                 <span>🛒</span>
 
-                <h3>Your cart is empty</h3>
+                <h3>{tr("emptyCart")}</h3>
 
-                <p>
-                  Explore products and add what you need.
-                </p>
+                <p>{tr("chooseSection")}</p>
 
                 <button
                   className="mph-primary-button"
                   onClick={() => setShowCart(false)}
                   type="button"
                 >
-                  Continue Shopping
+                  {tr("continueShopping")}
                 </button>
               </div>
             ) : (
@@ -1106,10 +1074,11 @@ function Marketplace() {
                       </div>
 
                       <div className="mph-cart-item-info">
-                        <strong>{item.name}</strong>
+                        <strong>{productName(item)}</strong>
 
                         <span>
-                          {item.price.toLocaleString()} AFN each
+                          {item.price.toLocaleString()} AFN{" "}
+                          {tr("each")}
                         </span>
 
                         <div className="mph-quantity">
@@ -1117,7 +1086,7 @@ function Marketplace() {
                             onClick={() =>
                               changeQuantity(item.id, -1)
                             }
-                            aria-label={`Decrease ${item.name}`}
+                            aria-label={`${tr("decrease")} ${productName(item)}`}
                             type="button"
                           >
                             −
@@ -1129,7 +1098,7 @@ function Marketplace() {
                             onClick={() =>
                               changeQuantity(item.id, 1)
                             }
-                            aria-label={`Increase ${item.name}`}
+                            aria-label={`${tr("increase")} ${productName(item)}`}
                             type="button"
                           >
                             +
@@ -1140,14 +1109,15 @@ function Marketplace() {
                       <strong>
                         {(
                           item.price * item.quantity
-                        ).toLocaleString()} AFN
+                        ).toLocaleString()}{" "}
+                        AFN
                       </strong>
                     </div>
                   ))}
                 </div>
 
                 <div className="mph-cart-total">
-                  <span>Subtotal</span>
+                  <span>{tr("subtotal")}</span>
 
                   <strong>
                     {cartTotal.toLocaleString()} AFN
@@ -1155,20 +1125,17 @@ function Marketplace() {
                 </div>
 
                 <p className="mph-demo-note">
-                  Demo only. Delivery, payment and real
-                  orders are not implemented.
+                  {tr("demoNote")}
                 </p>
 
                 <button
                   className="mph-primary-button mph-full-button"
                   onClick={() =>
-                    setMessage(
-                      "Demo only. No order or payment has been processed."
-                    )
+                    setMessage(tr("demoMessage"))
                   }
                   type="button"
                 >
-                  Review Demo Cart
+                  {tr("reviewCart")}
                 </button>
 
                 <button
@@ -1176,7 +1143,7 @@ function Marketplace() {
                   onClick={() => setCart([])}
                   type="button"
                 >
-                  Clear Cart
+                  {tr("clearCart")}
                 </button>
               </>
             )}
@@ -1195,8 +1162,21 @@ function ProductCard({
   onFavorite,
   onDetails,
   onAdd,
+  t,
+  categoryName,
 }) {
   const isFavorite = favorites.includes(product.id);
+
+  const name = t(`marketplace.product.${product.id}.name`, {
+    defaultValue: product.name.trim(),
+  });
+
+  const description = t(
+    `marketplace.product.${product.id}.description`,
+    {
+      defaultValue: product.description,
+    }
+  );
 
   return (
     <article className="mph-product-card">
@@ -1207,24 +1187,23 @@ function ProductCard({
             : "medical-art"
         }`}
       >
-      {product.image ? (
-  <img
-    src={product.image}
-    alt={product.name}
-    className="mph-product-image"
-  />
-) : (
-  <span>{product.icon}</span>
-)}
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={name}
+            className="mph-product-image"
+          />
+        ) : (
+          <span>{product.icon}</span>
+        )}
+
         <button
           className={`mph-favorite-button ${
             isFavorite ? "favorited" : ""
           }`}
           onClick={() => onFavorite(product.id)}
           aria-label={
-            isFavorite
-              ? "Remove from favorites"
-              : "Add to favorites"
+            isFavorite ? "Remove from favorites" : "Add to favorites"
           }
           type="button"
         >
@@ -1234,12 +1213,12 @@ function ProductCard({
 
       <div className="mph-product-info">
         <span className="mph-product-category">
-          {product.category}
+          {categoryName(product.category)}
         </span>
 
-        <h3>{product.name}</h3>
+        <h3>{name}</h3>
 
-        <p>{product.description}</p>
+        <p>{description}</p>
 
         <div className="mph-product-bottom">
           <strong>
@@ -1249,7 +1228,7 @@ function ProductCard({
           <button
             className="mph-add-button"
             onClick={() => onAdd(product)}
-            aria-label={`Add ${product.name} to cart`}
+            aria-label={`${t("marketplace.addToCart")} ${name}`}
             type="button"
           >
             +
@@ -1261,7 +1240,7 @@ function ProductCard({
           onClick={() => onDetails(product)}
           type="button"
         >
-          View Details →
+          {t("marketplace.viewDetails")} →
         </button>
       </div>
     </article>

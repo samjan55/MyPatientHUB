@@ -16,7 +16,6 @@ import {
   FaCog,
   FaSignOutAlt
 } from 'react-icons/fa';
-import bodyMap from '../pages/BodyMap';
 import './Sidebar.css';
 
 function Sidebar({ isOpen = false, onClose = () => {} }) {
